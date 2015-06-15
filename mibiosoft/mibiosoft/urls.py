@@ -19,5 +19,5 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^polls/', include('polls.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'', include('basic_content.urls')),
+    url(r'', include('protocat_app.urls')),
 ]

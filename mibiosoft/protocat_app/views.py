@@ -9,7 +9,7 @@ def index(request):
         'title': 'ProtoCat',
         'descr': 'ProtoCat - A seamless web platform to standardize wetlab protocols. Homepage.'
     }
-    return render(request, 'basic_content/root_index.html', page,)
+    return render(request, 'protocat_app/root_index.html', page,)
 
 # TODO: Build views for more pages:
 #     1. About

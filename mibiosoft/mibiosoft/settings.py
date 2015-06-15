@@ -38,7 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'polls',
-    'basic_content',
+    'protocat_app',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -104,6 +104,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "basic_content/static"),
+    os.path.join(BASE_DIR, "protocat_app/static"),
     '/var/www/static/',
 )
