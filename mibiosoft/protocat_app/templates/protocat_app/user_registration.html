@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4"></div>
+            </div>
+            <div class="col-md-4"></div>
+                <form action="/your-name/" method="post">
+                    <label for="your_name">Your Name:</label>
+                    <input id="your_name" type="text" name="your_name" value={{ page.current_name }}>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+            <div class="col-md-4"></div>
+            </div>
+    </div>
+
+{% endblock %}
+
