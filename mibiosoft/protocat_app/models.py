@@ -32,3 +32,12 @@ class ProtocolForm(ModelForm):
     class Meta:
         model = Protocol
         fields = ['title', 'protocol_type', 'protocol']
+
+class SignUp(models.Model):
+    email = models.EmailField()
+    full_name = models.CharField(max_length='50', default='Your Name', blank=False, null=True)
+    timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+    def __str__(self):
+        return self.email

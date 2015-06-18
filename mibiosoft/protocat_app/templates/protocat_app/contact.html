@@ -8,14 +8,13 @@
             <div class="col-md-4"></div>
             </div>
             <div class="col-md-4"></div>
-             <form method="POST" action=""> {% csrf_token %} {# allows us to send post data #}
-                 {{ form.as_p }}
-                <input type="submit" value="Sign Up">
-                 </form>
+                <form action="" method="POST">
+                    {{ form.as_p }}
+                    <input type="submit" value="Submit">
+                </form>
             </div>
             <div class="col-md-4"></div>
             </div>
     </div>
 
 {% endblock %}
-
