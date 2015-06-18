@@ -106,3 +106,22 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "protocat_app/static"),
     '/var/www/static/',
 )
+
+# Email Configuration:
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = '' #TODO: Add gmail for the production server
+EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+'''
+If using gmail you will need to
+unlock Captcha to enable Django
+to send for you:
+https://accounts.google.com/displayunlockcaptcha
+'''
+
+
+# TODO: Update the static files path for production:
+# View this:
+# https://www.youtube.com/watch?v=8cupCFknL4Q&list=PLEsfXFp6DpzRcd-q4vR5qAgOZUuz8041S&index=16&feature=iv&src_vid=p1aC-KwB98o&annotation_id=annotation_2615471217

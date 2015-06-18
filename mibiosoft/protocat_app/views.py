@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .forms import SignUpForm, ContactFrom
-from django.template import RequestContext, loader
+from django.core.mail import send_mail
+from django.conf import settings
 
 def index(request):
     context = {
@@ -64,10 +65,21 @@ def contact(request):
     # Add somekind of email forwarding or processing to this database
     form = ContactForm(request.POST or None)
     if form.is_valid():
-        email = form.cleaned_data.get('email')
-        messages = form.cleaned_data('message')
+        form_email = form.cleaned_data.get('email')
+        form_messages = form.cleaned_data('message')
         full_name = form.cleaned_data.get('full_name')
-        print(email, messages, full_name)
+        subject = 'Site Contact form'
+        from_email = settings.EMAIL_HOST_USER
+        to_email = [from_email, 'youotheremail@email.com']
+        contact_message = '%s: %s via %s' \
+                          %(full_name,
+                            form_messages,
+                            form_email)
+        send_mail(subject,
+                  contact_message,
+                  from_email,
+                  to_email,
+                  fail_silently=True)
     context = {
         'form': form
     }
