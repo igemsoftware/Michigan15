@@ -1,0 +1,6 @@
+## Production Server TODO's:
+### Any kind of sercure information or settings updates that cannot be published to Github
+### or are not suitable for the development environment, add them here. ~ Will
+
+1. Disable Debug Mode
+2. Add GMail ID and Password =
