@@ -8,11 +8,11 @@
             <div class="col-md-4"></div>
             </div>
             <div class="col-md-4"></div>
-                <form action="/your-name/" method="post">
-                    <label for="your_name">Your Name:</label>
-                    <input id="your_name" type="text" name="your_name" value={{ page.current_name }}>
-                    <input type="submit" value="Submit">
-                </form>
+               <form method="POST" action=""> {% csrf_token %} {#  allows POST requests #}
+                    {{ form.as_p }}
+                   <input type="submit" value="Sign In">
+               </form>
+
             </div>
             <div class="col-md-4"></div>
             </div>

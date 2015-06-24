@@ -1,21 +1,15 @@
 from django import forms
-from .models import SignUp
+from .models import UserRegistration, UserAuthentication
+from django.core.exceptions import ValidationError
 
-class SignUpForm(forms.ModelForm):
+class UserRegistrationForm(forms.ModelForm):
     class Meta:
-        model = SignUp
-        fields = ['full_name','email']
+        model = UserRegistration
+        fields = ['user_name', 'email', 'password']
+        exclude = [None]
 
-    def clean_email(self):
-        email = (self.cleaned_data.get('email'))
-        # if you want to exclude certain emails:
-        # email_base, provider = email.split('@')
-        # domain, extension = provider.split('.')
-        # if not extension == 'edu':
-        #     raise forms.ValidationError('Please use a valid .edu email address')
-        return email
-
-class ContactFrom(forms.Form):
-    full_name= forms.CharField()
-    email = forms.EmailField()
-    message = forms.CharField()
+class UserAuthenticationForm(forms.ModelForm):
+    class Meta:
+        model = UserAuthentication
+        fields = ['user_name', 'password']
+        exlcude = [None]

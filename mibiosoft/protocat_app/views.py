@@ -1,8 +1,11 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from .forms import SignUpForm, ContactFrom
+from django.shortcuts import render, HttpResponse
+from .forms import UserRegistrationForm, UserAuthenticationForm
+from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.conf import settings
+from django import forms
+from django.contrib.auth import authenticate
+from django.core import exceptions
 
 def index(request):
     context = {
@@ -10,9 +13,10 @@ def index(request):
         'descr': 'ProtoCat - A seamless web platform to standardize wetlab protocols. Homepage.'
     }
     return render(request, 'protocat_app/root_index.html', context)
+# add set test cookie
 
 def user_registration(request):
-    form = SignUpForm(request.POST)
+    form = UserRegistrationForm(request.POST)
 
     context = {
         'title': 'User Registration - ProtoCat',
@@ -22,78 +26,41 @@ def user_registration(request):
 
     if form.is_valid():
         instance = form.save(commit=False)
-        instance.full_name = form.cleaned_data.get('full_name')
+        instance.user_name = form.cleaned_data.get('user_name')
+        instance.email = form.cleaned_data.get('email')
+        instance.password = form.cleaned_data.get('password')
+        user = User.objects.create_user(instance.user_name, instance.email, instance.password)
 
-        if not instance.full_name:
-            instance.full_name = 'John Doe'
+        return HttpResponse('You have successfully registered')
 
-        instance.save()
-        context = {
-            'title': 'Thank you!',
-            'descr': 'We appreciate your dedication to better protocols'
-        }
+    return render(request, 'protocat_app/user_registration.html', context)
 
-    return render(request, 'protocat_app/user_registration', context)
+def user_authentication(request):
 
-def user_login(request):
-    # if user is already authenticated it will redirect them to their homepage
-    # if not, they will be prompted to login
-    if not request.user.is_authenticated():
-        context = {
-        'title': 'User Login Page - ProtoCat'
-
-    }
-        return render(request, 'protocat_app/login', context)
-    else:
-        # change this to an actual redirect, this will create the right page,
-        # however, it will not change the url correctly
-        user_home(request)
-
-def user_home(request):
     if request.user.is_authenticated():
-        title = 'Welcome, %s' %(request.user)
-        context = {
-            'title': title,
-        }
-        return render(request, 'protocat_app/user_home', context)
-    else:
-        # however, it will not change the url correctly
-        user_login(request)
+        return HttpResponse('You are already logged in')
 
-
-def contact(request):
-    # Add somekind of email forwarding or processing to this database
-    form = ContactForm(request.POST or None)
-    if form.is_valid():
-        form_email = form.cleaned_data.get('email')
-        form_messages = form.cleaned_data('message')
-        full_name = form.cleaned_data.get('full_name')
-        subject = 'Site Contact form'
-        from_email = settings.EMAIL_HOST_USER
-        to_email = [from_email, 'youotheremail@email.com']
-        contact_message = '%s: %s via %s' \
-                          %(full_name,
-                            form_messages,
-                            form_email)
-        send_mail(subject,
-                  contact_message,
-                  from_email,
-                  to_email,
-                  fail_silently=True)
+    form = UserAuthenticationForm(request.POST)
     context = {
+        'title': 'User Authentication - ProtoCat',
+        'descr': 'User Authentication --> Because why not!',
         'form': form
     }
 
-    return render(request, 'protocat_app/contact.html', context)
+    if form.is_valid():
+        user = authenticate(username = form.cleaned_data.get('user_name'), password=form.cleaned_data.get('password'))
 
+        if user is not None:
+            # the pasword verified for the user
+            if user.is_active:
+                return HttpResponse('user.is_active passed, You are authenicated')
 
-# TODO: Build views for more pages:
-#     1. About
-#     2. Contact
-#     3. Login
-#     4. User Homepage
-#     5. User Settings
-#     6. Protocol Entry
-#     7. Protocol Presentation
-#     8. How to and troubleshooting
+            else:
+                context.banner = ('The password is valid, but the account has been diasbled! User: ' + form.cleaned_data.get('user_name'))
+        else:
+            return HttpResponse('the user name and password were incorrect')
 
+        if user.is_autheniticated():
+            return HttpResponse('<h1>You are currently logged in.</h1>')
+
+    return render(request, 'protocat_app/user_authentication.html', context)
