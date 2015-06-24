@@ -2,20 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0181e363-3254-483e-9cfe-ac664d8c7ece" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mibiosoft/protocat_app/protocols.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/mibiosoft/protocat_app/admin.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/Protocol.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/contact.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/user_home.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/mibiosoft/protocat_app/tests.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/mibiosoft/protocat_app/user_module.py" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/user_login.html" afterPath="$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/user_authentication.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mibiosoft/db.sqlite3" afterPath="$PROJECT_DIR$/mibiosoft/db.sqlite3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mibiosoft/protocat_app/forms.py" afterPath="$PROJECT_DIR$/mibiosoft/protocat_app/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mibiosoft/protocat_app/models.py" afterPath="$PROJECT_DIR$/mibiosoft/protocat_app/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mibiosoft/mibiosoft/settings.py" afterPath="$PROJECT_DIR$/mibiosoft/mibiosoft/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mibiosoft/protocat_app/urls.py" afterPath="$PROJECT_DIR$/mibiosoft/protocat_app/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/user_registration.html" afterPath="$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/user_registration.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/protocol_display.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mibiosoft/protocat_app/views.py" afterPath="$PROJECT_DIR$/mibiosoft/protocat_app/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -107,8 +94,8 @@
               <file leaf-file-name="user_authentication.html" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/user_authentication.html">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.37878788">
-                      <caret line="10" column="67" selection-start-line="10" selection-start-column="67" selection-end-line="10" selection-end-column="87" />
+                    <state vertical-scroll-proportion="0.45454547">
+                      <caret line="12" column="56" selection-start-line="12" selection-start-column="56" selection-end-line="12" selection-end-column="56" />
                       <folding />
                     </state>
                   </provider>
@@ -122,15 +109,25 @@
         <splitter split-orientation="vertical" split-proportion="0.5">
           <split-first>
             <leaf>
-              <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+              <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/views.py">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.82476634">
-                      <caret line="60" column="18" selection-start-line="60" selection-start-column="18" selection-end-line="60" selection-end-column="18" />
+                    <state vertical-scroll-proportion="0.0">
+                      <caret line="38" column="20" selection-start-line="38" selection-start-column="20" selection-end-line="38" selection-end-column="20" />
                       <folding>
                         <element signature="e#0#49#0" expanded="true" />
                         <element signature="e#360#571#0" expanded="false" />
                       </folding>
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+              <file leaf-file-name="protocol_display.html" pinned="false" current-in-tab="true">
+                <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/protocol_display.html">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state vertical-scroll-proportion="-3.638614">
+                      <caret line="22" column="30" selection-start-line="22" selection-start-column="30" selection-end-line="22" selection-end-column="30" />
+                      <folding />
                     </state>
                   </provider>
                 </entry>
@@ -142,8 +139,8 @@
               <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/models.py">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.27906978">
-                      <caret line="10" column="51" selection-start-line="9" selection-start-column="22" selection-end-line="10" selection-end-column="51" />
+                    <state vertical-scroll-proportion="0.3139535">
+                      <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
                       <folding />
                     </state>
                   </provider>
@@ -178,8 +175,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Html5" />
         <option value="Python Script" />
+        <option value="Html5" />
       </list>
     </option>
   </component>
@@ -208,9 +205,10 @@
         <option value="$PROJECT_DIR$/mibiosoft/protocat_app/urls.py" />
         <option value="$PROJECT_DIR$/mibiosoft/protocat_app/forms.py" />
         <option value="$PROJECT_DIR$/mibiosoft/protocat_app/models.py" />
-        <option value="$PROJECT_DIR$/mibiosoft/protocat_app/views.py" />
         <option value="$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/user_authentication.html" />
         <option value="$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/user_registration.html" />
+        <option value="$PROJECT_DIR$/mibiosoft/protocat_app/views.py" />
+        <option value="$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/protocol_display.html" />
       </list>
     </option>
   </component>
@@ -671,9 +669,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="631" y="-1177" width="1920" height="1177" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15576036" sideWeight="0.49676898" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15576036" sideWeight="0.49676898" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956383" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24893314" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1025,6 +1023,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/user_registration.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.36231884">
+          <caret line="10" column="84" selection-start-line="10" selection-start-column="84" selection-end-line="10" selection-end-column="84" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1033,10 +1039,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/user_authentication.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.45454547">
+          <caret line="12" column="56" selection-start-line="12" selection-start-column="56" selection-end-line="12" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.82476634">
-          <caret line="60" column="18" selection-start-line="60" selection-start-column="18" selection-end-line="60" selection-end-column="18" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="38" column="20" selection-start-line="38" selection-start-column="20" selection-end-line="38" selection-end-column="20" />
           <folding>
             <element signature="e#0#49#0" expanded="true" />
             <element signature="e#360#571#0" expanded="false" />
@@ -1044,18 +1058,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/user_authentication.html">
+    <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/protocol_display.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37878788">
-          <caret line="10" column="67" selection-start-line="10" selection-start-column="67" selection-end-line="10" selection-end-column="87" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/user_registration.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36231884">
-          <caret line="10" column="84" selection-start-line="10" selection-start-column="84" selection-end-line="10" selection-end-column="84" />
+        <state vertical-scroll-proportion="-3.638614">
+          <caret line="22" column="30" selection-start-line="22" selection-start-column="30" selection-end-line="22" selection-end-column="30" />
           <folding />
         </state>
       </provider>

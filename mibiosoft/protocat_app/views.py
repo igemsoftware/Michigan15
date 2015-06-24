@@ -36,7 +36,7 @@ def user_registration(request):
     return render(request, 'protocat_app/user_registration.html', context)
 
 def user_authentication(request):
-
+    # not working...
     if request.user.is_authenticated():
         return HttpResponse('You are already logged in')
 
