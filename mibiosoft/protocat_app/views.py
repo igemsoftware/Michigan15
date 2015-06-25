@@ -64,3 +64,18 @@ def user_authentication(request):
             return HttpResponse('<h1>You are currently logged in.</h1>')
 
     return render(request, 'protocat_app/user_authentication.html', context)
+
+def protocol_display(request):
+    context = {
+        'title': 'You are currently viewing the template display model',
+        'descr': 'This is the template protocol -- DEVELOPMENT ONLY',
+    }
+    return render(request, 'protocat_app/protocol_display.html', context)
+
+def user_home(request):
+    context = {
+        'title': 'XYZ Profile Page',
+        'descr': 'this is the homepage of user XYZ'
+    }
+
+    return render(request, 'protocat_app/user_home.html', context)
