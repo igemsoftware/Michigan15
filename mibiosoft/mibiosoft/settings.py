@@ -123,3 +123,6 @@ https://accounts.google.com/displayunlockcaptcha
 # TODO: Update the static files path for production:
 # View this:
 # https://www.youtube.com/watch?v=8cupCFknL4Q&list=PLEsfXFp6DpzRcd-q4vR5qAgOZUuz8041S&index=16&feature=iv&src_vid=p1aC-KwB98o&annotation_id=annotation_2615471217
+
+# Specify the default user model
+AUTH_USER_MODEL = 'customauth.MyUser'
