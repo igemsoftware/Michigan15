@@ -6,6 +6,7 @@ from django.conf import settings
 from django import forms
 from django.contrib.auth import authenticate
 from django.core import exceptions
+from django.utils import timezone
 
 def index(request):
     context = {
@@ -92,6 +93,7 @@ def protocol_upload(request):
         instance.protocol_type = form.cleaned_data.get('protocol_type')
         instance.rating = form.cleaned_data.get('rating')
         instance.protocol = form.cleaned_data.get('protocol')
+        instance.date_of_upload = form.cleaned_data.get('date_of_upload')
         return HttpResponse('You have posted a protocol')
 
     else:
