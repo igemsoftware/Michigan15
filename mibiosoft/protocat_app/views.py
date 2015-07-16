@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse
-from .forms import UserRegistrationForm, UserAuthenticationForm
+from .forms import UserRegistrationForm, UserAuthenticationForm, ProtocolUploadForm
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.conf import settings
@@ -77,5 +77,24 @@ def user_home(request):
         'title': 'XYZ Profile Page',
         'descr': 'this is the homepage of user XYZ'
     }
-
     return render(request, 'protocat_app/user_home.html', context)
+
+def protocol_upload(request):
+    #if user.is_active:
+    form = ProtocolUploadForm(request.POST)
+    context = {
+            'title': 'Protocol Upload',
+            'form': form
+        }
+    if form.is_valid():
+        instance = form.save()
+        instance.title = form.cleaned_data.get('title')
+        instance.protocol_type = form.cleaned_data.get('protocol_type')
+        instance.rating = form.cleaned_data.get('rating')
+        instance.protocol = form.cleaned_data.get('protocol')
+        return HttpResponse('You have posted a protocol')
+
+    else:
+        return render(request, 'protocat_app/protocol_upload.html', context)
+    #else:
+        #return HttpResponse('Log in first')
