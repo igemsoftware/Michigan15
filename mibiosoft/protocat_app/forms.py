@@ -19,5 +19,6 @@ class UserAuthenticationForm(forms.ModelForm):
 class ProtocolUploadForm(forms.ModelForm):
     class Meta:
         model = ProtocolUpload
-        fields = ['title', 'protocol_type', 'rating', 'protocol']
+        fields = ['title', 'protocol_type', 'reagents', 'protocol']
         exclude = [None]
+

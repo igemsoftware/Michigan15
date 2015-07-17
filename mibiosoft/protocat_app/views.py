@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate
 from django.core import exceptions
 from django.utils import timezone
 
+
 def index(request):
     context = {
         'title': 'ProtoCat',
@@ -92,6 +93,7 @@ def protocol_upload(request):
         instance.title = form.cleaned_data.get('title')
         instance.protocol_type = form.cleaned_data.get('protocol_type')
         instance.rating = form.cleaned_data.get('rating')
+        instance.reagents = form.cleaned_data.get('reagents')
         instance.protocol = form.cleaned_data.get('protocol')
         instance.date_of_upload = form.cleaned_data.get('date_of_upload')
         return HttpResponse('You have posted a protocol')
@@ -100,3 +102,6 @@ def protocol_upload(request):
         return render(request, 'protocat_app/protocol_upload.html', context)
     #else:
         #return HttpResponse('Log in first')
+
+def protocol_edit(request):
+    

@@ -4,6 +4,7 @@ from django.forms import ModelForm
 from datetime import datetime
 from .protocols import PROTOCOL_TYPES
 
+
 class UserRegistration(models.Model):
     email = models.EmailField(blank=False)
     user_name = models.CharField(max_length=50, default='YourName', blank=False)
@@ -38,6 +39,9 @@ class ProtocolUpload(models.Model):
     rating = models.DecimalField(
         validators=[MinValueValidator(0.0), MaxValueValidator(5.0)],
         max_digits=3, decimal_places=2, default=0.00)
+    reagents = models.TextField(default='')
     protocol = models.TextField(default='')
+
+
 
 
