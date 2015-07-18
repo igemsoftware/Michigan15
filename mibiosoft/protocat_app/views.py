@@ -7,6 +7,7 @@ from django import forms
 from django.contrib.auth import authenticate, login, logout
 from django.core import exceptions
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -88,22 +89,24 @@ def user_home(request):
     }
     return render(request, 'protocat_app/user_home.html', context)
 
+@login_required(login_url='/user_authentication')
 def protocol_upload(request):
-    if User.is_active:
+    if User.is_authenticated:
         form = ProtocolUploadForm(request.POST)
         context = {
                 'title': 'Protocol Upload',
                 'form': form
             }
         if form.is_valid():
-            instance = form.save()
+            instance = form.save(commit=False)
             instance.title = form.cleaned_data.get('title')
             instance.author = request.user
             instance.protocol_type = form.cleaned_data.get('protocol_type')
-            instance.rating = form.cleaned_data.get('rating')
+            instance.rating = 0.00
             instance.reagents = form.cleaned_data.get('reagents')
             instance.protocol = form.cleaned_data.get('protocol')
             instance.date_of_upload = form.cleaned_data.get('date_of_upload')
+            instance.save()
             return HttpResponse('You have posted a protocol')
 
         else:
