@@ -1,5 +1,5 @@
 from django import forms
-from .models import UserRegistration, UserAuthentication, ProtocolUpload
+from .models import UserRegistration, UserAuthentication, Protocol
 from django.core.exceptions import ValidationError
 from django.utils import timezone
 
@@ -18,7 +18,7 @@ class UserAuthenticationForm(forms.ModelForm):
 
 class ProtocolUploadForm(forms.ModelForm):
     class Meta:
-        model = ProtocolUpload
-        fields = ['title', 'protocol_type', 'reagents', 'protocol']
+        model = Protocol
+        fields = ['title', 'description', 'protocol_type', 'reagents', 'protocol']
         exclude = [None]
 

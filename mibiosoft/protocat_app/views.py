@@ -1,10 +1,10 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from .forms import UserRegistrationForm, UserAuthenticationForm, ProtocolUploadForm
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.conf import settings
 from django import forms
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login, logout
 from django.core import exceptions
 from django.utils import timezone
 
@@ -52,10 +52,12 @@ def user_authentication(request):
     if form.is_valid():
         user = authenticate(username = form.cleaned_data.get('user_name'), password=form.cleaned_data.get('password'))
 
+
         if user is not None:
             # the pasword verified for the user
             if user.is_active:
-                return HttpResponse('user.is_active passed, You are authenicated')
+                login(request, user)
+                return HttpResponseRedirect('/user_home/')
 
             else:
                 context.banner = ('The password is valid, but the account has been diasbled! User: ' + form.cleaned_data.get('user_name'))
@@ -66,6 +68,11 @@ def user_authentication(request):
             return HttpResponse('<h1>You are currently logged in.</h1>')
 
     return render(request, 'protocat_app/user_authentication.html', context)
+
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect('/')
+
 
 def protocol_display(request):
     context = {
@@ -82,26 +89,25 @@ def user_home(request):
     return render(request, 'protocat_app/user_home.html', context)
 
 def protocol_upload(request):
-    #if user.is_active:
-    form = ProtocolUploadForm(request.POST)
-    context = {
-            'title': 'Protocol Upload',
-            'form': form
-        }
-    if form.is_valid():
-        instance = form.save()
-        instance.title = form.cleaned_data.get('title')
-        instance.protocol_type = form.cleaned_data.get('protocol_type')
-        instance.rating = form.cleaned_data.get('rating')
-        instance.reagents = form.cleaned_data.get('reagents')
-        instance.protocol = form.cleaned_data.get('protocol')
-        instance.date_of_upload = form.cleaned_data.get('date_of_upload')
-        return HttpResponse('You have posted a protocol')
+    if User.is_active:
+        form = ProtocolUploadForm(request.POST)
+        context = {
+                'title': 'Protocol Upload',
+                'form': form
+            }
+        if form.is_valid():
+            instance = form.save()
+            instance.title = form.cleaned_data.get('title')
+            instance.author = request.user
+            instance.protocol_type = form.cleaned_data.get('protocol_type')
+            instance.rating = form.cleaned_data.get('rating')
+            instance.reagents = form.cleaned_data.get('reagents')
+            instance.protocol = form.cleaned_data.get('protocol')
+            instance.date_of_upload = form.cleaned_data.get('date_of_upload')
+            return HttpResponse('You have posted a protocol')
 
+        else:
+            return render(request, 'protocat_app/protocol_upload.html', context)
     else:
-        return render(request, 'protocat_app/protocol_upload.html', context)
-    #else:
-        #return HttpResponse('Log in first')
+        return HttpResponseRedirect('/user_authentication/')
 
-def protocol_edit(request):
-    
