@@ -60,8 +60,16 @@
                         {% if user.is_authenticated %}
                       <ul class="nav navbar-nav navbar-right">
                         <li><a href="/user_home" class="smothscroll">Home</a></li>
-                        <li><a href="/protocol_upload" class="smothscroll">Protocol</a></li>
-                        <li><a href="/user_logout" class="smothscroll">Log out</a></li>
+                        <li>
+                          <button type="button" class="btn smothscroll" data-toggle="dropdown" >
+                            Protocol
+                          </button>
+                          <ul class="dropdown-menu">
+                            <li><a href="/protocol_upload">Upload</a></li>
+                            <li><a href="/protocol_list">List</a></li>
+                          </ul>
+                        <li>
+                          <a href="/user_logout" class="smothscroll">Log out</a></li>
                       </ul>
                         {% endif %}
                     </div><!--/.nav-collapse -->

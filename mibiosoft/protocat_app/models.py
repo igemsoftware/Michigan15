@@ -33,6 +33,7 @@ class UserAuthentication(models.Model):
 #     protocol = models.TextField(default = '')
 
 class Protocol(models.Model):
+    id = models.AutoField(primary_key=True)
     title = models.TextField()
     author = models.CharField(max_length=50)
     date_of_upload = datetime.now()
