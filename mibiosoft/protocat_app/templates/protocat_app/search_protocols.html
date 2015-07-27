@@ -20,11 +20,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            {% for protocol in protocol_list %}
+                            {% for protocol in results %}
                                 <tr>
-                                    <td><a href={{protocol.4}}>{{protocol.0}}</a></td>
-                                    <td>{{ protocol.1 }}</td>
-                                    <td>{{ protocol.2 }}</td>
+                                    <td><a href="/protocol_display/{{protocol.id}}">{{protocol.title}}</a></td>
+                                    <td>{{ protocol.author }}</td>
+                                    <td>{{ protocol.date_of_upload }}</td>
                                 </tr>
                             {% endfor %}
                             </tbody>

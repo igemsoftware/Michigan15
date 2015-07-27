@@ -110,7 +110,7 @@ def protocol_upload(request):
             instance.protocol = form.cleaned_data.get('protocol')
             instance.date_of_upload = datetime.now()
             instance.save()
-            return HttpResponse('You have posted a protocol')
+            return HttpResponseRedirect('/protocol_list')
 
         else:
             return render(request, 'protocat_app/protocol_upload.html', context)
@@ -173,5 +173,11 @@ def edit_protocol(request, protocol_id):
 
         return render(request,'protocat_app/edit_protocol.html',context)
 
-
+def search(request):
+    query = request.GET.get('search')
+    if query:
+        results = Protocol.objects.filter(title__contains=query)
+    else:
+        results = ''
+    return render(request, 'protocat_app/search_protocols.html',{'results':results})
 

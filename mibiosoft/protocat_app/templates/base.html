@@ -79,6 +79,16 @@
     </div>
     {% block pagination %}
     {% endblock %}
+    <div class="jumbotron">
+        <div class="col-md-12">
+        <div class="input-group input-group-lg">
+            <form class="form-search" method="GET" action="{% url 'search' %}">
+
+                <input type="text" name="search" class="form-control" placeholder="Search for Protocols!">
+            </form>
+        </div>
+        </div>
+    </div>
 
 
     <div id="content">
