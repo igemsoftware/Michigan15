@@ -76,13 +76,6 @@ def user_logout(request):
     return HttpResponseRedirect('/')
 
 
-def protocol_display1(request):
-    context = {
-        'title': 'You are currently viewing the template display model',
-        'descr': 'This is the template protocol -- DEVELOPMENT ONLY',
-    }
-    return render(request, 'protocat_app/protocol_display.html', context)
-
 def user_home(request):
     context = {
         'title': 'XYZ Profile Page',

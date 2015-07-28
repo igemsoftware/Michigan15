@@ -156,3 +156,9 @@ a:after {
 #c p {
 	color: white
 }
+
+/* custom style */
+#search_bar {
+    padding-bottom: 160px;
+    padding-top: 100px;
+}

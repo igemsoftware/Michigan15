@@ -13,21 +13,14 @@
 					<br>
 	    		</div>
 	    		
-	    		<div class="col-lg-2">
-	    			<h5>Amazing Results</h5>
-	    			<p>This is filler text, this is filler text, and this is more filler text.</p>
-	    			<img class="hidden-xs hidden-sm hidden-md" src="{%  static 'images/arrow1.png' %}"/>
-	    		</div>
-	    		<div class="col-lg-8">
-	    			<img class="img-responsive" src="{%  static 'images/app-bg.png' %}" alt="">
-	    		</div>
-	    		<div class="col-lg-2">
-	    			<br>
-	    			<img class="hidden-xs hidden-sm hidden-md" src="{%  static 'images/arrow2.png' %}">
-	    			<h5>Awesome Design</h5>
-	    			<p>This is filler text, this is filler text, and this is more filler text.</p>
-	    		</div>
-	    	</div>
+                <div class="col-md-12">
+                    <div class="input input-lg" id="search_bar">
+                        <form class="form-search" method="GET" action="{% url 'search' %}">
+                            <input type="text" name="search" class="form-control" placeholder="Search for Protocols!">
+                        </form>
+                    </div>
+                </div>
+	    	</div> <!--.row centered-->
 	    </div> <!--/ .container -->
 	</div><!--/ #headerwrap -->
 

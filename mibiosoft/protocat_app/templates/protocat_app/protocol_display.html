@@ -27,6 +27,9 @@
         {{protocol_items.reagents}}
         {{protocol_items.protocol}}
     </div>
+
+    {% if user == protocol_items.author %}
+
     <form method="POST" action="/delete_protocol/{{protocol_items.id}}/">
          {% csrf_token %}
         <input type="submit" value="Delete">
@@ -35,6 +38,6 @@
          {% csrf_token %}
         <input type="submit" value="Edit">
     </form>
-
+    {% endif %}
 
 {% endblock %}
