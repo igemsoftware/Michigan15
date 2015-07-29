@@ -27,9 +27,12 @@
         {{protocol_items.reagents}}
         {{protocol_items.protocol}}
     </div>
+    {% if procotol_items.cuthor == user %}
+    works!
+    {% endif %}
 
-    {% if user == protocol_items.author %}
 
+    {% if user ==  protocol_items.author %}
     <form method="POST" action="/delete_protocol/{{protocol_items.id}}/">
          {% csrf_token %}
         <input type="submit" value="Delete">

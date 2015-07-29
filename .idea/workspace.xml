@@ -3,12 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0181e363-3254-483e-9cfe-ac664d8c7ece" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mibiosoft/db.sqlite3" afterPath="$PROJECT_DIR$/mibiosoft/db.sqlite3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mibiosoft/protocat_app/templates/base.html" afterPath="$PROJECT_DIR$/mibiosoft/protocat_app/templates/base.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/protocol_display.html" afterPath="$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/protocol_display.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mibiosoft/protocat_app/static/stylesheets/root_index.css" afterPath="$PROJECT_DIR$/mibiosoft/protocat_app/static/stylesheets/root_index.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/root_index.html" afterPath="$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/root_index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mibiosoft/protocat_app/views.py" afterPath="$PROJECT_DIR$/mibiosoft/protocat_app/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Michigan15.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,9 +30,9 @@
     <favorites_list name="Michigan15" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.515625">
+    <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
-        <splitter split-orientation="vertical" split-proportion="0.7734628">
+        <splitter split-orientation="vertical" split-proportion="0.5695793">
           <split-first>
             <leaf>
               <file leaf-file-name="user_registration.html" pinned="false" current-in-tab="false">
@@ -53,7 +48,7 @@
               <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/urls.py">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.0" vertical-offset="22" max-vertical-offset="374">
+                    <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="374">
                       <caret line="14" column="48" selection-start-line="14" selection-start-column="48" selection-end-line="14" selection-end-column="48" />
                       <folding>
                         <element signature="e#0#32#0" expanded="true" />
@@ -75,8 +70,8 @@
               <file leaf-file-name="protocol_display.html" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/protocol_display.html">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.28132388" vertical-offset="391" max-vertical-offset="816">
-                      <caret line="30" column="17" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="17" />
+                    <state vertical-scroll-proportion="0.7373737" vertical-offset="206" max-vertical-offset="867">
+                      <caret line="25" column="33" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="33" />
                       <folding />
                     </state>
                   </provider>
@@ -85,8 +80,8 @@
               <file leaf-file-name="protocol_list.html" pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/protocol_list.html">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.0" vertical-offset="320" max-vertical-offset="799">
-                      <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+                    <state vertical-scroll-proportion="-18.76923" vertical-offset="158" max-vertical-offset="799">
+                      <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
                       <folding />
                     </state>
                   </provider>
@@ -106,10 +101,10 @@
           </split-first>
           <split-second>
             <leaf>
-              <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
+              <file leaf-file-name="forms.py" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/forms.py">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="510">
+                    <state vertical-scroll-proportion="0.5887446" vertical-offset="170" max-vertical-offset="510">
                       <caret line="18" column="40" selection-start-line="18" selection-start-column="40" selection-end-line="18" selection-end-column="40" />
                       <folding>
                         <element signature="e#0#24#0" expanded="true" />
@@ -118,10 +113,10 @@
                   </provider>
                 </entry>
               </file>
-              <file leaf-file-name="base.html" pinned="false" current-in-tab="true">
+              <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/templates/base.html">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="4.151515" vertical-offset="1392" max-vertical-offset="1819">
+                    <state vertical-scroll-proportion="-4.0" vertical-offset="1562" max-vertical-offset="1819">
                       <caret line="98" column="0" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
                       <folding />
                     </state>
@@ -166,10 +161,10 @@
         <splitter split-orientation="vertical" split-proportion="0.5">
           <split-first>
             <leaf>
-              <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+              <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/views.py">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="4.3932586" vertical-offset="0" max-vertical-offset="2975">
+                    <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2975">
                       <caret line="76" column="0" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
                       <folding>
                         <element signature="e#0#71#0" expanded="true" />
@@ -190,10 +185,10 @@
                   </provider>
                 </entry>
               </file>
-              <file leaf-file-name="user_home.html" pinned="false" current-in-tab="false">
+              <file leaf-file-name="user_home.html" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/user_home.html">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="4080">
+                    <state vertical-scroll-proportion="0.07053942" vertical-offset="187" max-vertical-offset="4080">
                       <caret line="12" column="39" selection-start-line="12" selection-start-column="39" selection-end-line="12" selection-end-column="39" />
                       <folding />
                     </state>
@@ -207,11 +202,9 @@
               <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/models.py">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.0" vertical-offset="612" max-vertical-offset="986">
-                      <caret line="36" column="29" selection-start-line="36" selection-start-column="29" selection-end-line="36" selection-end-column="29" />
-                      <folding>
-                        <element signature="e#0#28#0" expanded="true" />
-                      </folding>
+                    <state vertical-scroll-proportion="0.3256705" vertical-offset="0" max-vertical-offset="986">
+                      <caret line="5" column="35" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
+                      <folding />
                     </state>
                   </provider>
                 </entry>
@@ -281,7 +274,6 @@
         <option value="$PROJECT_DIR$/mibiosoft/protocat_app/edit_protocol.html" />
         <option value="$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/edit_protocol.html" />
         <option value="$PROJECT_DIR$/mibiosoft/protocat_app/forms.py" />
-        <option value="$PROJECT_DIR$/mibiosoft/protocat_app/models.py" />
         <option value="$PROJECT_DIR$/mibiosoft/protocat_app/urls.py" />
         <option value="$PROJECT_DIR$/mibiosoft/protocat_app/templates/search_protocols.html" />
         <option value="$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/protocol_list.html" />
@@ -290,6 +282,7 @@
         <option value="$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/root_index.html" />
         <option value="$PROJECT_DIR$/mibiosoft/protocat_app/templates/base.html" />
         <option value="$PROJECT_DIR$/mibiosoft/protocat_app/static/stylesheets/root_index.css" />
+        <option value="$PROJECT_DIR$/mibiosoft/protocat_app/models.py" />
         <option value="$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/protocol_display.html" />
       </list>
     </option>
@@ -728,7 +721,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="7" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1112,38 +1105,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/forms.py">
+    <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/search_protocols.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="510">
-          <caret line="18" column="40" selection-start-line="18" selection-start-column="40" selection-end-line="18" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="612" max-vertical-offset="986">
-          <caret line="36" column="29" selection-start-line="36" selection-start-column="29" selection-end-line="36" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/user_home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="4080">
-          <caret line="12" column="39" selection-start-line="12" selection-start-column="39" selection-end-line="12" selection-end-column="39" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="166" max-vertical-offset="799">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/protocol_list.html">
+    <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="320" max-vertical-offset="799">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2975">
+          <caret line="76" column="0" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#71#0" expanded="true" />
+            <element signature="e#574#785#0" expanded="false" />
+            <element signature="e#2700#2752#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/root_index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="11.038462" vertical-offset="559" max-vertical-offset="2907">
+          <caret line="16" column="62" selection-start-line="16" selection-start-column="62" selection-end-line="16" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.0" vertical-offset="1562" max-vertical-offset="1819">
+          <caret line="98" column="0" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1158,23 +1151,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/search_protocols.html">
+    <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/static/stylesheets/root_index.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="166" max-vertical-offset="799">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="2547" max-vertical-offset="2873">
+          <caret line="161" column="22" selection-start-line="161" selection-start-column="22" selection-end-line="161" selection-end-column="22" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="4.3932586" vertical-offset="0" max-vertical-offset="2975">
-          <caret line="76" column="0" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#71#0" expanded="true" />
-            <element signature="e#574#785#0" expanded="false" />
-            <element signature="e#2700#2752#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1186,34 +1167,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/root_index.html">
+    <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="11.038462" vertical-offset="559" max-vertical-offset="2907">
-          <caret line="16" column="62" selection-start-line="16" selection-start-column="62" selection-end-line="16" selection-end-column="62" />
+        <state vertical-scroll-proportion="0.5887446" vertical-offset="170" max-vertical-offset="510">
+          <caret line="18" column="40" selection-start-line="18" selection-start-column="40" selection-end-line="18" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3256705" vertical-offset="0" max-vertical-offset="986">
+          <caret line="5" column="35" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/templates/base.html">
+    <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/protocol_list.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="4.151515" vertical-offset="1392" max-vertical-offset="1819">
-          <caret line="98" column="0" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/static/stylesheets/root_index.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2547" max-vertical-offset="2873">
-          <caret line="161" column="22" selection-start-line="161" selection-start-column="22" selection-end-line="161" selection-end-column="22" />
+        <state vertical-scroll-proportion="-18.76923" vertical-offset="158" max-vertical-offset="799">
+          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/protocol_display.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.28132388" vertical-offset="391" max-vertical-offset="816">
-          <caret line="30" column="17" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.7373737" vertical-offset="206" max-vertical-offset="867">
+          <caret line="25" column="33" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mibiosoft/protocat_app/templates/protocat_app/user_home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.07053942" vertical-offset="187" max-vertical-offset="4080">
+          <caret line="12" column="39" selection-start-line="12" selection-start-column="39" selection-end-line="12" selection-end-column="39" />
           <folding />
         </state>
       </provider>
