@@ -99,6 +99,8 @@ def protocol_upload(request):
             instance.author = request.user
             instance.protocol_type = form.cleaned_data.get('protocol_type')
             instance.rating = 0.00
+            instance.num_ratings = 0
+            instance.user_rated = [0]
             instance.reagents = form.cleaned_data.get('reagents')
             instance.protocol = form.cleaned_data.get('protocol')
             instance.date_of_upload = datetime.now()
@@ -117,6 +119,7 @@ def protocol_list(request):
     author = ''
     date = ''
     id=''
+    rating=''
     protocol_list=[]
 
 
@@ -125,16 +128,18 @@ def protocol_list(request):
         author = each.author
         date = each.date_of_upload
         protocol_id = each.id
+        rating = each.rating
         url = "/protocol_display/" + str(protocol_id)
-        inner_protocol = [title, author, date, protocol_id, url]
+        inner_protocol = [title, author, date, protocol_id, url, rating]
         protocol_list.append(inner_protocol)
 
     return render(request,'protocat_app/protocol_list.html', {'protocol_list':protocol_list})
 
 def protocol_display(request, protocol_id):
     protocol_items = Protocol.objects.get(id=protocol_id)
+    current_user = str(request.user)
 
-    return render(request, 'protocat_app/protocol_display.html', {'protocol_items':protocol_items})
+    return render(request, 'protocat_app/protocol_display.html', {'protocol_items':protocol_items, 'current_user':current_user})
 
 def delete_protocol(request, protocol_id):
     protocol = Protocol.objects.get(id=protocol_id)
@@ -145,7 +150,7 @@ def delete_protocol(request, protocol_id):
 def edit_protocol(request, protocol_id):
     protocol = Protocol.objects.get(id=protocol_id)
     form = ProtocolUploadForm(request.GET, instance=protocol)
-    url= "/protocol_display/" + str(protocol_id) + "/"
+    url= "/protocol_display/" + str(protocol_id)
 
     if request.POST:
         form = ProtocolUploadForm(request.POST)
@@ -173,4 +178,22 @@ def search(request):
     else:
         results = ''
     return render(request, 'protocat_app/search_protocols.html',{'results':results})
+
+def rating(request, protocol_id):
+    rate = str(request.POST.get('rating'))
+    protocol = Protocol.objects.get(id=protocol_id)
+    protocol.num_ratings += 1
+    protocol.rating += int(rate)
+    protocol.rating = protocol.rating / protocol.num_ratings
+    current_user = str(request.user)
+    protocol.user_rated += current_user
+    protocol.save()
+    url = "/protocol_display/" + str(protocol_id) + "/"
+
+    return HttpResponseRedirect(url)
+
+
+
+
+
 

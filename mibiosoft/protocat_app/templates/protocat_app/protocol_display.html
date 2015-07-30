@@ -13,26 +13,34 @@
             <div class="col-md-2"></div>
             <div class="col-md-8">
                 <strong>{{protocol_items.title}}</strong>
-                <br>
                 {{protocol_items.date_of_upload}}
                 Uploaded by {{protocol_items.author}}
+                <hr>
             </div>
+
             <div class="col-md-2"></div>
-        </div>
-        <div class="row">
-            <div class="well well-sm">{{protocol_items.description}}</div>
+
         </div>
         {{protocol_items.protocol_type}}
         {{protocol_items.rating}}
         {{protocol_items.reagents}}
         {{protocol_items.protocol}}
-    </div>
-    {% if procotol_items.cuthor == user %}
-    works!
+
+
+
+    <div class="row">
+    {{protocol_items.user_rated}}
+    {% if current_user not in protocol_items.user_rated %}
+        {# This is a quick fix, change it later. Find a list field in Django #}
+
+    <br>
+        <form method="POST" action="/rating/{{protocol_items.id}}/">
+            {% csrf_token %}
+            <input type="number" name="rating" min="1" max="5">
+        </form>
+    <br>
     {% endif %}
-
-
-    {% if user ==  protocol_items.author %}
+    {% if protocol_items.author == current_user %}
     <form method="POST" action="/delete_protocol/{{protocol_items.id}}/">
          {% csrf_token %}
         <input type="submit" value="Delete">
@@ -42,5 +50,6 @@
         <input type="submit" value="Edit">
     </form>
     {% endif %}
+
 
 {% endblock %}

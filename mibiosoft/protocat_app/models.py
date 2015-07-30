@@ -41,7 +41,9 @@ class Protocol(models.Model):
     protocol_type = models.CharField(max_length=2, choices=PROTOCOL_TYPES, null=True)
     rating = models.DecimalField(
         validators=[MinValueValidator(0.0), MaxValueValidator(5.0)],
-        max_digits=3, decimal_places=2, default=0.00)
+        max_digits=3, decimal_places=2, default=2.50)
+    num_ratings = models.IntegerField(default=0)
+    user_rated = models.TextField(default='')
     reagents = models.TextField(default='')
     protocol = models.TextField(default='')
 

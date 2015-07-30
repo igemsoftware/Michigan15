@@ -13,4 +13,5 @@ urlpatterns = [
     url(r'^delete_protocol/(?P<protocol_id>[0-9]+)/$', views.delete_protocol, name='delete_protocol'),
     url(r'^edit_protocol/(?P<protocol_id>[0-9]+)/$', views.edit_protocol, name='edit_protocol'),
     url(r'^search/$', views.search, name='search'),
+    url(r'^rating/(?P<protocol_id>[0-9]+)/$', views.rating, name='rating'),
 ]
