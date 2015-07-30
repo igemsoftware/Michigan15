@@ -182,6 +182,7 @@ def search(request):
 def rating(request, protocol_id):
     rate = str(request.POST.get('rating'))
     protocol = Protocol.objects.get(id=protocol_id)
+    protocol.rating = protocol.rating * protocol.num_ratings
     protocol.num_ratings += 1
     protocol.rating += int(rate)
     protocol.rating = protocol.rating / protocol.num_ratings

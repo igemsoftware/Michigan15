@@ -8,12 +8,32 @@
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4">
-                <form method="POST" action="">
-                    {% csrf_token %}
-                    {# allows POST requests #}
-                    {{ form.as_p }}
-                    <input type="submit" value="Post it">
-                </form>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="fieldWrapper">
+
+                    {{ form.title.label_tag }}
+                    <input id="id_title" type="text" name="title">
+                    <br>
+
+                    {{ form.description.label_tag }}
+                    {{ form.description }}
+
+                    {{ form.protocol_type.label_tag }}
+                    {{ form.protocol_type }}
+
+                    {{ form.reagents.label_tag }}
+                    {{ form.reagents }}
+
+                    {{ form.protocol.label_tag }}
+                    <br>
+                    <input id="id_protocol" type="text" name="protocol">
+                    <br>
+
+
+                </div>
+                <input type="submit" value="Post">
+            </form>
             </div>
             <div class="col-md-4"></div>
         </div>
