@@ -47,9 +47,9 @@
                     </div>
                     <div class="navbar-collapse collapse">
                       <ul class="nav navbar-nav">
-                        <li><a href="#desc" class="smothscroll">About</a></li>
-                        <li><a href="#showcase" class="smothScroll">Protocols</a></li>
-                        <li><a href="#contact" class="smothScroll">Contact</a></li>
+                        <li><a href="/protocol_list" class="smothscroll">Protocols</a></li>
+                        <li><a href="/about" class="smothScroll">About</a></li>
+                        <li><a href="/contact" class="smothScroll">Contact</a></li>
                       </ul>
                         {% if not user.is_authenticated %}
                       <ul class="nav navbar-nav navbar-right">
@@ -60,14 +60,7 @@
                         {% if user.is_authenticated %}
                       <ul class="nav navbar-nav navbar-right">
                         <li><a href="/user_home" class="smothscroll">Home</a></li>
-                        <li>
-                          <button type="button" class="btn smothscroll" data-toggle="dropdown" >
-                            Protocol
-                          </button>
-                          <ul class="dropdown-menu">
-                            <li><a href="/protocol_upload">Upload</a></li>
-                            <li><a href="/protocol_list">List</a></li>
-                          </ul>
+                        <li><a href="/protocol_upload">Upload</a></li>
                         <li>
                           <a href="/user_logout" class="smothscroll">Log out</a>
                         </li>
