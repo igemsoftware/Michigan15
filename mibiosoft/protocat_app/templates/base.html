@@ -48,8 +48,6 @@
                     <div class="navbar-collapse collapse">
                       <ul class="nav navbar-nav">
                         <li><a href="/protocol_list" class="smothscroll">Protocols</a></li>
-                        <li><a href="/about" class="smothScroll">About</a></li>
-                        <li><a href="/contact" class="smothScroll">Contact</a></li>
                       </ul>
                         {% if not user.is_authenticated %}
                       <ul class="nav navbar-nav navbar-right">
@@ -64,6 +62,9 @@
                         <li>
                           <a href="/user_logout" class="smothscroll">Log out</a>
                         </li>
+                        {% endif %}
+                        <li><a href="/about" class="smothScroll">About</a></li>
+                        <li><a href="/contact" class="smothScroll">Contact</a></li>
                         <li>
                             <div class="input-group input-group-lg">
                                 <form class="form-search" method="GET" action="{% url 'search' %}">
@@ -72,7 +73,6 @@
                             </div>
                         </li>
                       </ul>
-                        {% endif %}
                     </div><!--/.nav-collapse -->
                   </div>
                 </div>
