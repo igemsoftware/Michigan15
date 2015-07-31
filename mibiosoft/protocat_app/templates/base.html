@@ -63,15 +63,15 @@
                           <a href="/user_logout" class="smothscroll">Log out</a>
                         </li>
                         {% endif %}
-                        <li><a href="/about" class="smothScroll">About</a></li>
-                        <li><a href="/contact" class="smothScroll">Contact</a></li>
-                        <li>
-                            <div class="input-group input-group-lg">
-                                <form class="form-search" method="GET" action="{% url 'search' %}">
-                                    <input type="text" name="search" class="form-control" placeholder="Search for Protocols!">
-                                </form>
-                            </div>
-                        </li>
+                             <li><a href="/about" class="smothScroll">About</a></li>
+                             <li><a href="/contact" class="smothScroll">Contact Us</a></li>
+                             <li>
+                                 <div class="input-group input-group-lg">
+                                     <form class="form-search" method="GET" action="{% url 'search' %}">
+                                         <input type="text" name="search" class="form-control" placeholder="Search for Protocols!">
+                                     </form>
+                                 </div>
+                             </li>
                       </ul>
                     </div><!--/.nav-collapse -->
                   </div>
