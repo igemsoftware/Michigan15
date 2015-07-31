@@ -41,9 +41,15 @@ def user_registration(request):
         instance.email = form.cleaned_data.get('email')
         instance.password = form.cleaned_data.get('password')
         user = User.objects.create_user(instance.user_name, instance.email, instance.password)
-        return HttpResponseRedirect('/user_authentication/')
+        user = authenticate(username=instance.user_name, password=instance.password)
+        if user is not None:
+            # the pasword verified for the user
+            if user.is_active:
+                login(request, user)
+                return HttpResponseRedirect('/user_home/')
 
     return render(request, 'protocat_app/user_registration.html', context)
+
 
 def user_authentication(request):
     # not working...
@@ -68,11 +74,11 @@ def user_authentication(request):
                 return HttpResponseRedirect('/user_home/')
 
             else:
-                context.banner = ('The password is valid, but the account has been diasbled! User: ' + form.cleaned_data.get('user_name'))
+                context.banner = ('The password is valid, but the account has been disabled! User: ' + form.cleaned_data.get('user_name'))
         else:
             return HttpResponse('the user name and password were incorrect')
 
-        if user.is_autheniticated():
+        if user.is_authenticated():
             return HttpResponse('<h1>You are currently logged in.</h1>')
 
     return render(request, 'protocat_app/user_authentication.html', context)
@@ -198,9 +204,3 @@ def rating(request, protocol_id):
     url = "/protocol_display/" + str(protocol_id) + "/"
 
     return HttpResponseRedirect(url)
-
-
-
-
-
-

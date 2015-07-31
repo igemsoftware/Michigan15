@@ -1,21 +1,21 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
-from django.forms import ModelForm
+from django.forms import ModelForm, PasswordInput
 from datetime import datetime
 from .protocols import PROTOCOL_TYPES
 from django.contrib.auth.models import User
 
 class UserRegistration(models.Model):
     email = models.EmailField(blank=False)
-    user_name = models.CharField(max_length=50, default='YourName', blank=False)
-    password = models.CharField(max_length=120, default='password123', blank=False)
+    user_name = models.CharField(max_length=50, default='First Last', blank=False)
+    password = models.CharField(max_length=120, default='password', blank=False)
 
     def __str__(self):
         return (self.user_name + ', ' + self.email)
 
 class UserAuthentication(models.Model):
     user_name = models.CharField(max_length=50, default='YourUserName')
-    password = models.CharField(max_length=120, default='password123', blank=False)
+    password = models.CharField(max_length=120, default='password', blank=False)
 
     def __str__(self):
         return (self.user_name + ', ' + self.email)
@@ -45,9 +45,3 @@ class Protocol(models.Model):
     user_rated = models.TextField(default='')
     reagents = models.TextField(default='')
     protocol = models.TextField(default='')
-
-
-
-
-
-
