@@ -170,10 +170,11 @@ a:after {
 #user_registration_form .left {
     display: inline-block;
     border: 1px border green;
-
+    text-align: left;
 }
 
 #user_registration_form .right {
     display: inline-block;
     border: 1px border blue;
+    text-align: right;
 }
