@@ -20,6 +20,12 @@ def index(request):
     return render(request, 'protocat_app/root_index.html', context)
 # add set test cookie
 
+def about(request):
+    context = {
+        'title': 'About'
+    }
+    return render(request, 'protocat_app/about.html', context)
+    
 def user_registration(request):
     form = UserRegistrationForm(request.POST)
 
