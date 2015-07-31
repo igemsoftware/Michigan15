@@ -5,8 +5,6 @@ from datetime import datetime
 from .protocols import PROTOCOL_TYPES
 from django.contrib.auth.models import User
 
-
-
 class UserRegistration(models.Model):
     email = models.EmailField(blank=False)
     user_name = models.CharField(max_length=50, default='YourName', blank=False)

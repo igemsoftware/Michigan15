@@ -162,3 +162,18 @@ a:after {
     padding-bottom: 160px;
     padding-top: 100px;
 }
+
+#user_registration_form {
+    border: 1px border red;
+}
+
+#user_registration_form .left {
+    display: inline-block;
+    border: 1px border green;
+
+}
+
+#user_registration_form .right {
+    display: inline-block;
+    border: 1px border blue;
+}
