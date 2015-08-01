@@ -10,7 +10,6 @@ from django.utils import timezone
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from protocat_app.models import *
-from django.forms.formsets import formset_factory
 
 
 def index(request):

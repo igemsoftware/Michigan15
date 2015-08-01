@@ -4,7 +4,7 @@ from django.forms import ModelForm, PasswordInput
 from datetime import datetime
 from .protocols import PROTOCOL_TYPES
 from django.contrib.auth.models import User
-import ast
+
 
 class UserRegistration(models.Model):
     email = models.EmailField(blank=False)
@@ -32,8 +32,6 @@ class UserAuthentication(models.Model):
 #         max_digits=3, decimal_places=2, default = 0.00)
 #     protocol = models.TextField(default = '')
 
-class ProtocolSteps(models.Model):
-    step = models.TextField(default='')
 
 
 
