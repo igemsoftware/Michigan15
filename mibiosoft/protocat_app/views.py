@@ -10,6 +10,7 @@ from django.utils import timezone
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from protocat_app.models import *
+from django.forms.formsets import formset_factory
 
 
 def index(request):
@@ -102,7 +103,7 @@ def protocol_upload(request):
             instance.num_ratings = 0
             instance.user_rated = [0]
             instance.reagents = form.cleaned_data.get('reagents')
-            instance.protocol = form.cleaned_data.get('protocol')
+            instance.protocol_steps = form.cleaned_data.get('protocol')
             instance.date_of_upload = datetime.now()
             instance.save()
             return HttpResponseRedirect('/protocol_list')

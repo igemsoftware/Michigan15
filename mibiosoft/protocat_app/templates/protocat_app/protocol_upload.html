@@ -4,36 +4,74 @@
 
 {% block content %}
 
+                    <script type="text/javascript">
+                        var i = 1;
+                        function addStep(i) {
+
+                            var container =  document.getElementById("step_container");
+                            var step = document.createElement("input");
+                            step.type = "text";
+                            step.id = "id_protocol";
+                            step.name = "protocol";
+                            container.appendChild(step);
+
+                            var remove = document.createElement('button');
+                            var new_id = ++i;
+                            remove.id= "step" + new_id;
+                            remove.onclick = "removeStep(this.id)";
+                            remove.innerHTML = 'x';
+                            container.appendChild(remove);
+
+                            var line = document.createElement("br");
+                            container.appendChild(line);
+                        }
+                        function removeStep(x) {
+                            document.write('pass');
+                            var container = document.getElementById("step_container");
+                            var current = document.getElementById(x);
+                            var victim = current.previousSibling;
+                            container.removeChild(victim);
+                        }
+
+                    </script>
+
     <div class="container">
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4">
-            <form method="POST">
-                {% csrf_token %}
-                <div class="fieldWrapper">
+                <form method="POST" action="/protocol_upload/">
+                    {% csrf_token %}
+                    <div class="fieldWrapper">
+                        {{ form.title.label_tag }}
+                        {{ form.title }}
+                    </div>
+                    <div class="fieldWrapper">
+                        {{ form.description.label_tag }}
+                        {{ form.description }}
+                    </div>
+                    <div class="fieldWrapper">
+                        {{ form.protocol_type.label_tag }}
+                        {{ form.protocol_type }}
+                    </div>
+                    <div class="fieldWrapper">
+                        {{ form.reagents.label_tag }}
+                        {{ form.reagents }}
+                    </div>
 
-                    {{ form.title.label_tag }}
-                    <input id="id_title" type="text" name="title">
-                    <br>
+                    <div class="fieldWrapper">
+                        {{ form.protocol.label_tag }}
+                        <button type="button" onclick="addStep()">Add a Step</button>
+                        <button type="button" onclick="removeStep()">Remove a Step</button>
+                        <input type="text" id="id_protocol" name="protocol" >
 
-                    {{ form.description.label_tag }}
-                    {{ form.description }}
+                        <br>
 
-                    {{ form.protocol_type.label_tag }}
-                    {{ form.protocol_type }}
+                        <div id="step_container">
+                        </div>
+                    </div>
 
-                    {{ form.reagents.label_tag }}
-                    {{ form.reagents }}
-
-                    {{ form.protocol.label_tag }}
-                    <br>
-                    <input id="id_protocol" type="text" name="protocol">
-                    <br>
-
-
-                </div>
-                <input type="submit" value="Post">
-            </form>
+                    <input type="submit" value="Post">
+                </form>
             </div>
             <div class="col-md-4"></div>
         </div>

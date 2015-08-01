@@ -4,6 +4,7 @@ from django.forms import ModelForm
 from datetime import datetime
 from .protocols import PROTOCOL_TYPES
 from django.contrib.auth.models import User
+import ast
 
 
 
@@ -33,6 +34,11 @@ class UserAuthentication(models.Model):
 #         max_digits=3, decimal_places=2, default = 0.00)
 #     protocol = models.TextField(default = '')
 
+class ProtocolSteps(models.Model):
+    step = models.TextField(default='')
+
+
+
 class Protocol(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.TextField()
@@ -46,7 +52,9 @@ class Protocol(models.Model):
     num_ratings = models.IntegerField(default=0)
     user_rated = models.TextField(default='')
     reagents = models.TextField(default='')
-    protocol = models.TextField(default='')
+    protocol_steps = models.TextField(default='')
+
+
 
 
 
