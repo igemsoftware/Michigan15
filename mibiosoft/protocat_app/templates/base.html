@@ -19,6 +19,7 @@
 
     <!-- Custom styles for this template -->
     <link href="{% static 'stylesheets/root_index.css' %}" rel="stylesheet">
+    <link href="{% static 'stylesheets/user_authentication.css' %}" rel="stylesheet">
 
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
@@ -47,12 +48,10 @@
                       <a class="navbar-brand" href="/"><b>ProtoCat</b></a>
                     </div>
                     <div class="navbar-collapse collapse">
-                        {% if not user.is_authenticated %}
                       <ul class="nav navbar-nav">
-                        <li><a href="#desc" class="smothscroll">About</a></li>
-                        <li><a href="#showcase" class="smothScroll">Protocols</a></li>
-                        <li><a href="#contact" class="smothScroll">Contact</a></li>
+                        <li><a href="/protocol_list" class="smothscroll">Protocols</a></li>
                       </ul>
+                        {% if not user.is_authenticated %}
                       <ul class="nav navbar-nav navbar-right">
                           <li><a href="/user_registration" class="smothscroll">Sign up</a></li>
                           <li><a href="/user_authentication" class="smothScroll">Login</a></li>
@@ -60,27 +59,22 @@
                         {% endif %}
                         {% if user.is_authenticated %}
                       <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/protocol_upload">Upload</a></li>
                         <li><a href="/user_home" class="smothscroll">Home</a></li>
-                        <li>
-                          <button type="button" class="btn smothscroll" data-toggle="dropdown" >
-                            Protocol
-                          </button>
-                          <ul class="dropdown-menu">
-                            <li><a href="/protocol_upload">Upload</a></li>
-                            <li><a href="/protocol_list">List</a></li>
-                          </ul>
                         <li>
                           <a href="/user_logout" class="smothscroll">Log out</a>
                         </li>
-                        <li>
-                            <div class="input-group input-group-lg">
-                                <form class="form-search" method="GET" action="{% url 'search' %}">
-                                    <input type="text" name="search" class="form-control" placeholder="Search for Protocols!">
-                                </form>
-                            </div>
-                        </li>
-                      </ul>
                         {% endif %}
+                             <li><a href="/about" class="smothScroll">About</a></li>
+                             <li><a href="/feedback" class="smothScroll">Feedback</a></li>
+                             <li>
+                                 <div class="input-group input-group-lg">
+                                     <form class="form-search" method="GET" action="{% url 'search' %}">
+                                         <input type="text" name="search" class="form-control" placeholder="Search for Protocols!">
+                                     </form>
+                                 </div>
+                             </li>
+                      </ul>
                     </div><!--/.nav-collapse -->
                   </div>
                 </div>

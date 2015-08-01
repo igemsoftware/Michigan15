@@ -3,19 +3,20 @@
 {% load staticfiles %}
 
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4"></div>
+    <div class="user_auth">
+        <form method="POST" action=""> {% csrf_token %} {#  allows POST requests #}
+            <div class="left">
+                {{ form.user_name.label_tag }}<br><br>
+                {{ form.password.label_tag }}
             </div>
-            <div class="col-md-4"></div>
-               <form method="POST" action=""> {% csrf_token %} {#  allows POST requests #}
-                    {{ form.as_p }}
-                   <input type="submit" value="Sign In">
-               </form>
-
+            <div class="right">
+                {{ form.user_name }}<br><br>
+                {{ form.password }}
             </div>
-            <div class="col-md-4"></div>
+            <div class="bottom">
+                <input type="submit" value="Sign In">
             </div>
+       </form>
     </div>
 
 {% endblock %}
