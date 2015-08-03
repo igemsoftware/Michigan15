@@ -3,17 +3,20 @@
 {% load staticfiles %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-            <form action="/protocol_list">
-                <input type="submit" value="List">
-            </form>
-        </div>
-        <div class="col-md-2"></div>
-    </div>
+
 
     <div class="container">
+
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <form action="/protocol_list">
+                    <input type="submit" value="List">
+                </form>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-8">
@@ -23,48 +26,46 @@
                 {{protocol_items.rating}}
                 <hr>
             </div>
-
             <div class="col-md-2"></div>
-
         </div>
+
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-8">
                 <h3>Protocol Type:  {{protocol_items.protocol_type}}</h3>
-                <h3>Reagents: <h3> <p><pre>{{protocol_items.reagents}}</pre></p>
+                <h3>Reagents: </h3> <p>{{protocol_items.reagents|linebreaksbr}}</p>
                 <br>
-                <h3>Steps: </h3> <p><pre>{{protocol_items.protocol_steps}}</pre></p>
+                <h3>Steps: </h3> <p>{{protocol_items.protocol_steps|linebreaksbr}}</p>
             </div>
             <div class="col-md-2"></div>
         </div>
-    </div>
 
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                {% if current_user not in protocol_items.user_rated %}
+                {# This is a quick fix, change it later. Find a list field in Django #}
+            <br>
+            <form method="POST" action="/rating/{{protocol_items.id}}/">
+                {% csrf_token %}
+                <input type="number" value="1" name="rating" min="1" max="5">
+            </form>
+            <br>
+            {% endif %}
 
-    <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-            {% if current_user not in protocol_items.user_rated %}
-            {# This is a quick fix, change it later. Find a list field in Django #}
-        <br>
-        <form method="POST" action="/rating/{{protocol_items.id}}/">
-            {% csrf_token %}
-            <input type="number" name="rating" min="1" max="5">
-        </form>
-        <br>
-        {% endif %}
-
-        {% if protocol_items.author == current_user %}
-        <form method="POST" action="/delete_protocol/{{protocol_items.id}}/">
-            {% csrf_token %}
-            <input type="submit" value="Delete">
-        </form>
-        <form method="POST" action="/edit_protocol/{{protocol_items.id}}/">
-            {% csrf_token %}
-            <input type="submit" value="Edit">
-        </form>
-        {% endif %}
+            {% if protocol_items.author == current_user %}
+            <form method="POST" action="/delete_protocol/{{protocol_items.id}}/">
+                {% csrf_token %}
+                <input type="submit" value="Delete">
+            </form>
+            <form method="POST" action="/edit_protocol/{{protocol_items.id}}/">
+                {% csrf_token %}
+                <input type="submit" value="Edit">
+            </form>
+            {% endif %}
+            </div>
+            <div class="col-md-2"></div>
         </div>
-        <div class="col-md-2"></div>
-    </div>
 
+    </div>
 {% endblock %}
