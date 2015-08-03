@@ -101,14 +101,12 @@ def user_home(request):
 def protocol_upload(request):
 
     x = 0
-    text = "wrong"
-    list = []
+    text = ''
+    newline = '\n'
     while request.POST.get('step' + str(x)):
-        text += request.POST.get('step' + str(x))
+        text += (request.POST.get('step' + str(x)))
+        text += newline
         x += 1
-
-
-
 
     if User.is_authenticated:
         form = ProtocolUploadForm(request.POST)
@@ -161,9 +159,11 @@ def protocol_list(request):
 
 def protocol_display(request, protocol_id):
     protocol_items = Protocol.objects.get(id=protocol_id)
+    steps = protocol_items.protocol_steps
     current_user = str(request.user)
 
-    return render(request, 'protocat_app/protocol_display.html', {'protocol_items':protocol_items, 'current_user':current_user})
+    return render(request, 'protocat_app/protocol_display.html', {'protocol_items':protocol_items, 'steps':steps,
+                                                                  'current_user':current_user})
 
 def delete_protocol(request, protocol_id):
     protocol = Protocol.objects.get(id=protocol_id)
