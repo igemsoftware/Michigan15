@@ -5,26 +5,24 @@
 {% block content %}
 
                     <script type="text/javascript">
-                        var i = 1;
-                        function addStep(i) {
+                        function addStep() {
 
                             var container =  document.getElementById("step_container");
-                            var step = document.createElement("input");
-                            step.type = "text";
-                            step.id = "id_protocol";
-                            step.name = "protocol";
+                            var step = document.createElement("textarea");
+                            step.rows = "3";
+                            step.cols = "40";
+
+                            step.setAttribute("class", "protocol");
                             container.appendChild(step);
 
-                            var remove = document.createElement('button');
-                            var new_id = ++i;
-                            remove.id= "step" + new_id;
-                            remove.onclick = "removeStep(this.id)";
-                            remove.innerHTML = 'x';
-                            container.appendChild(remove);
+                            var step_list = document.getElementsByClassName("protocol");
 
-                            var line = document.createElement("br");
-                            container.appendChild(line);
+                            for(var i = 0; i <= step_list.length; i++) {
+                                var new_name = "step" + i;
+                                step_list[i].setAttribute("name", new_name);
+                            }
                         }
+
                         function removeStep(x) {
                             document.write('pass');
                             var container = document.getElementById("step_container");
@@ -57,7 +55,7 @@
                         {{ form.reagents.label_tag }}
                         {{ form.reagents }}
                     </div>
-
+                    <!-- protocol form
                     <div class="fieldWrapper">
                         {{ form.protocol.label_tag }}
                         <button type="button" onclick="addStep()">Add a Step</button>
@@ -69,6 +67,19 @@
                         <div id="step_container">
                         </div>
                     </div>
+                    -->
+                    <label for="id_protocol_steps">Steps:</label>
+                    <button type="button" onclick="addStep()">Add a Step</button>
+                    <button type="button" onclick="removeStep()">Remove a Step</button>
+                    <br><br>
+
+                    <br>
+
+
+                    <div id="step_container">
+
+                    </div>
+
 
                     <input type="submit" value="Post">
                 </form>

@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
+from django.http import HttpRequest
 from .forms import UserRegistrationForm, UserAuthenticationForm, ProtocolUploadForm
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
@@ -98,6 +99,17 @@ def user_home(request):
 
 @login_required(login_url='/user_authentication')
 def protocol_upload(request):
+
+    x = 0
+    text = "wrong"
+    list = []
+    while request.POST.get('step' + str(x)):
+        text += request.POST.get('step' + str(x))
+        x += 1
+
+
+
+
     if User.is_authenticated:
         form = ProtocolUploadForm(request.POST)
         context = {
@@ -114,7 +126,7 @@ def protocol_upload(request):
             instance.num_ratings = 0
             instance.user_rated = [0]
             instance.reagents = form.cleaned_data.get('reagents')
-            instance.protocol_steps = form.cleaned_data.get('protocol')
+            instance.protocol_steps = text
             instance.date_of_upload = datetime.now()
             instance.save()
             return HttpResponseRedirect('/protocol_list')
