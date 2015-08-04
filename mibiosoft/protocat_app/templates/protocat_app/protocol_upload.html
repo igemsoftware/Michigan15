@@ -6,28 +6,39 @@
 
                     <script type="text/javascript">
                         function addStep() {
+                            var inner_container = document.createElement("div");
+                            inner_container.className = "inner_container";
 
                             var container =  document.getElementById("step_container");
+
+                            // creating the step label
+                            var nodeList = document.getElementsByClassName("protocol");
+                            var step_count = nodeList.length + 1;
+                            var label = document.createElement("h3");
+                            label.innerHTML = "Step " + step_count;
+                            inner_container.appendChild(label);
+
+                            // creating the text box for steps
                             var step = document.createElement("textarea");
                             step.rows = "3";
                             step.cols = "40";
-
                             step.setAttribute("class", "protocol");
-                            container.appendChild(step);
+                            inner_container.appendChild(step);
 
+                            container.appendChild(inner_container);
+
+                            // creating name to extract content in views
                             var step_list = document.getElementsByClassName("protocol");
-
+                            // giving the name for each step
                             for(var i = 0; i <= step_list.length; i++) {
-                                var new_name = "step" + i;
+                                var new_name = "step" + (i + 1);
                                 step_list[i].setAttribute("name", new_name);
                             }
                         }
 
-                        function removeStep(x) {
-                            document.write('pass');
+                        function removeStep() {
                             var container = document.getElementById("step_container");
-                            var current = document.getElementById(x);
-                            var victim = current.previousSibling;
+                            var victim = container.lastChild;
                             container.removeChild(victim);
                         }
 
@@ -68,14 +79,15 @@
                         </div>
                     </div>
                     -->
-                    <label for="id_protocol_steps">Steps:</label>
+                    <label>Steps:</label>
                     <button type="button" onclick="addStep()">Add a Step</button>
                     <button type="button" onclick="removeStep()">Remove a Step</button>
                     <br><br>
 
                     <br>
-
-
+                    <h3>Step 1</h3>
+                    <br>
+                    <textarea class="protocol" rows="3" cols="40" name="step1   "></textarea>
                     <div id="step_container">
 
                     </div>
