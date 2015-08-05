@@ -3,6 +3,8 @@ from .models import UserRegistration, UserAuthentication, Protocol
 from django.core.exceptions import ValidationError
 from django.utils import timezone
 from django.forms import ModelForm, PasswordInput
+from django_comments.forms import CommentForm
+from django_comments.models import Comment
 
 class UserRegistrationForm(forms.ModelForm):
     class Meta:
@@ -27,3 +29,5 @@ class ProtocolUploadForm(forms.ModelForm):
         model = Protocol
         fields = ['title', 'description', 'protocol_type', 'reagents']
         exclude = [None]
+
+

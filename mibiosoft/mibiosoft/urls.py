@@ -19,5 +19,6 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'', include('protocat_app.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^comments/', include('django_comments.urls')),
 ]
 

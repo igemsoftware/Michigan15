@@ -13,6 +13,7 @@ from django.contrib.auth.decorators import login_required
 from protocat_app.models import *
 
 
+
 def index(request):
     context = {
         'title': 'ProtoCat',
@@ -165,8 +166,7 @@ def protocol_display(request, protocol_id):
     steps = protocol_items.protocol_steps
     current_user = str(request.user)
 
-    return render(request, 'protocat_app/protocol_display.html', {'protocol_items':protocol_items, 'steps':steps,
-                                                                  'current_user':current_user})
+    return render(request, 'protocat_app/protocol_display.html', {'protocol_items':protocol_items, 'steps':steps,'current_user':current_user})
 
 def delete_protocol(request, protocol_id):
     protocol = Protocol.objects.get(id=protocol_id)

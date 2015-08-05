@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load staticfiles %}
+{% load comments %}
 
 {% block content %}
 
@@ -52,7 +53,42 @@
             </form>
             <br>
             {% endif %}
+            </div>
+            <div class="col-md-2"></div>
+        </div>
 
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                {% render_comment_list for protocol_items %}
+            {% get_comment_form for protocol_items as form %}
+                <table>
+                    <form action="{% comment_form_target %}" method="post">
+                        {% csrf_token %}
+                        {{ form.comment }}
+                        {{ form.object_pk }}
+                        {{ form.content_type }}
+                        {{ form.timestamp }}
+                        {{ form.security_hash }}
+                        <input type="submit" value="Add comment" id="id_submit">
+                        <input type="hidden" name="name" value="{{current_user}}">
+                        <input type="hidden" name="next" value="/protocol_display/{{protocol_items.id}}" />
+                        <tr>
+                        </tr>
+                    </form>
+                </table>
+                <br>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+
+
+
+        <br>
+
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
             {% if protocol_items.author == current_user %}
             <form method="POST" action="/delete_protocol/{{protocol_items.id}}/">
                 {% csrf_token %}
@@ -67,5 +103,10 @@
             <div class="col-md-2"></div>
         </div>
 
+
+
+
+
     </div>
 {% endblock %}
+
