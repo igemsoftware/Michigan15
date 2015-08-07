@@ -1,5 +1,6 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 from . import views
+import haystack
 
 urlpatterns = [
     url(r'^$', views.index, name='root_index'),
@@ -12,7 +13,7 @@ urlpatterns = [
     url(r'^protocol_list/', views.protocol_list, name='protocol_list'),
     url(r'^delete_protocol/(?P<protocol_id>[0-9]+)/$', views.delete_protocol, name='delete_protocol'),
     url(r'^edit_protocol/(?P<protocol_id>[0-9]+)/$', views.edit_protocol, name='edit_protocol'),
-    url(r'^search/$', views.search, name='search'),
     url(r'^rating/(?P<protocol_id>[0-9]+)/$', views.rating, name='rating'),
     url(r'^about/', views.about, name='about'),
+    url(r'^search/', include('haystack.urls')),
 ]

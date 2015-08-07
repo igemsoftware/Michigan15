@@ -10,7 +10,9 @@ from django.utils import timezone
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from protocat_app.models import *
-
+from itertools import chain
+from haystack.query import SearchQuerySet
+from haystack.generic_views import SearchView
 
 def index(request):
     context = {
@@ -183,13 +185,18 @@ def edit_protocol(request, protocol_id):
 
         return render(request,'protocat_app/edit_protocol.html',context)
 
-def search(request):
-    query = request.GET.get('search')
-    if query:
-        results = Protocol.objects.filter(title__contains=query)
-    else:
-        results = ''
-    return render(request, 'protocat_app/search_protocols.html',{'results':results})
+def gen_search(request):
+    #keywords = request.GET.get('gen_search')
+    #keyword_list = keywords.split()
+    #query_list = []
+    #for keyword in keyword_list:
+    #    query_list = list(chain(Protocol.objects.filter(title__contains=keyword, author__contains=keyword,
+    #                                description_contains=keyword, protocol_type__contains=keyword,
+    #                                reagents__contains=keyword), query_list[0]))
+    #
+    protocols = SearchQuerySet().autocomplete(content_auto=request.POST.get('gen_search', ''))
+    return render(request, 'protocat_app/search_protocols.html', {'results_list':protocols})
+
 
 def rating(request, protocol_id):
     rate = str(request.POST.get('rating'))

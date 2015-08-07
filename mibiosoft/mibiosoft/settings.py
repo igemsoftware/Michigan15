@@ -32,8 +32,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'haystack',
     'protocat_app',
-
 )
 
 MIDDLEWARE_CLASSES = (
@@ -72,6 +72,16 @@ WSGI_APPLICATION = 'mibiosoft.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
+from urlparse import urlparse #python2
+#from urllib import parse #python3
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://127.0.0.1:8000/',
+        'INDEX_NAME': 'haystack',
+    },
+}
 
 DATABASES = {
     'default': {
@@ -86,7 +96,7 @@ DATABASES = {
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Detroit'
 
 USE_I18N = True
 
