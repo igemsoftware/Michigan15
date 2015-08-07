@@ -2,19 +2,20 @@
     text-align: center;
 }
 
-.user_auth {
+.user_reg {
     padding-top: 35px;
     text-align: center;
 }
 
-.user_auth .left {
+.user_reg .left {
     display: inline-block;
 }
 
-.user_auth .right {
+.user_reg .right {
     display: inline-block;
 }
 
-.user_auth .bottom {
+.user_reg .bottom {
     padding-top: 10px;
 }
+
