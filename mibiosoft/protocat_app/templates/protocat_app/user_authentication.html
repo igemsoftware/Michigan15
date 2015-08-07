@@ -9,7 +9,7 @@
     <div class="user_auth">
         <form method="POST" action=""> {% csrf_token %} {#  allows POST requests #}
             <div class="left">
-                {{ form.user_name.label_tag }}<br><br>
+                <div class="user">{{ form.user_name.label_tag }}</div><br><br>
                 {{ form.password.label_tag }}
             </div>
             <div class="right">
