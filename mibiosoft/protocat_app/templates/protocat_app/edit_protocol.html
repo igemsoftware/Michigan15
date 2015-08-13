@@ -49,7 +49,7 @@
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4">
-                <form method="POST" action="/protocol_upload/">
+                <form method="POST" action="/edit_protocol/{{protocol_id}}/">
                     {% csrf_token %}
                     <div class="fieldWrapper">
                         {{ form.title.label_tag }}
@@ -76,7 +76,7 @@
                     <br>
                     <h3>Step 1</h3>
                     <br>
-                    <textarea class="protocol" rows="3" cols="40" name="step1   "></textarea>
+                    <textarea class="protocol" rows="3" cols="40" name="step1"></textarea>
                     <div id="step_container">
 
                     </div>

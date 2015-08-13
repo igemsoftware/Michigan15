@@ -175,6 +175,18 @@ def delete_protocol(request, protocol_id):
     return HttpResponseRedirect('/protocol_list/')
 
 def edit_protocol(request, protocol_id):
+    x = 1
+    newline = '\n'
+    text = ''
+
+    while request.POST.get('step' + str(x)):
+        text += ('Step ' + str(x))
+        text += newline
+        text += (request.POST.get('step' + str(x)))
+        text += newline
+        text += newline
+        x += 1
+
     protocol = Protocol.objects.get(id=protocol_id)
     form = ProtocolUploadForm(request.GET, instance=protocol)
     url= "/protocol_display/" + str(protocol_id)
@@ -185,12 +197,14 @@ def edit_protocol(request, protocol_id):
     if form.is_valid():
 
         protocol = Protocol.objects.get(id=protocol_id)
+        protocol.protocol_steps = text
         form = ProtocolUploadForm(request.POST, instance = protocol)
         form.save()
         return HttpResponseRedirect(url)
     else:
         context = {
             'title': 'Protocol Edit',
+            'protocol_id': protocol_id,
             'form': form
         }
         protocol = Protocol.objects.get(pk = protocol_id)
