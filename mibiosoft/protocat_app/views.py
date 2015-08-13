@@ -100,10 +100,10 @@ def user_home(request):
 
 @login_required(login_url='/user_authentication')
 def protocol_upload(request):
-
     x = 1
-    text = ''
     newline = '\n'
+    text = ''
+
     while request.POST.get('step' + str(x)):
         text += ('Step ' + str(x))
         text += newline

@@ -4,15 +4,85 @@
 
 {% block content %}
 
+
+                    <script type="text/javascript">
+                        function addStep() {
+                            var inner_container = document.createElement("div");
+                            inner_container.className = "inner_container";
+
+                            var container =  document.getElementById("step_container");
+
+                            // creating the step label
+                            var nodeList = document.getElementsByClassName("protocol");
+                            var step_count = nodeList.length + 1;
+                            var label = document.createElement("h3");
+                            label.innerHTML = "Step " + step_count;
+                            inner_container.appendChild(label);
+
+                            // creating the text box for steps
+                            var step = document.createElement("textarea");
+                            step.rows = "3";
+                            step.cols = "40";
+                            step.setAttribute("class", "protocol");
+                            inner_container.appendChild(step);
+
+                            container.appendChild(inner_container);
+
+                            // creating name to extract content in views
+                            var step_list = document.getElementsByClassName("protocol");
+                            // giving the name for each step
+                            for(var i = 0; i <= step_list.length; i++) {
+                                var new_name = "step" + (i + 1);
+                                step_list[i].setAttribute("name", new_name);
+                            }
+                        }
+
+                        function removeStep() {
+                            var container = document.getElementById("step_container");
+                            var victim = container.lastChild;
+                            container.removeChild(victim);
+                        }
+
+                    </script>
+
     <div class="container">
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4">
-                <form method="POST" action="">
+                <form method="POST" action="/protocol_upload/">
                     {% csrf_token %}
-                    {# allows POST requests #}
-                    {{ form.as_p }}
-                    <input type="submit" value="Post it">
+                    <div class="fieldWrapper">
+                        {{ form.title.label_tag }}
+                        {{ form.title }}
+                    </div>
+                    <div class="fieldWrapper">
+                        {{ form.description.label_tag }}
+                        {{ form.description }}
+                    </div>
+                    <div class="fieldWrapper">
+                        {{ form.protocol_type.label_tag }}
+                        {{ form.protocol_type }}
+                    </div>
+                    <div class="fieldWrapper">
+                        {{ form.reagents.label_tag }}
+                        {{ form.reagents }}
+                    </div>
+
+                    <label>Steps:</label>
+                    <button type="button" onclick="addStep()">Add a Step</button>
+                    <button type="button" onclick="removeStep()">Remove a Step</button>
+                    <br><br>
+
+                    <br>
+                    <h3>Step 1</h3>
+                    <br>
+                    <textarea class="protocol" rows="3" cols="40" name="step1   "></textarea>
+                    <div id="step_container">
+
+                    </div>
+
+
+                    <input type="submit" value="Post">
                 </form>
             </div>
             <div class="col-md-4"></div>
