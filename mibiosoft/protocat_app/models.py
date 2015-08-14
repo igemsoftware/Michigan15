@@ -6,7 +6,7 @@ from .protocols import PROTOCOL_TYPES
 from django.contrib.auth.models import User
 from django_comments.forms import CommentForm
 from django_comments.models import Comment
-
+from django.db.models import Q
 
 
 class UserRegistration(models.Model):
@@ -52,7 +52,6 @@ class Protocol(models.Model):
     user_rated = models.TextField(default='')
     reagents = models.TextField(default='')
     protocol_steps = models.TextField(default='')
-
 
 
 

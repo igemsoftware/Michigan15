@@ -11,8 +11,7 @@ from django.utils import timezone
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from protocat_app.models import *
-
-
+import operator
 
 def index(request):
     context = {
@@ -213,9 +212,18 @@ def edit_protocol(request, protocol_id):
         return render(request,'protocat_app/edit_protocol.html',context)
 
 def search(request):
-    query = request.GET.get('search')
-    if query:
-        results = Protocol.objects.filter(title__contains=query)
+    terms = request.GET.get('search', '').split(' ')
+    q_list = []
+    for term in terms:
+        if term:
+            q_list.append(Q(title__contains=term))
+            q_list.append(Q(author__contains=term))
+            q_list.append(Q(description__contains=term))
+            q_list.append(Q(reagents__contains=term))
+            q_list.append(Q(protocol_steps__contains=term))
+
+    if q_list:
+        results = Protocol.objects.filter(reduce(operator.or_, q_list))
     else:
         results = ''
     return render(request, 'protocat_app/search_protocols.html',{'results':results})
