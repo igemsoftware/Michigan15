@@ -42,7 +42,7 @@ class Protocol(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.TextField()
     author = models.CharField(max_length=50)
-    date_of_upload = datetime.now()
+    date_of_upload = models.DateField(auto_now=True)
     description = models.TextField(default='')
     protocol_type = models.CharField(max_length=2, choices=PROTOCOL_TYPES, null=True)
     rating = models.DecimalField(

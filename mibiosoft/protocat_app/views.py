@@ -140,11 +140,6 @@ def protocol_upload(request):
 def protocol_list(request):
 
     all_entries = Protocol.objects.all()
-    title = ''
-    author = ''
-    date = ''
-    id=''
-    rating=''
     protocol_list=[]
 
 
@@ -159,6 +154,75 @@ def protocol_list(request):
         protocol_list.append(inner_protocol)
 
     return render(request,'protocat_app/protocol_list.html', {'protocol_list':protocol_list})
+
+def protocol_list_rating(request):
+    all_entries = Protocol.objects.all().order_by('-rating')
+    protocol_list=[]
+
+
+    for each in all_entries:
+        title = each.title
+        author = each.author
+        date = each.date_of_upload
+        protocol_id = each.id
+        rating = each.rating
+        url = "/protocol_display/" + str(protocol_id)
+        inner_protocol = [title, author, date, protocol_id, url, rating]
+        protocol_list.append(inner_protocol)
+
+    return render(request,'protocat_app/protocol_list.html', {'protocol_list':protocol_list})
+
+def protocol_list_date(request):
+    all_entries = Protocol.objects.all().order_by('-date_of_upload')
+    protocol_list=[]
+
+
+    for each in all_entries:
+        title = each.title
+        author = each.author
+        date = each.date_of_upload
+        protocol_id = each.id
+        rating = each.rating
+        url = "/protocol_display/" + str(protocol_id)
+        inner_protocol = [title, author, date, protocol_id, url, rating]
+        protocol_list.append(inner_protocol)
+
+    return render(request,'protocat_app/protocol_list.html', {'protocol_list':protocol_list})
+
+def protocol_list_author(request):
+    all_entries = Protocol.objects.all().order_by('author')
+    protocol_list=[]
+
+
+    for each in all_entries:
+        title = each.title
+        author = each.author
+        date = each.date_of_upload
+        protocol_id = each.id
+        rating = each.rating
+        url = "/protocol_display/" + str(protocol_id)
+        inner_protocol = [title, author, date, protocol_id, url, rating]
+        protocol_list.append(inner_protocol)
+
+    return render(request,'protocat_app/protocol_list.html', {'protocol_list':protocol_list})
+
+def protocol_list_title(request):
+    all_entries = Protocol.objects.all().order_by('title')
+    protocol_list=[]
+
+
+    for each in all_entries:
+        title = each.title
+        author = each.author
+        date = each.date_of_upload
+        protocol_id = each.id
+        rating = each.rating
+        url = "/protocol_display/" + str(protocol_id)
+        inner_protocol = [title, author, date, protocol_id, url, rating]
+        protocol_list.append(inner_protocol)
+
+    return render(request,'protocat_app/protocol_list.html', {'protocol_list':protocol_list})
+
 
 def protocol_display(request, protocol_id):
     protocol_items = Protocol.objects.get(id=protocol_id)
