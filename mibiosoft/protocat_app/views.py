@@ -148,10 +148,11 @@ def protocol_list(request):
         title = each.title
         author = each.author
         date = each.date_of_upload
+        last_mod = each.date_modified
         protocol_id = each.id
         rating = each.rating
         url = "/protocol_display/" + str(protocol_id)
-        inner_protocol = [title, author, date, protocol_id, url, rating]
+        inner_protocol = [title, author, date, protocol_id, url, rating, last_mod]
         protocol_list.append(inner_protocol)
 
     return render(request,'protocat_app/protocol_list.html', {'protocol_list':protocol_list})
@@ -216,11 +217,10 @@ def protocol_list_title(request):
         title = each.title
         author = each.author
         date = each.date_of_upload
-        last_mod = each.date_modified
         protocol_id = each.id
         rating = each.rating
         url = "/protocol_display/" + str(protocol_id)
-        inner_protocol = [title, author, date, protocol_id, url, rating, last_mod]
+        inner_protocol = [title, author, date, protocol_id, url, rating]
         protocol_list.append(inner_protocol)
 
     return render(request,'protocat_app/protocol_list.html', {'protocol_list':protocol_list})
