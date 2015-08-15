@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from django.http import HttpRequest
-from .forms import UserRegistrationForm, UserAuthenticationForm, ProtocolUploadForm
+from .forms import UserRegistrationForm, UserAuthenticationForm, ProtocolUploadForm, ProtocolEditForm
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.conf import settings
@@ -223,6 +223,23 @@ def protocol_list_title(request):
 
     return render(request,'protocat_app/protocol_list.html', {'protocol_list':protocol_list})
 
+def protocol_list_modified(request):
+    all_entries = Protocol.objects.all().order_by('date_modified')
+    protocol_list=[]
+
+
+    for each in all_entries:
+        title = each.title
+        author = each.author
+        date = each.date_of_upload
+        protocol_id = each.id
+        rating = each.rating
+        url = "/protocol_display/" + str(protocol_id)
+        inner_protocol = [title, author, date, protocol_id, url, rating]
+        protocol_list.append(inner_protocol)
+
+    return render(request,'protocat_app/protocol_list.html', {'protocol_list':protocol_list})
+
 
 def protocol_display(request, protocol_id):
     protocol_items = Protocol.objects.get(id=protocol_id)
@@ -242,6 +259,7 @@ def edit_protocol(request, protocol_id):
     newline = '\n'
     text = ''
 
+
     while request.POST.get('step' + str(x)):
         text += ('Step ' + str(x))
         text += newline
@@ -251,17 +269,16 @@ def edit_protocol(request, protocol_id):
         x += 1
 
     protocol = Protocol.objects.get(id=protocol_id)
-    form = ProtocolUploadForm(request.GET, instance=protocol)
+    time = protocol.date_of_upload
+    form = ProtocolUploadForm(request.POST, instance=protocol)
     url= "/protocol_display/" + str(protocol_id)
 
     if request.POST:
-        form = ProtocolUploadForm(request.POST)
+        form = ProtocolUploadForm(request.POST, instance=protocol)
 
     if form.is_valid():
-
-        protocol = Protocol.objects.get(id=protocol_id)
         protocol.protocol_steps = text
-        form = ProtocolUploadForm(request.POST, instance = protocol)
+        protocol.date_of_upload = time
         form.save()
         return HttpResponseRedirect(url)
     else:
@@ -270,8 +287,6 @@ def edit_protocol(request, protocol_id):
             'protocol_id': protocol_id,
             'form': form
         }
-        protocol = Protocol.objects.get(pk = protocol_id)
-        form = ProtocolUploadForm(instance=protocol)
 
         return render(request,'protocat_app/edit_protocol.html',context)
 

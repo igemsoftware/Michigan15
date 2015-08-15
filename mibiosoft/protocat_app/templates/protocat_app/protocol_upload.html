@@ -51,6 +51,7 @@
                 <form method="POST" action="/protocol_upload/">
                     {% csrf_token %}
                     <div class="fieldWrapper">
+                        <br>
                         {{ form.title.label_tag }}
                         {{ form.title }}
                     </div>

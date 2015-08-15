@@ -25,9 +25,15 @@ class UserAuthenticationForm(forms.ModelForm):
         exclude = [None]
 
 class ProtocolUploadForm(forms.ModelForm):
+    title = forms.CharField(widget=forms.Textarea(attrs={'rows':1, 'cols':60}))
+    description = forms.CharField(required=False, widget=forms.Textarea(attrs={'rows':5, 'cols':40}))
     class Meta:
         model = Protocol
-        fields = ['title', 'description', 'protocol_type', 'reagents']
+        fields = ['title','description','protocol_type', 'reagents']
         exclude = [None]
 
-
+class ProtocolEditForm(forms.ModelForm):
+    class Meta:
+        model = Protocol
+        fields = ['title','description','protocol_type', 'reagents']
+        exclude = [None]

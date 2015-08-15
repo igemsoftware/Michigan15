@@ -25,7 +25,12 @@
                 Uploaded by {{protocol_items.author}}
                 {{protocol_items.date_of_upload}}
                 {{protocol_items.rating}}
+                Last Modified: {{protocol_items.date_modified}}
                 <hr>
+                {% if protocol_items.description %}
+                {{protocol_items.description}}
+                <hr>
+                {% endif %}
             </div>
             <div class="col-md-2"></div>
         </div>
@@ -47,6 +52,7 @@
                 {% if current_user not in protocol_items.user_rated %}
                 {# This is a quick fix, change it later. Find a list field in Django #}
             <br>
+                <h3>Rate this protocol</h3>
             <form method="POST" action="/rating/{{protocol_items.id}}/">
                 {% csrf_token %}
                 <input type="number" value="1" name="rating" min="1" max="5">
@@ -62,14 +68,16 @@
             <div class="col-md-8">
                 {% render_comment_list for protocol_items %}
             {% get_comment_form for protocol_items as form %}
+                <hr>
                 <table>
                     <form action="{% comment_form_target %}" method="post">
                         {% csrf_token %}
-                        {{ form.comment }}
+                        <textarea name="comment" rows="4" cols="40"></textarea>
                         {{ form.object_pk }}
                         {{ form.content_type }}
                         {{ form.timestamp }}
                         {{ form.security_hash }}
+                        <br>
                         <input type="submit" value="Add comment" id="id_submit">
                         <input type="hidden" name="name" value="{{current_user}}">
                         <input type="hidden" name="next" value="/protocol_display/{{protocol_items.id}}" />

@@ -42,9 +42,10 @@ class Protocol(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.TextField()
     author = models.CharField(max_length=50)
-    date_of_upload = models.DateField(auto_now=True)
-    description = models.TextField(default='')
-    protocol_type = models.CharField(max_length=2, choices=PROTOCOL_TYPES, null=True)
+    date_of_upload = models.DateField(auto_now_add=True)
+    date_modified = models.DateField(auto_now=True)
+    description = models.TextField(blank=True)
+    protocol_type = models.CharField(max_length=2, choices=PROTOCOL_TYPES, null=True, blank=True)
     rating = models.DecimalField(
         validators=[MinValueValidator(0.0), MaxValueValidator(5.0)],
         max_digits=3, decimal_places=2, default=2.50)
