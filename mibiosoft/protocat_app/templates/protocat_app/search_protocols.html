@@ -13,9 +13,11 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>Title</th>
-                                    <th>Author</th>
-                                    <th>Date Uploaded</th>
+                                    <th><a href="/title_list">Title</a></th>
+                                    <th><a href="/author_list">Author</a></th>
+                                    <th><a href="/date_list">Date Uploaded</a></th>
+                                    <th><a href="/modified_list">Last Modified</a></th>
+                                    <th><a href="/rating_list">Rating</a></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -24,6 +26,8 @@
                                     <td><a href="/protocol_display/{{protocol.id}}">{{protocol.title}}</a></td>
                                     <td>{{ protocol.author }}</td>
                                     <td>{{ protocol.date_of_upload }}</td>
+                                    <td>{{ protocol.date_modified }}</td>
+                                    <td>{{ protocol.rating }}</td>
                                 </tr>
                             {% endfor %}
                             </tbody>

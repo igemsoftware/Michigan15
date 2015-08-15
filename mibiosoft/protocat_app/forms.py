@@ -5,6 +5,7 @@ from django.utils import timezone
 from django.forms import ModelForm, PasswordInput
 from django_comments.forms import CommentForm
 from django_comments.models import Comment
+import operator
 
 class UserRegistrationForm(forms.ModelForm):
     class Meta:
@@ -32,8 +33,3 @@ class ProtocolUploadForm(forms.ModelForm):
         fields = ['title','description','protocol_type', 'reagents']
         exclude = [None]
 
-class ProtocolEditForm(forms.ModelForm):
-    class Meta:
-        model = Protocol
-        fields = ['title','description','protocol_type', 'reagents']
-        exclude = [None]

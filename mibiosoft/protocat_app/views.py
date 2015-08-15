@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from django.http import HttpRequest
-from .forms import UserRegistrationForm, UserAuthenticationForm, ProtocolUploadForm, ProtocolEditForm
+from .forms import UserRegistrationForm, UserAuthenticationForm, ProtocolUploadForm
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.conf import settings
@@ -12,6 +12,7 @@ from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from protocat_app.models import *
 import operator
+from functools import reduce
 
 def index(request):
     context = {
@@ -215,10 +216,11 @@ def protocol_list_title(request):
         title = each.title
         author = each.author
         date = each.date_of_upload
+        last_mod = each.date_modified
         protocol_id = each.id
         rating = each.rating
         url = "/protocol_display/" + str(protocol_id)
-        inner_protocol = [title, author, date, protocol_id, url, rating]
+        inner_protocol = [title, author, date, protocol_id, url, rating, last_mod]
         protocol_list.append(inner_protocol)
 
     return render(request,'protocat_app/protocol_list.html', {'protocol_list':protocol_list})
@@ -269,12 +271,11 @@ def edit_protocol(request, protocol_id):
         x += 1
 
     protocol = Protocol.objects.get(id=protocol_id)
-    time = protocol.date_of_upload
     form = ProtocolUploadForm(request.POST, instance=protocol)
     url= "/protocol_display/" + str(protocol_id)
 
     if request.POST:
-        form = ProtocolUploadForm(request.POST, instance=protocol)
+        form = ProtocolUploadForm(request.POST, protocol_id, instance=protocol)
 
     if form.is_valid():
         protocol.protocol_steps = text
