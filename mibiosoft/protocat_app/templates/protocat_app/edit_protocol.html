@@ -53,14 +53,14 @@
                     {% csrf_token %}
                     <div class="fieldWrapper">
                         {{ form.title.label_tag }}
-                        <textarea name="title" id="id_title">{{title}}</textarea>
+                        <textarea name="title" id="id_title" rows="1" cols="60">{{title}}</textarea>
                     </div>
                     <div class="fieldWrapper">
                         {{ form.description.label_tag }}
                         {% if description %}
-                        <textarea name="description" id="id_description">{{description}}</textarea>
+                        <textarea name="description" id="id_description" rows="5" cols="40">{{description}}</textarea>
                         {% else %}
-                        <textarea name="description" id="id_description"></textarea>
+                        <textarea name="description" id="id_description" rows="5" cols="40"></textarea>
                         {% endif %}
 
                     </div>
@@ -70,12 +70,12 @@
                     </div>
                     <div class="fieldWrapper">
                         {{ form.reagents.label_tag }}
-                        <textarea name="reagents" id="id_reagents">{{reagents}}</textarea>
+                        <textarea name="reagents" id="id_reagents" rows="15" cols="40">{{reagents}}</textarea>
                     </div>
 
                     <div class="fieldWrapper">
                         {{ form.protocol_steps.label_tag }}
-                        <textarea name="protocol_steps" id="id_protocol_steps">{{protocol_steps}}</textarea>
+                        <textarea name="protocol_steps" id="id_protocol_steps" rows="20" cols="40">{{protocol_steps}}</textarea>
                     </div>
 
 

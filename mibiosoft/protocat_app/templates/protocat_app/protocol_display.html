@@ -9,6 +9,93 @@
     <div class="container">
 
         <div class="row">
+            <div class="col-md-5">
+                <h1><strong>{{protocol_items.title}}</strong></h1>
+                Uploaded by {{protocol_items.author}}
+                {{protocol_items.date_of_upload}}
+                {{protocol_items.rating}}
+                Last Modified: {{protocol_items.date_modified}}
+                <br>
+                <form action="/protocol_list" style ='float: left; padding: 5px;'>
+                    <input type="submit" value="Back">
+                </form>
+                {% if protocol_items.author == current_user %}
+                <form method="POST" style ='float: left; padding: 5px;' action="/delete_protocol/{{protocol_items.id}}/">
+                    {% csrf_token %}
+                    <input type="submit" value="Delete">
+                </form>
+                <form method="POST" style ='float: left; padding: 5px;' action="/pre_edit/{{protocol_items.id}}/">
+                    {% csrf_token %}
+                    <input type="submit" value="Edit">
+                </form>
+                {% endif %}
+                <br>
+                <hr>
+                {% if protocol_items.description %}
+                {{protocol_items.description}}
+                <hr>
+                {% endif %}
+                <div class="row">
+                    <div class="col-md-5">
+                        <h3>Protocol Type:  {{protocol_items.protocol_type}}</h3>
+                        <h3>Reagents: </h3> <p>{{protocol_items.reagents|linebreaksbr}}</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {% if current_user not in protocol_items.user_rated %}
+                            {# This is a quick fix, change it later. Find a list field in Django #}
+                            <br>
+                            <h3>Rate this protocol</h3>
+                            <form method="POST" action="/rating/{{protocol_items.id}}/">
+                                {% csrf_token %}
+                                <input type="number" value="1" name="rating" min="1" max="5">
+                            </form>
+                            <br>
+                            {% endif %}
+
+                            {% render_comment_list for protocol_items %}
+                            {% get_comment_form for protocol_items as form %}
+                            <hr>
+                            <table>
+                                <form action="{% comment_form_target %}" method="post">
+                                    {% csrf_token %}
+                                    <textarea name="comment" rows="4" cols="40"></textarea>
+                                    {{ form.object_pk }}
+                                    {{ form.content_type }}
+                                    {{ form.timestamp }}
+                                    {{ form.security_hash }}
+                                    <br>
+                                    <input type="submit" value="Add comment" id="id_submit">
+                                    <br><br>
+                                    <input type="hidden" name="name" value="{{current_user}}">
+                                    <input type="hidden" name="next" value="/protocol_display/{{protocol_items.id}}" />
+                                    <tr>
+                                    </tr>
+                                </form>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <h3>Protocol Steps: </h3> <p>{{steps|linebreaksbr}}</p>
+            </div>
+        </div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+<!-- straight down layout -->
+<!--
+        <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-8">
                 <form action="/protocol_list">
@@ -110,11 +197,7 @@
             </div>
             <div class="col-md-2"></div>
         </div>
-
-
-
-
-
     </div>
-{% endblock %}
+-->
+
 
