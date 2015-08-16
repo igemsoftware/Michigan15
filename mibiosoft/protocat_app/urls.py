@@ -16,6 +16,7 @@ urlpatterns = [
     url(r'^title_list/', views.protocol_list_title, name='protocol_list_title'),
     url(r'^modified_list/', views.protocol_list_modified, name='protocol_list_modified'),
     url(r'^delete_protocol/(?P<protocol_id>[0-9]+)/$', views.delete_protocol, name='delete_protocol'),
+    url(r'^pre_edit/(?P<protocol_id>[0-9]+)/$', views.pre_edit, name='pre_edit'),
     url(r'^edit_protocol/(?P<protocol_id>[0-9]+)/$', views.edit_protocol, name='edit_protocol'),
     url(r'^search/$', views.search, name='search'),
     url(r'^rating/(?P<protocol_id>[0-9]+)/$', views.rating, name='rating'),

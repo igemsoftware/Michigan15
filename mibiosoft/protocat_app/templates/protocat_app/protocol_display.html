@@ -102,7 +102,7 @@
                 {% csrf_token %}
                 <input type="submit" value="Delete">
             </form>
-            <form method="POST" action="/edit_protocol/{{protocol_items.id}}/">
+            <form method="POST" action="/pre_edit/{{protocol_items.id}}/">
                 {% csrf_token %}
                 <input type="submit" value="Edit">
             </form>

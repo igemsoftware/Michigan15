@@ -13,6 +13,7 @@ from django.contrib.auth.decorators import login_required
 from protocat_app.models import *
 import operator
 from functools import reduce
+from .protocols import PROTOCOL_TYPES
 
 def index(request):
     context = {
@@ -256,30 +257,40 @@ def delete_protocol(request, protocol_id):
 
     return HttpResponseRedirect('/protocol_list/')
 
+
+def pre_edit(request, protocol_id):
+    protocol = Protocol.objects.get(id=protocol_id)
+    title = protocol.title
+    reagents = protocol.reagents
+    protocol_type = protocol.protocol_type
+    description = protocol.description
+    protocol_steps = protocol.protocol_steps
+    url= "/protocol_display/" + str(protocol_id)
+    form = ProtocolUploadForm(request.POST, instance=protocol)
+    context = {
+        'protocol_id':protocol_id,
+        'protocol':protocol,
+        'title':title,
+        'reagents':reagents,
+        'description':description,
+        'protocol_type':protocol_type,
+        'protocol_steps':protocol_steps,
+        'PROTOCOL_TYPES':PROTOCOL_TYPES,
+        'url':url,
+        'form':form
+    }
+    return render(request, 'protocat_app/edit_protocol.html', context)
+
+
 def edit_protocol(request, protocol_id):
-    x = 1
-    newline = '\n'
-    text = ''
-
-
-    while request.POST.get('step' + str(x)):
-        text += ('Step ' + str(x))
-        text += newline
-        text += (request.POST.get('step' + str(x)))
-        text += newline
-        text += newline
-        x += 1
 
     protocol = Protocol.objects.get(id=protocol_id)
     form = ProtocolUploadForm(request.POST, instance=protocol)
     url= "/protocol_display/" + str(protocol_id)
 
-    if request.POST:
-        form = ProtocolUploadForm(request.POST, protocol_id, instance=protocol)
+
 
     if form.is_valid():
-        protocol.protocol_steps = text
-        protocol.date_of_upload = time
         form.save()
         return HttpResponseRedirect(url)
     else:

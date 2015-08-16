@@ -53,11 +53,16 @@
                     {% csrf_token %}
                     <div class="fieldWrapper">
                         {{ form.title.label_tag }}
-                        {{ form.title }}
+                        <textarea name="title" id="id_title">{{title}}</textarea>
                     </div>
                     <div class="fieldWrapper">
                         {{ form.description.label_tag }}
-                        {{ form.description }}
+                        {% if description %}
+                        <textarea name="description" id="id_description">{{description}}</textarea>
+                        {% else %}
+                        <textarea name="description" id="id_description"></textarea>
+                        {% endif %}
+
                     </div>
                     <div class="fieldWrapper">
                         {{ form.protocol_type.label_tag }}
@@ -65,21 +70,14 @@
                     </div>
                     <div class="fieldWrapper">
                         {{ form.reagents.label_tag }}
-                        {{ form.reagents }}
+                        <textarea name="reagents" id="id_reagents">{{reagents}}</textarea>
                     </div>
 
-                    <label>Steps:</label>
-                    <button type="button" onclick="addStep()">Add a Step</button>
-                    <button type="button" onclick="removeStep()">Remove a Step</button>
-                    <br><br>
-
-                    <br>
-                    <h3>Step 1</h3>
-                    <br>
-                    <textarea class="protocol" rows="3" cols="40" name="step1"></textarea>
-                    <div id="step_container">
-
+                    <div class="fieldWrapper">
+                        {{ form.protocol_steps.label_tag }}
+                        <textarea name="protocol_steps" id="id_protocol_steps">{{protocol_steps}}</textarea>
                     </div>
+
 
 
                     <input type="submit" value="Post">
