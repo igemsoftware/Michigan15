@@ -39,11 +39,18 @@ def user_registration(request):
     }
 
     if form.is_valid():
+
         instance = form.save(commit=False)
         instance.user_name = form.cleaned_data.get('user_name')
+        instance.first_name = form.cleaned_data.get('first_name')
+        instance.last_name = form.cleaned_data.get('last_name')
         instance.email = form.cleaned_data.get('email')
         instance.password = form.cleaned_data.get('password')
         user = User.objects.create_user(instance.user_name, instance.email, instance.password)
+        user.first_name = instance.first_name
+        user.last_name = instance.last_name
+        user.save()
+
         user = authenticate(username=instance.user_name, password=instance.password)
         if user is not None:
             # the pasword verified for the user
@@ -90,14 +97,6 @@ def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/')
 
-
-def user_home(request):
-    context = {
-        'title': 'XYZ Profile Page',
-        'descr': 'this is the homepage of user XYZ'
-    }
-
-    return render(request, 'protocat_app/user_home.html', context)
 
 @login_required(login_url='/user_authentication')
 def protocol_upload(request):
@@ -153,10 +152,57 @@ def protocol_list(request):
         protocol_id = each.id
         rating = each.rating
         url = "/protocol_display/" + str(protocol_id)
-        inner_protocol = [title, author, date, protocol_id, url, rating, last_mod]
+        url2 = "/user_profile/" + str(author)
+        inner_protocol = [title, author, date, protocol_id, url, rating, last_mod, url2]
         protocol_list.append(inner_protocol)
 
     return render(request,'protocat_app/protocol_list.html', {'protocol_list':protocol_list})
+
+def user_home(request):
+    current_user = request.user
+    name = User.objects.get(username=current_user)
+    first = name.first_name
+    last = name.last_name
+
+    user_protocols = Protocol.objects.filter(author=current_user)
+
+    protocol_list = []
+
+    for each in user_protocols:
+        title = each.title
+        author = each.author
+        date = each.date_of_upload
+        last_mod = each.date_modified
+        protocol_id = each.id
+        rating = each.rating
+        url = "/protocol_display/" + str(protocol_id)
+        inner_protocol = [title, author, date, protocol_id, url, rating, last_mod]
+        protocol_list.append(inner_protocol)
+    return render(request, 'protocat_app/user_home.html', {'protocol_list':protocol_list, 'first':first, 'last':last})
+
+def user_profile(request, user1):
+    use_name = str(user1)
+    name = User.objects.get(username=use_name)
+    first = name.first_name
+    last = name.last_name
+
+    user_protocols = Protocol.objects.filter(author=use_name)
+
+    protocol_list = []
+
+    for each in user_protocols:
+        title = each.title
+        author = each.author
+        date = each.date_of_upload
+        last_mod = each.date_modified
+        protocol_id = each.id
+        rating = each.rating
+        url = "/protocol_display/" + str(protocol_id)
+        inner_protocol = [title, author, date, protocol_id, url, rating, last_mod]
+        protocol_list.append(inner_protocol)
+    return render(request, 'protocat_app/user_profile.html', {'protocol_list':protocol_list,
+                                                              'first':first, 'last':last, 'user1':use_name})
+
 
 def protocol_list_rating(request):
     all_entries = Protocol.objects.all().order_by('-rating')

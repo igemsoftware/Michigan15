@@ -11,6 +11,8 @@ from django.db.models import Q
 
 class UserRegistration(models.Model):
     email = models.EmailField(blank=False)
+    first_name = models.CharField(max_length=20, default='')
+    last_name = models.CharField(max_length=20, default='')
     user_name = models.CharField(max_length=50, default='First Last', blank=False)
     password = models.CharField(max_length=120, default='password', blank=False)
 
@@ -53,6 +55,9 @@ class Protocol(models.Model):
     user_rated = models.TextField(default='')
     reagents = models.TextField(default='')
     protocol_steps = models.TextField(default='')
+
+
+
 
 
 

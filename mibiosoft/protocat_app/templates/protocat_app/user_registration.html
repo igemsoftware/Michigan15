@@ -10,11 +10,15 @@
         <form method="POST" action=""> {% csrf_token %} {#  allows POST requests #}
             <div class="left">
                 <div class="user">{{ form.user_name.label_tag }}</div><br><br>
+                <div class="first_name">{{ form.first_name.label_tag }}</div><br>
+                <div class="last_name">{{ form.last_name.label_tag }}</div><br>
                 <div class="email">{{ form.email.label_tag }}</div><br><br>
                 {{ form.password.label_tag }}
             </div>
             <div class="right">
                 {{ form.user_name }}<br><br>
+                {{ form.first_name }}<br><br>
+                {{ form.last_name }}<br><br>
                 {{ form.email }}<br><br>
                 {{ form.password }}
             </div>

@@ -13,7 +13,7 @@ class UserRegistrationForm(forms.ModelForm):
         widgets = {
             'password' : PasswordInput(),
         }
-        fields = ['user_name', 'email', 'password']
+        fields = ['user_name', 'first_name', 'last_name', 'email', 'password']
         exclude = [None]
 
 class UserAuthenticationForm(forms.ModelForm):
@@ -25,6 +25,7 @@ class UserAuthenticationForm(forms.ModelForm):
         fields = ['user_name', 'password']
         exclude = [None]
 
+
 class ProtocolUploadForm(forms.ModelForm):
     title = forms.CharField(widget=forms.Textarea(attrs={'rows':1, 'cols':60}))
     description = forms.CharField(required=False, widget=forms.Textarea(attrs={'rows':5, 'cols':40}))
@@ -33,4 +34,6 @@ class ProtocolUploadForm(forms.ModelForm):
         model = Protocol
         fields = ['title','description','protocol_type', 'reagents','protocol_steps']
         exclude = [None]
+
+
 
