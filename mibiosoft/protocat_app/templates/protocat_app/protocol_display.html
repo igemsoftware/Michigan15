@@ -17,7 +17,7 @@
                 Last Modified: {{protocol_items.date_modified}}
                 <br>
                 <form action="/protocol_list" style ='float: left; padding: 5px;'>
-                    <input type="submit" value="Back">
+                    <input type="submit" value="Back to List">
                 </form>
                 {% if protocol_items.author == current_user %}
                 <form method="POST" style ='float: left; padding: 5px;' action="/delete_protocol/{{protocol_items.id}}/">

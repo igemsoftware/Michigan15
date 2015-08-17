@@ -46,9 +46,9 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-4"></div>
+            <form method="POST" action="/protocol_upload/">
             <div class="col-md-4">
-                <form method="POST" action="/protocol_upload/">
+
                     {% csrf_token %}
                     <div class="fieldWrapper">
                         <br>
@@ -57,7 +57,8 @@
                     </div>
                     <div class="fieldWrapper">
                         {{ form.description.label_tag }}
-                        {{ form.description }}
+                        <textarea name="description" id="id_description" rows="5" cols="40"
+                                  placeholder="What this protocol is used for,safety guidelines, duration, etc."></textarea>
                     </div>
                     <div class="fieldWrapper">
                         {{ form.protocol_type.label_tag }}
@@ -67,37 +68,22 @@
                         {{ form.reagents.label_tag }}
                         {{ form.reagents }}
                     </div>
-                    <!-- protocol form
-                    <div class="fieldWrapper">
-                        {{ form.protocol.label_tag }}
-                        <button type="button" onclick="addStep()">Add a Step</button>
-                        <button type="button" onclick="removeStep()">Remove a Step</button>
-                        <input type="text" id="id_protocol" name="protocol" >
-
-                        <br>
-
-                        <div id="step_container">
-                        </div>
-                    </div>
-                    -->
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-6">
+                    <br>
                     <label>Steps:</label>
                     <button type="button" onclick="addStep()">Add a Step</button>
                     <button type="button" onclick="removeStep()">Remove a Step</button>
-                    <br><br>
-
                     <br>
                     <h3>Step 1</h3>
                     <br>
                     <textarea class="protocol" rows="3" cols="40" name="step1"></textarea>
-                    <div id="step_container">
-
-                    </div>
-
-
+                    <div id="step_container"></div>
                     <input type="submit" value="Post">
-                </form>
+
             </div>
-            <div class="col-md-4"></div>
+            </form>
         </div>
     </div>
 

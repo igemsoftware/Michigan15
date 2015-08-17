@@ -47,7 +47,6 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-4"></div>
             <div class="col-md-4">
                 <form method="POST" action="/edit_protocol/{{protocol_id}}/">
                     {% csrf_token %}
@@ -72,16 +71,17 @@
                         {{ form.reagents.label_tag }}
                         <textarea name="reagents" id="id_reagents" rows="15" cols="40">{{reagents}}</textarea>
                     </div>
-
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-7">
                     <div class="fieldWrapper">
+                        <br>
                         {{ form.protocol_steps.label_tag }}
-                        <textarea name="protocol_steps" id="id_protocol_steps" rows="20" cols="40">{{protocol_steps}}</textarea>
+                        <textarea name="protocol_steps" id="id_protocol_steps" rows="30" cols="80">{{protocol_steps}}</textarea>
                     </div>
-
-
-
                     <input type="submit" value="Post">
                 </form>
+            </div>
             </div>
             <div class="col-md-4"></div>
         </div>
