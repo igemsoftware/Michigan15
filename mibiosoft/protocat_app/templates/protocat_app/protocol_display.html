@@ -11,10 +11,11 @@
         <div class="row">
             <div class="col-md-5">
                 <h1><strong>{{protocol_items.title}}</strong></h1>
-                Uploaded by {{protocol_items.author}}
+                Uploaded by {{protocol_items.author}} on
                 {{protocol_items.date_of_upload}}
-                {{protocol_items.rating}}
-                Last Modified: {{protocol_items.date_modified}}
+                | Last Modified: {{protocol_items.date_modified}}
+                <br>
+                Rating: <strong>{{protocol_items.rating}}</strong>
                 <br>
                 <form action="/protocol_list" style ='float: left; padding: 5px;'>
                     <input type="submit" value="Back to List">
@@ -52,7 +53,8 @@
                             </form>
                             <br>
                             {% endif %}
-
+                            <strong>Comments</strong>
+                            <hr>
                             {% render_comment_list for protocol_items %}
                             {% get_comment_form for protocol_items as form %}
                             <hr>
