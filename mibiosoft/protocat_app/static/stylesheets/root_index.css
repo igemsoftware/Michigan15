@@ -64,7 +64,30 @@ a:after {
     margin: 1em 0;
     padding: 0;
 }
+button{
+    color:#3bc492;
 
+}
+button:hover {
+    color: #c0392b;
+    text-decoration: none;
+    outline: 0;
+}
+
+button:before,
+button:after {
+    -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -o-transition: color 0.1s ease-in, background 0.1s ease-in;
+    transition: color 0.1s ease-in, background 0.1s ease-in;
+}
+
+input {
+    color:black;
+}
+
+label {color: #3bc492}
 
 /* ==========================================================================
    Wrap Sections
@@ -177,4 +200,64 @@ a:after {
     display: inline-block;
     border: 1px border blue;
     text-align: right;
+}
+
+/* navbar */
+.navbar{
+    background-image:none;
+    background-color: #3bc492;
+    color:white;
+
+}
+.navbar-default{
+    background-image:none;
+    background-color: #3bc492;
+    color:white;
+}
+.navbar-fixed-top{
+    background-image:none;
+    background-color: #3bc492;
+    color:white;
+}
+.navbar-header{
+    background-image:none;
+    background-color: #3bc492;
+    color:white;
+}
+
+.navbar-brand{
+    background-image:none;
+    background-color: #3bc492;
+    color:white;
+}
+.navbar-collapse{
+    background-image:none;
+    background-color: #3bc492;
+    color:white;
+}
+.navbar-nav{
+    background-image:none;
+    background-color: #3bc492;
+    color:white;
+}
+.navbar-right{
+    background-image:none;
+    background-color: #3bc492;
+    color:white;
+}
+.nav{
+    background-image:none;
+    background-color: #3bc492;
+    color:white;
+}
+
+.navbar .nav > li > a {
+    color: white;
+}
+
+.navbar-brand > a{
+    color: white;
+}
+.navbar-default .navbar-brand {
+    color:white;
 }
