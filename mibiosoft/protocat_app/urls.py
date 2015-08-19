@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^search/$', views.search, name='search'),
     url(r'^rating/(?P<protocol_id>[0-9]+)/$', views.rating, name='rating'),
     url(r'^about/', views.about, name='about'),
+    url(r'^feedback/', views.feedback, name='feedback'),
 ]

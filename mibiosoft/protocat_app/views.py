@@ -383,3 +383,7 @@ def rating(request, protocol_id):
     url = "/protocol_display/" + str(protocol_id) + "/"
 
     return HttpResponseRedirect(url)
+
+def feedback(request):
+
+    return render(request, 'protocat_app/feedback.html')
