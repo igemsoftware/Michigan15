@@ -21,6 +21,7 @@
     <link href="{% static 'stylesheets/root_index.css' %}" rel="stylesheet">
     <link href="{% static 'stylesheets/user_authentication.css' %}" rel="stylesheet">
     <link href="{% static 'stylesheets/user_registration.css' %}" rel="stylesheet">
+    <link href="{% static 'stylesheets/feedback.css' %}" rel="stylesheet">
 
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
@@ -68,10 +69,10 @@
                         {% endif %}
                              <li><a href="/about" class="smothScroll">About</a></li>
                              <li><a href="/feedback" class="smothScroll">Feedback</a></li>
-                             <li>
+                             <li class="search_box">
                                  <div class="input-group input-group-lg">
                                      <form class="form-search" method="GET" action="{% url 'search' %}">
-                                         <input type="text" name="search" class="form-control" placeholder="Search for Protocols!" style="background-color:#62cfa7; color:white">
+                                         <input type="text" name="search" class="form-control" placeholder="Search for Protocols!" style="color:white">
                                      </form>
                                  </div>
                              </li>
