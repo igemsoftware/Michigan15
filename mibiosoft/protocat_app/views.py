@@ -39,7 +39,6 @@ def user_registration(request):
     }
 
     if form.is_valid():
-
         instance = form.save(commit=False)
         instance.user_name = form.cleaned_data.get('user_name')
         instance.first_name = form.cleaned_data.get('first_name')
@@ -50,7 +49,6 @@ def user_registration(request):
         user.first_name = instance.first_name
         user.last_name = instance.last_name
         user.save()
-
         user = authenticate(username=instance.user_name, password=instance.password)
         if user is not None:
             # the pasword verified for the user
