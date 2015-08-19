@@ -65,7 +65,7 @@ a:after {
     padding: 0;
 }
 button{
-    color:#3bc492;
+    color:#000080;
 
 }
 button:hover {
@@ -98,19 +98,19 @@ label {color: #3bc492}
    ========================================================================== */
 
 #headerwrap {
-	background-color: #34495e;
+	background-color: white;
 	padding-top: 60px;
 }
 
 #headerwrap h1 {
 	margin-top: 30px;
-	color: white;
+	color: #000080;
 	font-size: 70px;
 
 }
 
 #headerwrap h3 {
-	color: white;
+	color: #000080;
 	font-size: 30px;
 }
 
@@ -209,49 +209,49 @@ label {color: #3bc492}
 /* navbar */
 .navbar{
     background-image:none;
-    background-color: #3bc492;
+    background-color: #000080;
     color:white;
 
 }
 .navbar-default{
     background-image:none;
-    background-color: #3bc492;
+    background-color: #000080;
     color:white;
 }
 .navbar-fixed-top{
     background-image:none;
-    background-color: #3bc492;
+    background-color: #000080;
     color:white;
 }
 .navbar-header{
     background-image:none;
-    background-color: #3bc492;
+    background-color: #000080;
     color:white;
 }
 
 .navbar-brand{
     background-image:none;
-    background-color: #3bc492;
+    background-color: #000080;
     color:white;
 }
 .navbar-collapse{
     background-image:none;
-    background-color: #3bc492;
+    background-color: #000080;
     color:white;
 }
 .navbar-nav{
     background-image:none;
-    background-color: #3bc492;
+    background-color: #000080;
     color:white;
 }
 .navbar-right{
     background-image:none;
-    background-color: #3bc492;
+    background-color: #000080;
     color:white;
 }
 .nav{
     background-image:none;
-    background-color: #3bc492;
+    background-color: #000080;
     color:white;
 }
 
