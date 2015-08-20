@@ -265,3 +265,7 @@ label {color: #000080}
 .navbar-default .navbar-brand {
     color:white;
 }
+
+.textarea {
+    resize:none;
+}
