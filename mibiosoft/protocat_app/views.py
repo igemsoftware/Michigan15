@@ -41,6 +41,9 @@ def user_registration(request):
     if form.is_valid():
         instance = form.save(commit=False)
         instance.user_name = form.cleaned_data.get('user_name')
+        if User.objects.get(username=instance.user_name):
+            context['error_message'] = "This username has been taken!"
+            return render(request, 'protocat_app/user_registration.html', context)
         instance.first_name = form.cleaned_data.get('first_name')
         instance.last_name = form.cleaned_data.get('last_name')
         instance.email = form.cleaned_data.get('email')
@@ -215,7 +218,8 @@ def protocol_list_rating(request):
         protocol_id = each.id
         rating = each.rating
         url = "/protocol_display/" + str(protocol_id)
-        inner_protocol = [title, author, date, protocol_id, url, rating, last_mod]
+        url2 = "/user_profile/" + str(author)
+        inner_protocol = [title, author, date, protocol_id, url, rating, last_mod, url2]
         protocol_list.append(inner_protocol)
 
     return render(request,'protocat_app/protocol_list.html', {'protocol_list':protocol_list})
@@ -233,7 +237,8 @@ def protocol_list_date(request):
         protocol_id = each.id
         rating = each.rating
         url = "/protocol_display/" + str(protocol_id)
-        inner_protocol = [title, author, date, protocol_id, url, rating, last_mod]
+        url2 = "/user_profile/" + str(author)
+        inner_protocol = [title, author, date, protocol_id, url, rating, last_mod, url2]
         protocol_list.append(inner_protocol)
 
     return render(request,'protocat_app/protocol_list.html', {'protocol_list':protocol_list})
@@ -251,7 +256,8 @@ def protocol_list_author(request):
         protocol_id = each.id
         rating = each.rating
         url = "/protocol_display/" + str(protocol_id)
-        inner_protocol = [title, author, date, protocol_id, url, rating, last_mod]
+        url2 = "/user_profile/" + str(author)
+        inner_protocol = [title, author, date, protocol_id, url, rating, last_mod, url2]
         protocol_list.append(inner_protocol)
 
     return render(request,'protocat_app/protocol_list.html', {'protocol_list':protocol_list})
@@ -269,7 +275,8 @@ def protocol_list_title(request):
         protocol_id = each.id
         rating = each.rating
         url = "/protocol_display/" + str(protocol_id)
-        inner_protocol = [title, author, date, protocol_id, url, rating, last_mod]
+        url2 = "/user_profile/" + str(author)
+        inner_protocol = [title, author, date, protocol_id, url, rating, last_mod, url2]
         protocol_list.append(inner_protocol)
 
     return render(request,'protocat_app/protocol_list.html', {'protocol_list':protocol_list})
@@ -287,7 +294,8 @@ def protocol_list_modified(request):
         protocol_id = each.id
         rating = each.rating
         url = "/protocol_display/" + str(protocol_id)
-        inner_protocol = [title, author, date, protocol_id, url, rating, last_mod]
+        url2 = "/user_profile/" + str(author)
+        inner_protocol = [title, author, date, protocol_id, url, rating, last_mod, url2]
         protocol_list.append(inner_protocol)
 
     return render(request,'protocat_app/protocol_list.html', {'protocol_list':protocol_list})
