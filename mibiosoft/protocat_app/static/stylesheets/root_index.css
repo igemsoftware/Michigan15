@@ -42,7 +42,7 @@ a {
 
 a:hover,
 a:focus {
-    color: #c0392b;
+    color: #fca708;
     text-decoration: none;
     outline: 0;
 }
@@ -69,7 +69,7 @@ button{
 
 }
 button:hover {
-    color: #c0392b;
+    color: #fca708;
     text-decoration: none;
     outline: 0;
 }
@@ -268,4 +268,8 @@ textarea {
 }
 .navbar-default .navbar-brand {
     color:white;
+}
+
+.textarea {
+    resize:none;
 }
