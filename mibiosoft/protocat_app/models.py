@@ -56,6 +56,10 @@ class Protocol(models.Model):
     reagents = models.TextField(default='')
     protocol_steps = models.TextField(default='')
 
+    def details(self):
+        return self.author + ', ' + self.title + ', ' + self.description
+
+
 
 
 
