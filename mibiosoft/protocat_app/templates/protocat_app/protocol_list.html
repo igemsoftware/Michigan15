@@ -11,29 +11,28 @@
 
                 <div class="panel panel-default" style="margin-top:15px">
                     <div class="panel-heading">Protocol List</div>
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th><a href="/title_list">Title</a></th>
-                                    <th><a href="/author_list">Author</a></th>
-                                    <th><a href="/date_list">Date Uploaded</a></th>
-                                    <th><a href="/modified_list">Last Modified</a></th>
-                                    <th><a href="/rating_list">Rating</a></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            {% for protocol in protocol_list %}
-                                <tr>
-                                    <td><a href={{protocol.4}}>{{ protocol.0 }}</a></td>
-                                    <td><a href={{protocol.7}}>{{ protocol.1 }}</a></td>
-                                    <td>{{ protocol.2 }}</td>
-                                    <td>{{ protocol.6 }}</td>
-                                    <td>{{ protocol.5 }}</td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
+                    <table> class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th><a href="/title_list">Title</a></th>
+                                <th><a href="/author_list">Author</a></th>
+                                <th><a href="/date_list">Date Uploaded</a></th>
+                                <th><a href="/modified_list">Last Modified</a></th>
+                                <th><a href="/rating_list">Rating</a></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for protocol in protocol_list %}
+                            <tr>
+                                <td><a href={{protocol.4}}>{{ protocol.0 }}</a></td>
+                                <td><a href={{protocol.7}}>{{ protocol.1 }}</a></td>
+                                <td>{{ protocol.2 }}</td>
+                                <td>{{ protocol.6 }}</td>
+                                <td>{{ protocol.5 }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
 
 
