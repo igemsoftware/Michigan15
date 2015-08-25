@@ -38,8 +38,16 @@ INSTALLED_APPS = (
     'protocat_app',
     'django.contrib.sites',
     'django_comments',
+    'django_nose',
 
 )
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-package=protocat_app',
+]
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

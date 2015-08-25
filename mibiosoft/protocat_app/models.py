@@ -18,6 +18,8 @@ class UserRegistration(models.Model):
 
     def __str__(self):
         return (self.user_name + ', ' + self.email)
+    def details(self):
+        return self.user_name + ', ' + self.email
 
 class UserAuthentication(models.Model):
     user_name = models.CharField(max_length=50, default='YourUserName')
@@ -25,6 +27,8 @@ class UserAuthentication(models.Model):
 
     def __str__(self):
         return (self.user_name + ', ' + self.email)
+    def details(self):
+        return self.user_name + ', ' + self.password
 
 
 # class Protocol(models.Model):

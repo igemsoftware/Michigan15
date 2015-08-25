@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, HttpResponse, HttpResponseRedirect, get_object_or_404
 from django.http import HttpRequest
 from .forms import UserRegistrationForm, UserAuthenticationForm, ProtocolUploadForm
 from django.contrib.auth.models import User
@@ -161,7 +161,7 @@ def protocol_list(request):
 
 def user_home(request):
     current_user = request.user
-    name = User.objects.get(username=current_user)
+    name = get_object_or_404(User,username=current_user)
     first = name.first_name
     last = name.last_name
 
@@ -310,55 +310,70 @@ def protocol_display(request, protocol_id):
 
 def delete_protocol(request, protocol_id):
     protocol = Protocol.objects.get(id=protocol_id)
-    protocol.delete()
-
+    author = protocol.author
+    current_user = str(request.user)
+    if current_user == author:
+        protocol.delete()
+    else:
+        return HttpResponse('You cannot delete this protocol')
     return HttpResponseRedirect('/protocol_list/')
 
 
 def pre_edit(request, protocol_id):
-    protocol = Protocol.objects.get(id=protocol_id)
-    title = protocol.title
-    reagents = protocol.reagents
-    protocol_type = protocol.protocol_type
-    description = protocol.description
-    protocol_steps = protocol.protocol_steps
-    url= "/protocol_display/" + str(protocol_id)
-    form = ProtocolUploadForm(request.POST, instance=protocol)
-    context = {
-        'protocol_id':protocol_id,
-        'protocol':protocol,
-        'title':title,
-        'reagents':reagents,
-        'description':description,
-        'protocol_type':protocol_type,
-        'protocol_steps':protocol_steps,
-        'PROTOCOL_TYPES':PROTOCOL_TYPES,
-        'url':url,
-        'form':form
-    }
-    return render(request, 'protocat_app/edit_protocol.html', context)
 
+    protocol = Protocol.objects.get(id=protocol_id)
+    author = protocol.author
+    current_user = str(request.user)
+    if current_user == author:
+
+        title = protocol.title
+        reagents = protocol.reagents
+        protocol_type = protocol.protocol_type
+        description = protocol.description
+        protocol_steps = protocol.protocol_steps
+        url= "/protocol_display/" + str(protocol_id)
+        form = ProtocolUploadForm(request.POST, instance=protocol)
+        context = {
+            'protocol_id':protocol_id,
+            'protocol':protocol,
+            'title':title,
+            'reagents':reagents,
+            'description':description,
+            'protocol_type':protocol_type,
+            'protocol_steps':protocol_steps,
+            'PROTOCOL_TYPES':PROTOCOL_TYPES,
+            'url':url,
+            'form':form
+        }
+        return render(request, 'protocat_app/edit_protocol.html', context)
+    else:
+        return HttpResponse('You cannot edit this protocol')
 
 def edit_protocol(request, protocol_id):
 
     protocol = Protocol.objects.get(id=protocol_id)
-    form = ProtocolUploadForm(request.POST, instance=protocol)
-    url= "/protocol_display/" + str(protocol_id)
+    author = protocol.author
+    current_user = str(request.user)
+    if current_user == author:
+
+        form = ProtocolUploadForm(request.POST, instance=protocol)
+        url= "/protocol_display/" + str(protocol_id)
 
 
 
-    if form.is_valid():
-        form.save()
-        return HttpResponseRedirect(url)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(url)
+        else:
+            context = {
+                'title': 'Protocol Edit',
+                'protocol_id': protocol_id,
+                'form': form
+            }
+
+            return render(request,'protocat_app/edit_protocol.html',context)
     else:
-        context = {
-            'title': 'Protocol Edit',
-            'protocol_id': protocol_id,
-            'form': form
-        }
-
-        return render(request,'protocat_app/edit_protocol.html',context)
-
+        return HttpResponse('You cannot edit this protocol')
 def search(request):
     terms = request.GET.get('search', '').split(' ')
     q_list = []
