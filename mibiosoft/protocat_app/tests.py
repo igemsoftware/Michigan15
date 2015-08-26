@@ -91,8 +91,6 @@ class NotLoggedInTests(TestCase):
         self.assertEqual(response.status_code, 200)
         response = c.get('/pre_edit/1/')
         self.assertEqual(response.status_code, 200)
-        response = c.get('/rating/1/')
-        self.assertEqual(response.status_code, 200)
 
 class LoggedInTests(TestCase):
     def test_logged_in(self):

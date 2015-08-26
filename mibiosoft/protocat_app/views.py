@@ -41,9 +41,6 @@ def user_registration(request):
     if form.is_valid():
         instance = form.save(commit=False)
         instance.user_name = form.cleaned_data.get('user_name')
-        if User.objects.get(username=instance.user_name):
-            context['error_message'] = "This username has been taken!"
-            return render(request, 'protocat_app/user_registration.html', context)
         instance.first_name = form.cleaned_data.get('first_name')
         instance.last_name = form.cleaned_data.get('last_name')
         instance.email = form.cleaned_data.get('email')
