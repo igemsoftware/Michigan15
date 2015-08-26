@@ -8,6 +8,10 @@
     <div class="banner">
         <h2>Login</h2>
     </div>
+    <div class="error">
+        <h4>{{ error1 }}</h4>
+        <h4>{{ error2 }}</h4>
+    </div>
     <div class="user_auth">
         <form method="POST" action=""> {% csrf_token %} {#  allows POST requests #}
             <div class="left">

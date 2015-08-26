@@ -2,6 +2,10 @@
     text-align: center;
 }
 
+.error {
+    text-align: center;
+}
+
 .user_auth {
     padding-top: 35px;
     text-align: center;
