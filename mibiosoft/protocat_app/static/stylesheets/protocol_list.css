@@ -1,0 +1,33 @@
+.panel {
+    margin-top:35px;
+}
+
+.panel-primary {
+    border: 2px solid #000080;
+}
+
+.panel-primary > .panel-heading {
+    background-color: #000080;
+    border-color: #000080;
+    color: white;
+    font-weight: bold;
+}
+
+.table {
+    border-color: #000080;
+}
+
+
+.table tbody > tr > th,
+.table tfoot > tr > th,
+.table thead > tr > td,
+.table tbody > tr > td,
+.table tfoot > tr > td {
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+}
+
+.table thead > tr > th {
+    border-bottom: 2px solid #000080;
+    border-top: 2px solid #000080;
+}
