@@ -41,15 +41,19 @@ def user_registration(request):
     if form.is_valid():
         instance = form.save(commit=False)
         instance.user_name = form.cleaned_data.get('user_name')
-        instance.first_name = form.cleaned_data.get('first_name')
-        instance.last_name = form.cleaned_data.get('last_name')
-        instance.email = form.cleaned_data.get('email')
-        instance.password = form.cleaned_data.get('password')
-        user = User.objects.create_user(instance.user_name, instance.email, instance.password)
-        user.first_name = instance.first_name
-        user.last_name = instance.last_name
-        user.save()
-        user = authenticate(username=instance.user_name, password=instance.password)
+        if User.objects.filter(username=instance.user_name):
+            context['error_message'] = "This username has been taken!"
+            return render(request, 'protocat_app/user_registration.html', context)
+        else:
+            instance.first_name = form.cleaned_data.get('first_name')
+            instance.last_name = form.cleaned_data.get('last_name')
+            instance.email = form.cleaned_data.get('email')
+            instance.password = form.cleaned_data.get('password')
+            user = User.objects.create_user(instance.user_name, instance.email, instance.password)
+            user.first_name = instance.first_name
+            user.last_name = instance.last_name
+            user.save()
+            user = authenticate(username=instance.user_name, password=instance.password)
         if user is not None:
             # the pasword verified for the user
             if user.is_active:
