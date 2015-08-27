@@ -44,16 +44,15 @@ def user_registration(request):
         if User.objects.filter(username=instance.user_name):
             context['error_message'] = "This username has been taken!"
             return render(request, 'protocat_app/user_registration.html', context)
-        else:
-            instance.first_name = form.cleaned_data.get('first_name')
-            instance.last_name = form.cleaned_data.get('last_name')
-            instance.email = form.cleaned_data.get('email')
-            instance.password = form.cleaned_data.get('password')
-            user = User.objects.create_user(instance.user_name, instance.email, instance.password)
-            user.first_name = instance.first_name
-            user.last_name = instance.last_name
-            user.save()
-            user = authenticate(username=instance.user_name, password=instance.password)
+        instance.first_name = form.cleaned_data.get('first_name')
+        instance.last_name = form.cleaned_data.get('last_name')
+        instance.email = form.cleaned_data.get('email')
+        instance.password = form.cleaned_data.get('password')
+        user = User.objects.create_user(instance.user_name, instance.email, instance.password)
+        user.first_name = instance.first_name
+        user.last_name = instance.last_name
+        user.save()
+        user = authenticate(username=instance.user_name, password=instance.password)
         if user is not None:
             # the pasword verified for the user
             if user.is_active:
@@ -355,12 +354,10 @@ def edit_protocol(request, protocol_id):
     protocol = Protocol.objects.get(id=protocol_id)
     author = protocol.author
     current_user = str(request.user)
-    if current_user == author:
 
+    if current_user == author:
         form = ProtocolUploadForm(request.POST, instance=protocol)
         url= "/protocol_display/" + str(protocol_id)
-
-
 
         if form.is_valid():
             form.save()

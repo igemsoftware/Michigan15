@@ -2,6 +2,9 @@ from protocat_app.models import *
 from django.test import TestCase
 from django.test import Client
 from django.contrib.auth import authenticate, login
+from .forms import UserRegistrationForm, UserAuthenticationForm, ProtocolUploadForm
+from webtest import TestApp
+from datetime import datetime
 
 class UserRegistrationTest(TestCase):
     """
@@ -144,6 +147,116 @@ class LoggedInTests(TestCase):
         self.assertEqual(response.status_code, 200)
         response = c.get('/delete_protocol/1/')
         self.assertEqual(response.status_code, 302)
+
+class Forms(TestCase):
+    def test_signup(self):
+        form = UserRegistrationForm({
+            'user_name' : "name",
+            'first_name' : "John",
+            'last_name' : "Doe",
+            'email' : "johnd@gmail.com",
+            'password' : "123"
+        })
+        self.assertTrue(form.is_valid())
+        response = self.client.post('/user_registration/', {
+            'user_name' : "name",
+            'first_name' : "John",
+            'last_name' : "Doe",
+            'email' : "johnd@gmail.com",
+            'password' : "123"
+        })
+        self.assertTrue(response.status_code, 302)
+
+        user = User.objects.create_user(username="johnd", password="123")
+        user.save()
+
+        response = self.client.post('/user_registration/', {
+            'user_name' : "johnd",
+            'first_name' : "John",
+            'last_name' : "Doe",
+            'email' : "johnd@gmail.com",
+            'password' : "123"
+        })
+        self.assertTrue(response.status_code, 200)
+
+    def test_login(self):
+        c = Client()
+        response = self.client.post('/user_authentication/', {
+            'user_name' : "johnd",
+            'password' : "123"
+        })
+        self.assertEqual(response.status_code, 200)
+
+        user = User.objects.create_user(username="johnd", password="123")
+        user.save()
+
+        form = UserAuthenticationForm({
+            'user_name' : "johnd",
+            'password' : "123"
+        })
+        self.assertTrue(form.is_valid())
+        response = self.client.post('/user_authentication/', {
+            'user_name' : "johnd",
+            'password' : "123"
+        })
+        self.assertEqual(response.status_code, 302)
+        c.login(username="johnd", password="123")
+
+
+
+    def test_upload(self):
+        form = ProtocolUploadForm({
+            'title': "Protocol",
+            'description': "This is a protocol",
+            'protocol_type': "BC",
+            'reagents': "Chemicals",
+            'protocol_steps': "Do stuff"
+        })
+        self.assertTrue(form.is_valid())
+        form.save()
+        response = self.client.post('/protocol_upload/', {
+            'title': "Protocol",
+            'description': "This is a protocol",
+            'protocol_type': "BC",
+            'reagents': "Chemicals",
+            'protocol_steps': "Do stuff"
+        })
+        self.assertEqual(response.status_code, 302)
+
+    def test_edit(self):
+        c = Client()
+        user = User.objects.create_user(username="johnd", password="123")
+        user.save()
+        c.login(username="johnd", password='123')
+        protocol = Protocol.objects.create(author="johnd", id=1, title='title', reagents='reagents',
+                                        date_of_upload=datetime.now(), date_modified=datetime.now(),
+                                        description='description', protocol_type='BC', rating=0.00,
+                                        num_ratings=0, user_rated='ds', protocol_steps="stuff")
+        protocol.save()
+
+        response = self.client.post('/pre_edit/1/', {
+            'title': "Protocol",
+            'description': "This is a protocol",
+            'protocol_type': "BC",
+            'reagents': "Chemicals",
+            'protocol_steps': "Do stuff"
+        })
+        self.assertEqual(response.status_code, 200)
+
+        response = self.client.post('/edit_protocol/1/', {
+            'title': "Protocol",
+            'description': "This is a protocol",
+            'protocol_type': "BC",
+            'reagents': "Chemicals",
+            'protocol_steps': "Do stuff"
+        })
+        self.assertEqual(response.status_code, 200)
+
+
+
+
+
+
 
 
 
