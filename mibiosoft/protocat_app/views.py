@@ -87,7 +87,8 @@ def user_authentication(request):
             else:
                 context.banner = ('The password is valid, but the account has been disabled! User: ' + form.cleaned_data.get('user_name'))
         else:
-            return HttpResponse('the user name and password were incorrect')
+            context['error'] = "The username or password you entered was incorrect."
+            return render(request, 'protocat_app/user_authentication.html', context)
 
         if user.is_authenticated():
             return HttpResponse('<h1>You are currently logged in.</h1>')
