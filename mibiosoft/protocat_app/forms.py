@@ -7,6 +7,12 @@ from django_comments.forms import CommentForm
 from django_comments.models import Comment
 import operator
 
+'''
+Add your forms here
+For default Django format, add your fields under "field" in the metaclass
+If you want to customize your field format, do so outside the metaclass
+'''
+
 class UserRegistrationForm(forms.ModelForm):
     class Meta:
         model = UserRegistration

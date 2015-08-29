@@ -1,6 +1,10 @@
 from django.conf.urls import url
 from . import views
 
+'''
+Add your URL, the associated view, and a name
+'''
+
 urlpatterns = [
     url(r'^$', views.index, name='root_index'),
     url(r'^user_authentication/', views.user_authentication, name='user_login'),

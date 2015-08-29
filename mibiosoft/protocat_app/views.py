@@ -15,20 +15,35 @@ import operator
 from functools import reduce
 from .protocols import PROTOCOL_TYPES
 
+'''
+Add your views functions here
+'''
+
+'''
+Renders the "Index" page
+'''
 def index(request):
     context = {
         'title': 'ProtoCat',
         'descr': 'ProtoCat - A seamless web platform to standardize wetlab protocols. Homepage.'
     }
     return render(request, 'protocat_app/root_index.html', context)
-# add set test cookie
 
+'''
+Renders the "About" page
+'''
 def about(request):
     context = {
         'title': 'About'
     }
     return render(request, 'protocat_app/about.html', context)
-    
+
+'''
+Uses the UserRegistrationForm in forms.py
+Validates input data.
+If valid, a User will be created, added to database, logged in, and redirect to user home
+Else, will be sent back to registration page
+'''
 def user_registration(request):
     form = UserRegistrationForm(request.POST)
 
@@ -41,6 +56,7 @@ def user_registration(request):
     if form.is_valid():
         instance = form.save(commit=False)
         instance.user_name = form.cleaned_data.get('user_name')
+        # This if statement makes sure no usernames are the same
         if User.objects.filter(username=instance.user_name):
             context['error_message'] = "This username has been taken!"
             return render(request, 'protocat_app/user_registration.html', context)
@@ -99,9 +115,10 @@ def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/')
 
-
 @login_required(login_url='/user_authentication')
 def protocol_upload(request):
+
+    # This reads in the "protocol steps" and puts them all in to the variable "text"
     x = 1
     newline = '\n'
     text = ''

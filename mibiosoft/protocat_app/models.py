@@ -8,6 +8,10 @@ from django_comments.forms import CommentForm
 from django_comments.models import Comment
 from django.db.models import Q
 
+'''
+Add your models here
+'''
+
 
 class UserRegistration(models.Model):
     email = models.EmailField(blank=False)
