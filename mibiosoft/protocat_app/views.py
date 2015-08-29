@@ -14,6 +14,8 @@ from protocat_app.models import *
 import operator
 from functools import reduce
 from .protocols import PROTOCOL_TYPES
+from django.db.models.functions import Lower
+from django.db.models import Func, F
 
 '''
 Add your views functions here
@@ -243,7 +245,7 @@ def protocol_list_rating(request):
     return render(request,'protocat_app/protocol_list.html', {'protocol_list':protocol_list})
 
 def protocol_list_date(request):
-    all_entries = Protocol.objects.all().order_by('-date_of_upload')
+    all_entries = Protocol.objects.all().annotate(date_lower=Func(F('date_of_upload'), function='LOWER')).order_by('-date_lower')
     protocol_list=[]
 
 
@@ -262,7 +264,7 @@ def protocol_list_date(request):
     return render(request,'protocat_app/protocol_list.html', {'protocol_list':protocol_list})
 
 def protocol_list_author(request):
-    all_entries = Protocol.objects.all().order_by('author')
+    all_entries = Protocol.objects.all().annotate(author_lower=Func(F('author'), function='LOWER')).order_by('-author_lower')
     protocol_list=[]
 
 
@@ -281,7 +283,8 @@ def protocol_list_author(request):
     return render(request,'protocat_app/protocol_list.html', {'protocol_list':protocol_list})
 
 def protocol_list_title(request):
-    all_entries = Protocol.objects.all().order_by('title')
+
+    all_entries = Protocol.objects.all().annotate(title_lower=Func(F('title'), function='LOWER')).order_by('-title_lower')
     protocol_list=[]
 
 
@@ -300,7 +303,7 @@ def protocol_list_title(request):
     return render(request,'protocat_app/protocol_list.html', {'protocol_list':protocol_list})
 
 def protocol_list_modified(request):
-    all_entries = Protocol.objects.all().order_by('-date_modified')
+    all_entries = Protocol.objects.all().annotate(modified_lower=Func(F('date_modified'), function='LOWER')).order_by('-modified_lower')
     protocol_list=[]
 
 
