@@ -227,7 +227,8 @@ def user_profile(request, user1):
 
 def protocol_list_sort(request, type):
 
-    all_entries = Protocol.objects.all().annotate(title_lower=Func(F('title'), function='LOWER')).order_by('title_lower')
+
+    all_entries = Protocol.objects.all().annotate(title_lower=Func(F(type), function='LOWER')).order_by(type + '_lower')
     protocol_list=[]
 
 
@@ -247,8 +248,11 @@ def protocol_list_sort(request, type):
 
 def protocol_search_sort(request, type, terms):
 
-    terms_list = request.GET.get('terms', '').split('+')
+    terms_list = terms.split('+')
     q_list = []
+
+
+
     for term in terms_list:
         if term:
             q_list.append(Q(title__contains=term))
