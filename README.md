@@ -19,6 +19,7 @@ QUICKSTART:
 
 AUTHORS:
   Hy Doan, hydoan@umich.edu
+  Josh Abramson, evolver@umich.edu
   
 TODO:
 
