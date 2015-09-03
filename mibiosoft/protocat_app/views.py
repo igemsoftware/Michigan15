@@ -227,8 +227,17 @@ def user_profile(request, user1):
 
 def protocol_list_sort(request, type):
 
+    if(type=='title'):
+        all_entries = Protocol.objects.all().annotate(title_lower=Func(F(type), function='LOWER')).order_by('title_lower')
+    if(type=='author'):
+        all_entries = Protocol.objects.all().annotate(author_lower=Func(F(type), function='LOWER')).order_by('author_lower')
+    if(type=='date_of_upload'):
+        all_entries = Protocol.objects.all().annotate(date_lower=Func(F(type), function='LOWER')).order_by('date_lower')
+    if(type=='date_modified'):
+        all_entries = Protocol.objects.all().annotate(mod_lower=Func(F(type), function='LOWER')).order_by('mod_lower')
+    if(type=='rating'):
+        all_entries = Protocol.objects.all().order_by('rating')
 
-    all_entries = Protocol.objects.all().annotate(title_lower=Func(F(type), function='LOWER')).order_by(type + '_lower')
     protocol_list=[]
 
 
