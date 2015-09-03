@@ -161,11 +161,11 @@ def protocol_upload(request):
 
 def protocol_list(request):
 
-    all_entries = Protocol.objects.all()
+    all_entries = Protocol.objects.all().order_by('-date_modified')
     protocol_list=[]
 
 
-    for each in Protocol.objects.all():
+    for each in all_entries:
         title = each.title
         author = each.author
         date = each.date_of_upload
@@ -225,8 +225,9 @@ def user_profile(request, user1):
                                                               'first':first, 'last':last, 'user1':use_name})
 
 
-def protocol_list_rating(request):
-    all_entries = Protocol.objects.all().order_by('-rating')
+def protocol_list_sort(request, type):
+
+    all_entries = Protocol.objects.all().order_by(type)
     protocol_list=[]
 
 
@@ -244,12 +245,24 @@ def protocol_list_rating(request):
 
     return render(request,'protocat_app/protocol_list.html', {'protocol_list':protocol_list})
 
-def protocol_list_date(request):
-    all_entries = Protocol.objects.all().annotate(date_lower=Func(F('date_of_upload'), function='LOWER')).order_by('-date_lower')
+def protocol_search_sort(request, type, terms):
+
+    terms_list = request.GET.get('terms', '').split('+')
+    q_list = []
+    for term in terms_list:
+        if term:
+            q_list.append(Q(title__contains=term))
+            q_list.append(Q(author__contains=term))
+            q_list.append(Q(description__contains=term))
+            q_list.append(Q(reagents__contains=term))
+            q_list.append(Q(protocol_steps__contains=term))
+
+    results = Protocol.objects.filter(reduce(operator.or_, q_list))
+    results = results.order_by(type)
     protocol_list=[]
 
 
-    for each in all_entries:
+    for each in results:
         title = each.title
         author = each.author
         date = each.date_of_upload
@@ -261,65 +274,9 @@ def protocol_list_date(request):
         inner_protocol = [title, author, date, protocol_id, url, rating, last_mod, url2]
         protocol_list.append(inner_protocol)
 
-    return render(request,'protocat_app/protocol_list.html', {'protocol_list':protocol_list})
-
-def protocol_list_author(request):
-    all_entries = Protocol.objects.all().annotate(author_lower=Func(F('author'), function='LOWER')).order_by('-author_lower')
-    protocol_list=[]
+    return render(request,'protocat_app/search_protocols.html', {'protocol_list':protocol_list, 'results':results, 'terms':terms})
 
 
-    for each in all_entries:
-        title = each.title
-        author = each.author
-        date = each.date_of_upload
-        last_mod = each.date_modified
-        protocol_id = each.id
-        rating = each.rating
-        url = "/protocol_display/" + str(protocol_id)
-        url2 = "/user_profile/" + str(author)
-        inner_protocol = [title, author, date, protocol_id, url, rating, last_mod, url2]
-        protocol_list.append(inner_protocol)
-
-    return render(request,'protocat_app/protocol_list.html', {'protocol_list':protocol_list})
-
-def protocol_list_title(request):
-
-    all_entries = Protocol.objects.all().annotate(title_lower=Func(F('title'), function='LOWER')).order_by('-title_lower')
-    protocol_list=[]
-
-
-    for each in all_entries:
-        title = each.title
-        author = each.author
-        date = each.date_of_upload
-        last_mod = each.date_modified
-        protocol_id = each.id
-        rating = each.rating
-        url = "/protocol_display/" + str(protocol_id)
-        url2 = "/user_profile/" + str(author)
-        inner_protocol = [title, author, date, protocol_id, url, rating, last_mod, url2]
-        protocol_list.append(inner_protocol)
-
-    return render(request,'protocat_app/protocol_list.html', {'protocol_list':protocol_list})
-
-def protocol_list_modified(request):
-    all_entries = Protocol.objects.all().annotate(modified_lower=Func(F('date_modified'), function='LOWER')).order_by('-modified_lower')
-    protocol_list=[]
-
-
-    for each in all_entries:
-        title = each.title
-        author = each.author
-        date = each.date_of_upload
-        last_mod = each.date_modified
-        protocol_id = each.id
-        rating = each.rating
-        url = "/protocol_display/" + str(protocol_id)
-        url2 = "/user_profile/" + str(author)
-        inner_protocol = [title, author, date, protocol_id, url, rating, last_mod, url2]
-        protocol_list.append(inner_protocol)
-
-    return render(request,'protocat_app/protocol_list.html', {'protocol_list':protocol_list})
 
 
 def protocol_display(request, protocol_id):
@@ -393,8 +350,16 @@ def edit_protocol(request, protocol_id):
             return render(request,'protocat_app/edit_protocol.html',context)
     else:
         return HttpResponse('You cannot edit this protocol')
+
 def search(request):
     terms = request.GET.get('search', '').split(' ')
+
+    all_terms = []
+    for each in terms:
+        all_terms.append(each)
+
+    joined = '+'.join(all_terms)
+
     q_list = []
     for term in terms:
         if term:
@@ -408,7 +373,8 @@ def search(request):
         results = Protocol.objects.filter(reduce(operator.or_, q_list))
     else:
         results = ''
-    return render(request, 'protocat_app/search_protocols.html',{'results':results})
+
+    return render(request, 'protocat_app/search_protocols.html',{'results':results, 'terms':joined})
 
 def rating(request, protocol_id):
     rate = str(request.POST.get('rating'))
@@ -427,3 +393,5 @@ def rating(request, protocol_id):
 def feedback(request):
 
     return render(request, 'protocat_app/feedback.html')
+
+
