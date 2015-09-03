@@ -227,7 +227,7 @@ def user_profile(request, user1):
 
 def protocol_list_sort(request, type):
 
-    all_entries = Protocol.objects.all().order_by(type)
+    all_entries = Protocol.objects.all().annotate(title_lower=Func(F('title'), function='LOWER')).order_by('title_lower')
     protocol_list=[]
 
 
