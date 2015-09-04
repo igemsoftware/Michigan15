@@ -236,7 +236,7 @@ def protocol_list_sort(request, type):
     if(type=='date_modified'):
         all_entries = Protocol.objects.all().annotate(mod_lower=Func(F(type), function='LOWER')).order_by('mod_lower')
     if(type=='rating'):
-        all_entries = Protocol.objects.all().order_by('rating')
+        all_entries = Protocol.objects.all().order_by('-rating')
 
     protocol_list=[]
 
@@ -271,7 +271,12 @@ def protocol_search_sort(request, type, terms):
             q_list.append(Q(protocol_steps__contains=term))
 
     results = Protocol.objects.filter(reduce(operator.or_, q_list))
-    results = results.order_by(type)
+
+    if (type != 'rating'):
+        results = results.order_by(type)
+    else:
+        results = results.order_by('-rating')
+
     protocol_list=[]
 
 
