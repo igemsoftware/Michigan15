@@ -55,7 +55,7 @@
                         <li><a href="/protocol_list" class="smothscroll">Protocols</a></li>
                       </ul>
                         {% if not user.is_authenticated %}
-                      <ul class="nav navbar-nav navbar-right">
+                      <div class="nav navbar-nav navbar-right">
                           <li><a href="/user_registration" class="smothscroll">Sign up</a></li>
                           <li><a href="/user_authentication" class="smothScroll">Login</a></li>
 
@@ -78,9 +78,11 @@
                                  </div>
                              </li>
                       </ul>
+
                     </div><!--/.nav-collapse -->
                   </div>
                 </div>
+            </body>
         {% endblock %}
     </div>
     {% block pagination %}

@@ -177,7 +177,9 @@ def protocol_list(request):
         inner_protocol = [title, author, date, protocol_id, url, rating, last_mod, url2]
         protocol_list.append(inner_protocol)
 
-    return render(request,'protocat_app/protocol_list.html', {'protocol_list':protocol_list})
+    asc = 'asc'
+
+    return render(request,'protocat_app/protocol_list.html', {'protocol_list':protocol_list, 'order':asc})
 
 def user_home(request):
     current_user = request.user
@@ -225,18 +227,33 @@ def user_profile(request, user1):
                                                               'first':first, 'last':last, 'user1':use_name})
 
 
-def protocol_list_sort(request, type):
+def protocol_list_sort(request, type, order):
 
-    if(type=='title'):
-        all_entries = Protocol.objects.all().annotate(title_lower=Func(F(type), function='LOWER')).order_by('title_lower')
-    if(type=='author'):
-        all_entries = Protocol.objects.all().annotate(author_lower=Func(F(type), function='LOWER')).order_by('author_lower')
-    if(type=='date_of_upload'):
-        all_entries = Protocol.objects.all().annotate(date_lower=Func(F(type), function='LOWER')).order_by('date_lower')
-    if(type=='date_modified'):
-        all_entries = Protocol.objects.all().annotate(mod_lower=Func(F(type), function='LOWER')).order_by('mod_lower')
-    if(type=='rating'):
-        all_entries = Protocol.objects.all().order_by('-rating')
+    if(order=='asc'):
+        new_order='desc'
+        if(type=='title'):
+            all_entries = Protocol.objects.all().annotate(title_lower=Func(F(type), function='LOWER')).order_by('-title_lower')
+        if(type=='author'):
+            all_entries = Protocol.objects.all().annotate(author_lower=Func(F(type), function='LOWER')).order_by('-author_lower')
+        if(type=='date_of_upload'):
+            all_entries = Protocol.objects.all().annotate(date_lower=Func(F(type), function='LOWER')).order_by('-date_lower')
+        if(type=='date_modified'):
+            all_entries = Protocol.objects.all().annotate(mod_lower=Func(F(type), function='LOWER')).order_by('-mod_lower')
+        if(type=='rating'):
+            all_entries = Protocol.objects.all().order_by('-rating')
+
+    if(order=='desc'):
+        new_order='asc'
+        if(type=='title'):
+            all_entries = Protocol.objects.all().order_by(Lower('title'))
+        if(type=='author'):
+            all_entries = Protocol.objects.all().order_by(Lower('author'))
+        if(type=='date_of_upload'):
+            all_entries = Protocol.objects.all().order_by(Lower('date_of_upload'))
+        if(type=='date_modified'):
+            all_entries = Protocol.objects.all().order_by(Lower('date_modified'))
+        if(type=='rating'):
+            all_entries = Protocol.objects.all().order_by('rating')
 
     protocol_list=[]
 
@@ -253,14 +270,12 @@ def protocol_list_sort(request, type):
         inner_protocol = [title, author, date, protocol_id, url, rating, last_mod, url2]
         protocol_list.append(inner_protocol)
 
-    return render(request,'protocat_app/protocol_list.html', {'protocol_list':protocol_list})
+    return render(request,'protocat_app/protocol_list.html', {'protocol_list':protocol_list, 'order': new_order})
 
-def protocol_search_sort(request, type, terms):
+def protocol_search_sort(request, type, order, terms):
 
     terms_list = terms.split('+')
     q_list = []
-
-
 
     for term in terms_list:
         if term:
@@ -270,12 +285,31 @@ def protocol_search_sort(request, type, terms):
             q_list.append(Q(reagents__contains=term))
             q_list.append(Q(protocol_steps__contains=term))
 
-    results = Protocol.objects.filter(reduce(operator.or_, q_list))
+    if(order=='asc'):
+        new_order='desc'
+        if(type=='title'):
+            results = Protocol.objects.filter(reduce(operator.or_, q_list)).annotate(title_lower=Func(F(type), function='LOWER')).order_by('-title_lower')
+        if(type=='author'):
+            results = Protocol.objects.filter(reduce(operator.or_, q_list)).annotate(author_lower=Func(F(type), function='LOWER')).order_by('-author_lower')
+        if(type=='date_of_upload'):
+            results = Protocol.objects.filter(reduce(operator.or_, q_list)).annotate(date_lower=Func(F(type), function='LOWER')).order_by('-date_lower')
+        if(type=='date_modified'):
+            results = Protocol.objects.filter(reduce(operator.or_, q_list)).annotate(mod_lower=Func(F(type), function='LOWER')).order_by('-mod_lower')
+        if(type=='rating'):
+            results = Protocol.objects.filter(reduce(operator.or_, q_list)).order_by('-rating')
 
-    if (type != 'rating'):
-        results = results.order_by(type)
-    else:
-        results = results.order_by('-rating')
+    if(order=='desc'):
+        new_order='asc'
+        if(type=='title'):
+            results = Protocol.objects.filter(reduce(operator.or_, q_list)).order_by(Lower('title'))
+        if(type=='author'):
+            results = Protocol.objects.filter(reduce(operator.or_, q_list)).order_by(Lower('author'))
+        if(type=='date_of_upload'):
+            results = Protocol.objects.filter(reduce(operator.or_, q_list)).order_by(Lower('date_of_upload'))
+        if(type=='date_modified'):
+            results = Protocol.objects.filter(reduce(operator.or_, q_list)).order_by(Lower('date_modified'))
+        if(type=='rating'):
+            results = Protocol.objects.filter(reduce(operator.or_, q_list)).order_by('rating')
 
     protocol_list=[]
 
@@ -292,10 +326,7 @@ def protocol_search_sort(request, type, terms):
         inner_protocol = [title, author, date, protocol_id, url, rating, last_mod, url2]
         protocol_list.append(inner_protocol)
 
-    return render(request,'protocat_app/search_protocols.html', {'protocol_list':protocol_list, 'results':results, 'terms':terms})
-
-
-
+    return render(request,'protocat_app/search_protocols.html', {'protocol_list':protocol_list, 'results':results, 'terms':terms, 'order':order})
 
 def protocol_display(request, protocol_id):
     protocol_items = Protocol.objects.get(id=protocol_id)
@@ -392,7 +423,9 @@ def search(request):
     else:
         results = ''
 
-    return render(request, 'protocat_app/search_protocols.html',{'results':results, 'terms':joined})
+    asc = 'asc'
+
+    return render(request, 'protocat_app/search_protocols.html',{'results':results, 'terms':joined, 'order': asc})
 
 def rating(request, protocol_id):
     rate = str(request.POST.get('rating'))
