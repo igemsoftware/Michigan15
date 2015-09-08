@@ -279,37 +279,33 @@ def protocol_search_sort(request, type, order, terms):
 
     for term in terms_list:
         if term:
-            q_list.append(Q(title__contains=term))
-            q_list.append(Q(author__contains=term))
-            q_list.append(Q(description__contains=term))
-            q_list.append(Q(reagents__contains=term))
-            q_list.append(Q(protocol_steps__contains=term))
+            q_list.append(Q(title__contains=term) | Q(author__contains=term) | Q(description__contains=term) | Q(reagents__contains=term) | Q(protocol_steps__contains=term))
 
     if(order=='asc'):
         new_order='desc'
         if(type=='title'):
-            results = Protocol.objects.filter(reduce(operator.or_, q_list)).annotate(title_lower=Func(F(type), function='LOWER')).order_by('-title_lower')
+            results = Protocol.objects.filter(reduce(operator.and_, q_list)).annotate(title_lower=Func(F(type), function='LOWER')).order_by('-title_lower')
         if(type=='author'):
-            results = Protocol.objects.filter(reduce(operator.or_, q_list)).annotate(author_lower=Func(F(type), function='LOWER')).order_by('-author_lower')
+            results = Protocol.objects.filter(reduce(operator.and_, q_list)).annotate(author_lower=Func(F(type), function='LOWER')).order_by('-author_lower')
         if(type=='date_of_upload'):
-            results = Protocol.objects.filter(reduce(operator.or_, q_list)).annotate(date_lower=Func(F(type), function='LOWER')).order_by('-date_lower')
+            results = Protocol.objects.filter(reduce(operator.and_, q_list)).annotate(date_lower=Func(F(type), function='LOWER')).order_by('-date_lower')
         if(type=='date_modified'):
-            results = Protocol.objects.filter(reduce(operator.or_, q_list)).annotate(mod_lower=Func(F(type), function='LOWER')).order_by('-mod_lower')
+            results = Protocol.objects.filter(reduce(operator.and_, q_list)).annotate(mod_lower=Func(F(type), function='LOWER')).order_by('-mod_lower')
         if(type=='rating'):
-            results = Protocol.objects.filter(reduce(operator.or_, q_list)).order_by('-rating')
+            results = Protocol.objects.filter(reduce(operator.and_, q_list)).order_by('-rating')
 
     if(order=='desc'):
         new_order='asc'
         if(type=='title'):
-            results = Protocol.objects.filter(reduce(operator.or_, q_list)).order_by(Lower('title'))
+            results = Protocol.objects.filter(reduce(operator.and_, q_list)).order_by(Lower('title'))
         if(type=='author'):
-            results = Protocol.objects.filter(reduce(operator.or_, q_list)).order_by(Lower('author'))
+            results = Protocol.objects.filter(reduce(operator.and_, q_list)).order_by(Lower('author'))
         if(type=='date_of_upload'):
-            results = Protocol.objects.filter(reduce(operator.or_, q_list)).order_by(Lower('date_of_upload'))
+            results = Protocol.objects.filter(reduce(operator.and_, q_list)).order_by(Lower('date_of_upload'))
         if(type=='date_modified'):
-            results = Protocol.objects.filter(reduce(operator.or_, q_list)).order_by(Lower('date_modified'))
+            results = Protocol.objects.filter(reduce(operator.and_, q_list)).order_by(Lower('date_modified'))
         if(type=='rating'):
-            results = Protocol.objects.filter(reduce(operator.or_, q_list)).order_by('rating')
+            results = Protocol.objects.filter(reduce(operator.and_, q_list)).order_by('rating')
 
     protocol_list=[]
 
@@ -412,14 +408,10 @@ def search(request):
     q_list = []
     for term in terms:
         if term:
-            q_list.append(Q(title__contains=term))
-            q_list.append(Q(author__contains=term))
-            q_list.append(Q(description__contains=term))
-            q_list.append(Q(reagents__contains=term))
-            q_list.append(Q(protocol_steps__contains=term))
+            q_list.append(Q(title__contains=term) | Q(author__contains=term) | Q(description__contains=term) | Q(reagents__contains=term) | Q(protocol_steps__contains=term))
 
     if q_list:
-        results = Protocol.objects.filter(reduce(operator.or_, q_list))
+        results = Protocol.objects.filter(reduce(operator.and_, q_list))
     else:
         results = ''
 
