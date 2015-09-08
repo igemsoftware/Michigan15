@@ -326,7 +326,7 @@ def protocol_search_sort(request, type, order, terms):
         inner_protocol = [title, author, date, protocol_id, url, rating, last_mod, url2]
         protocol_list.append(inner_protocol)
 
-    return render(request,'protocat_app/search_protocols.html', {'protocol_list':protocol_list, 'results':results, 'terms':terms, 'order':order})
+    return render(request,'protocat_app/search_protocols.html', {'protocol_list':protocol_list, 'results':results, 'terms':terms, 'order':new_order})
 
 def protocol_display(request, protocol_id):
     protocol_items = Protocol.objects.get(id=protocol_id)
