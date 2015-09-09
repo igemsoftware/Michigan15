@@ -6,7 +6,7 @@ INSTALL:
   https://www.python.org/downloads/release/python-343/
   
   Pip
-  (Pip may be already install with Python)
+  (Pip may already be installed with Python)
   https://pip.pypa.io/en/latest/installing.html
   
   Django 1.8
