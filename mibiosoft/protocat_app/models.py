@@ -25,6 +25,7 @@ class UserRegistration(models.Model):
     def details(self):
         return self.user_name + ', ' + self.email
 
+
 class UserAuthentication(models.Model):
     user_name = models.CharField(max_length=50, default='YourUserName')
     password = models.CharField(max_length=120, default='password', blank=False)

@@ -1,7 +1,8 @@
-from protocat_app.models import *
+from protocat_app.models import UserRegistration, UserAuthentication, Protocol
 from django.test import TestCase
 from django.test import Client
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 from .forms import UserRegistrationForm, UserAuthenticationForm, ProtocolUploadForm
 from webtest import TestApp
 from datetime import datetime
@@ -59,15 +60,19 @@ class NotLoggedInTests(TestCase):
         self.assertEqual(response.status_code, 200)
         response = c.get('/user_registration/')
         self.assertEqual(response.status_code, 200)
-        response = c.get('/rating_list/')
+        response = c.get('/protocol_list_sort/rating/asc/')
         self.assertEqual(response.status_code, 200)
-        response = c.get('/date_list/')
+        response = c.get('/protocol_list_sort/date_of_upload/asc/')
         self.assertEqual(response.status_code, 200)
-        response = c.get('/author_list/')
+        response = c.get('/protocol_list_sort/author/asc/')
         self.assertEqual(response.status_code, 200)
-        response = c.get('/title_list/')
+        response = c.get('/protocol_list_sort/title/asc/')
         self.assertEqual(response.status_code, 200)
-        response = c.get('/modified_list/')
+        response = c.get('/protocol_list_sort/date_modified/asc/')
+        self.assertEqual(response.status_code, 200)
+        response = c.get('/protocol_list_sort/date_modified/desc/')
+        self.assertEqual(response.status_code, 200)
+        response = c.get('/protocol_search_sort/date_modified/desc/johnd/')
         self.assertEqual(response.status_code, 200)
         response = c.get('/about/')
         self.assertEqual(response.status_code, 200)
@@ -113,21 +118,22 @@ class LoggedInTests(TestCase):
         protocol2 = Protocol(author="janed", id="2")
         protocol2.save()
 
+
         response = c.get('/protocol_list/')
         self.assertEqual(response.status_code, 200)
         response = c.get('/user_authentication/')
         self.assertEqual(response.status_code, 200)
         response = c.get('/user_registration/')
         self.assertEqual(response.status_code, 200)
-        response = c.get('/rating_list/')
+        response = c.get('/protocol_list_sort/rating/asc/')
         self.assertEqual(response.status_code, 200)
-        response = c.get('/date_list/')
+        response = c.get('/protocol_list_sort/date_of_upload/asc/')
         self.assertEqual(response.status_code, 200)
-        response = c.get('/author_list/')
+        response = c.get('/protocol_list_sort/author/asc/')
         self.assertEqual(response.status_code, 200)
-        response = c.get('/title_list/')
+        response = c.get('/protocol_list_sort/title/asc/')
         self.assertEqual(response.status_code, 200)
-        response = c.get('/modified_list/')
+        response = c.get('/protocol_list_sort/date_modified/asc/')
         self.assertEqual(response.status_code, 200)
         response = c.get('/about/')
         self.assertEqual(response.status_code, 200)
