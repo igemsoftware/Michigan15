@@ -27,7 +27,7 @@ QUICKSTART:
   5. To test, use "python manage.py test protocat_app"
 
 AUTHORS:
-  Hy Doan, hydoan@umich.edu
+  Hy Doan, hydoan@umich.edu |
   Josh Abramson, evolver@umich.edu
   
 
