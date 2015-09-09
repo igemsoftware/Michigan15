@@ -1,9 +1,13 @@
 # Michigan15
 
 INSTALL:
+
   Python 3.4
+  https://www.python.org/downloads/release/python-343/
   
   Pip
+  (Pip may be already install with Python)
+  https://pip.pypa.io/en/latest/installing.html
   
   Django 1.8
     to install use "pip install django"
@@ -26,9 +30,4 @@ AUTHORS:
   Hy Doan, hydoan@umich.edu
   Josh Abramson, evolver@umich.edu
   
-TODO:
-
-CHANGELOG:
-
-LINCENSE:
 
