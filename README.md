@@ -23,8 +23,8 @@ QUICKSTART:
   2. Inside a terminal/command line, cd into a directory you want this file to be in
      and use "git clone [the SSH URL]"
   3. cd Michigan15/mibiosoft
-  4. To run on your local server, use "python manage.py runserver" and go to localhost in a web browser
-  5. To test, use "python manage.py test protocat_app"
+  4. To run, use "python manage.py runserver" and go to localhost in a web browser or server address
+  5. To run test coverage, use "python manage.py test protocat_app"
 
 AUTHORS:
   Hy Doan, hydoan@umich.edu |
