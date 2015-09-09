@@ -2,11 +2,15 @@
 
 INSTALL:
   Python 3.4
+  
   Pip
+  
   Django 1.8
     to install use "pip install django"
+    
   django-nose + coverage
     to install use "pip install django-nose" and "pip install coverage"
+    
   django-contrib-comments
     to install use "pip install django-contrib-comments"
   
