@@ -80,6 +80,12 @@ def user_registration(request):
     return render(request, 'protocat_app/user_registration.html', context)
 
 
+'''
+Uses the UserAuthenticationForm in forms.py
+Validates input data.
+If valid, a User will be created, added to database, logged in, and redirect to user home
+Else, will be sent back to login page
+'''
 def user_authentication(request):
     # not working...
     if request.user.is_authenticated():
@@ -113,10 +119,19 @@ def user_authentication(request):
 
     return render(request, 'protocat_app/user_authentication.html', context)
 
+'''
+Logs user out
+'''
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/')
 
+'''
+Requires User to be logged in
+Takes all steps and combines into one text
+If form data is valid, will have to database
+Else, will be sent back to Upload page
+'''
 @login_required(login_url='/user_authentication')
 def protocol_upload(request):
 
@@ -159,6 +174,10 @@ def protocol_upload(request):
     else:
         return HttpResponseRedirect('/user_authentication/')
 
+
+'''
+Displays a list of all protocols in database
+'''
 def protocol_list(request):
 
     all_entries = Protocol.objects.all().order_by('-date_modified')
@@ -181,6 +200,10 @@ def protocol_list(request):
 
     return render(request,'protocat_app/protocol_list.html', {'protocol_list':protocol_list, 'order':asc})
 
+
+'''
+Displays the current user's home with all protocols uploaded by that user
+'''
 def user_home(request):
     current_user = request.user
     name = get_object_or_404(User,username=current_user)
@@ -203,6 +226,9 @@ def user_home(request):
         protocol_list.append(inner_protocol)
     return render(request, 'protocat_app/user_home.html', {'protocol_list':protocol_list, 'first':first, 'last':last})
 
+'''
+Displays a user's profile, other than the current user
+'''
 def user_profile(request, user1):
     use_name = str(user1)
     name = User.objects.get(username=use_name)
@@ -226,7 +252,10 @@ def user_profile(request, user1):
     return render(request, 'protocat_app/user_profile.html', {'protocol_list':protocol_list,
                                                               'first':first, 'last':last, 'user1':use_name})
 
-
+'''
+Displays a list of protocol depending on which attribute is chosen in ascending
+or descending order
+'''
 def protocol_list_sort(request, type, order):
 
     if(order=='asc'):
@@ -272,6 +301,9 @@ def protocol_list_sort(request, type, order):
 
     return render(request,'protocat_app/protocol_list.html', {'protocol_list':protocol_list, 'order': new_order})
 
+'''
+Displays a list of protocols containing the searched terms
+'''
 def protocol_search_sort(request, type, order, terms):
 
     terms_list = terms.split('+')
@@ -324,6 +356,10 @@ def protocol_search_sort(request, type, order, terms):
 
     return render(request,'protocat_app/search_protocols.html', {'protocol_list':protocol_list, 'results':results, 'terms':terms, 'order':new_order})
 
+
+'''
+Displays all attributes of one protocol
+'''
 def protocol_display(request, protocol_id):
     protocol_items = Protocol.objects.get(id=protocol_id)
     steps = protocol_items.protocol_steps
@@ -331,6 +367,9 @@ def protocol_display(request, protocol_id):
 
     return render(request, 'protocat_app/protocol_display.html', {'protocol_items':protocol_items, 'steps':steps,'current_user':current_user})
 
+'''
+Deletes a protocol using protocol id
+'''
 def delete_protocol(request, protocol_id):
     protocol = Protocol.objects.get(id=protocol_id)
     author = protocol.author
@@ -341,7 +380,9 @@ def delete_protocol(request, protocol_id):
         return HttpResponse('You cannot delete this protocol')
     return HttpResponseRedirect('/protocol_list/')
 
-
+'''
+Prepares user edits to a protocol and sends to edit protocol
+'''
 def pre_edit(request, protocol_id):
 
     protocol = Protocol.objects.get(id=protocol_id)
@@ -372,6 +413,9 @@ def pre_edit(request, protocol_id):
     else:
         return HttpResponse('You cannot edit this protocol')
 
+'''
+Edits a protocol object in the database
+'''
 def edit_protocol(request, protocol_id):
 
     protocol = Protocol.objects.get(id=protocol_id)
@@ -396,6 +440,9 @@ def edit_protocol(request, protocol_id):
     else:
         return HttpResponse('You cannot edit this protocol')
 
+'''
+Makes queries to the database for searched terms
+'''
 def search(request):
     terms = request.GET.get('search', '').split(' ')
 
@@ -419,6 +466,9 @@ def search(request):
 
     return render(request, 'protocat_app/search_protocols.html',{'results':results, 'terms':joined, 'order': asc})
 
+'''
+Adds user rating to average rating for a protocol
+'''
 def rating(request, protocol_id):
     rate = str(request.POST.get('rating'))
     protocol = Protocol.objects.get(id=protocol_id)
@@ -433,6 +483,9 @@ def rating(request, protocol_id):
 
     return HttpResponseRedirect(url)
 
+'''
+Displays the feedback page
+'''
 def feedback(request):
 
     return render(request, 'protocat_app/feedback.html')
