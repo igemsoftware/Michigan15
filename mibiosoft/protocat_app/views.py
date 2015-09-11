@@ -17,12 +17,12 @@ from .protocols import PROTOCOL_TYPES
 from django.db.models.functions import Lower
 from django.db.models import Func, F
 
-'''
-Add your views functions here
-'''
+
+# Add your views functions here
+
 
 '''
-Renders the "Index" page
+EFFECTS: Renders the "Index" page
 '''
 def index(request):
     context = {
@@ -32,7 +32,7 @@ def index(request):
     return render(request, 'protocat_app/root_index.html', context)
 
 '''
-Renders the "About" page
+EFFECTS: Renders the "About" page
 '''
 def about(request):
     context = {
@@ -41,10 +41,11 @@ def about(request):
     return render(request, 'protocat_app/about.html', context)
 
 '''
-Uses the UserRegistrationForm in forms.py
-Validates input data.
-If valid, a User will be created, added to database, logged in, and redirect to user home
-Else, will be sent back to registration page
+MODIFIES: database
+EFFECTS: Uses the UserRegistrationForm in forms.py
+         Validates input data.
+         If valid, a User will be created, added to database, logged in, and redirect to user home
+         Else, will be sent back to registration page
 '''
 def user_registration(request):
     form = UserRegistrationForm(request.POST)
@@ -79,12 +80,11 @@ def user_registration(request):
 
     return render(request, 'protocat_app/user_registration.html', context)
 
-
 '''
-Uses the UserAuthenticationForm in forms.py
-Validates input data.
-If valid, a User will be created, added to database, logged in, and redirect to user home
-Else, will be sent back to login page
+EFFECTS: Uses the UserAuthenticationForm in forms.py
+         Validates input data.
+         If valid, a User will be created, added to database, logged in, and redirect to user home
+         Else, will be sent back to login page
 '''
 def user_authentication(request):
     # not working...
@@ -120,17 +120,18 @@ def user_authentication(request):
     return render(request, 'protocat_app/user_authentication.html', context)
 
 '''
-Logs user out
+EFFECTS: Logs user out
 '''
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/')
 
 '''
-Requires User to be logged in
-Takes all steps and combines into one text
-If form data is valid, will have to database
-Else, will be sent back to Upload page
+REQUIRES: User to be logged in
+MODIFIES: database
+EFFECTS: Takes all steps and combines into one text
+         If form data is valid, will have to database
+         Else, will be sent back to Upload page
 '''
 @login_required(login_url='/user_authentication')
 def protocol_upload(request):
@@ -174,60 +175,8 @@ def protocol_upload(request):
     else:
         return HttpResponseRedirect('/user_authentication/')
 
-
 '''
-Displays a list of all protocols in database
-'''
-def protocol_list(request):
-
-    all_entries = Protocol.objects.all().order_by('-date_modified')
-    protocol_list=[]
-
-
-    for each in all_entries:
-        title = each.title
-        author = each.author
-        date = each.date_of_upload
-        last_mod = each.date_modified
-        protocol_id = each.id
-        rating = each.rating
-        url = "/protocol_display/" + str(protocol_id)
-        url2 = "/user_profile/" + str(author)
-        inner_protocol = [title, author, date, protocol_id, url, rating, last_mod, url2]
-        protocol_list.append(inner_protocol)
-
-    asc = 'asc'
-
-    return render(request,'protocat_app/protocol_list.html', {'protocol_list':protocol_list, 'order':asc})
-
-
-'''
-Displays the current user's home with all protocols uploaded by that user
-'''
-def user_home(request):
-    current_user = request.user
-    name = get_object_or_404(User,username=current_user)
-    first = name.first_name
-    last = name.last_name
-
-    user_protocols = Protocol.objects.filter(author=current_user)
-
-    protocol_list = []
-
-    for each in user_protocols:
-        title = each.title
-        author = each.author
-        date = each.date_of_upload
-        last_mod = each.date_modified
-        protocol_id = each.id
-        rating = each.rating
-        url = "/protocol_display/" + str(protocol_id)
-        inner_protocol = [title, author, date, protocol_id, url, rating, last_mod]
-        protocol_list.append(inner_protocol)
-    return render(request, 'protocat_app/user_home.html', {'protocol_list':protocol_list, 'first':first, 'last':last})
-
-'''
-Displays a user's profile, other than the current user
+EFFECTS: Displays a user's profile, other than the current user
 '''
 def user_profile(request, user1):
     use_name = str(user1)
@@ -253,8 +202,60 @@ def user_profile(request, user1):
                                                               'first':first, 'last':last, 'user1':use_name})
 
 '''
-Displays a list of protocol depending on which attribute is chosen in ascending
-or descending order
+REQUIRES: User to be logged in
+EFFECTS: Displays the current user's home with all protocols uploaded by that user
+'''
+def user_home(request):
+    current_user = request.user
+    name = get_object_or_404(User,username=current_user)
+    first = name.first_name
+    last = name.last_name
+
+    user_protocols = Protocol.objects.filter(author=current_user)
+
+    protocol_list = []
+
+    for each in user_protocols:
+        title = each.title
+        author = each.author
+        date = each.date_of_upload
+        last_mod = each.date_modified
+        protocol_id = each.id
+        rating = each.rating
+        url = "/protocol_display/" + str(protocol_id)
+        inner_protocol = [title, author, date, protocol_id, url, rating, last_mod]
+        protocol_list.append(inner_protocol)
+    return render(request, 'protocat_app/user_home.html', {'protocol_list':protocol_list, 'first':first, 'last':last})
+
+'''
+EFFECTS: Displays a list of all protocols in database
+'''
+def protocol_list(request):
+
+    all_entries = Protocol.objects.all().order_by('-date_modified')
+    protocol_list=[]
+
+
+    for each in all_entries:
+        title = each.title
+        author = each.author
+        date = each.date_of_upload
+        last_mod = each.date_modified
+        protocol_id = each.id
+        rating = each.rating
+        url = "/protocol_display/" + str(protocol_id)
+        url2 = "/user_profile/" + str(author)
+        inner_protocol = [title, author, date, protocol_id, url, rating, last_mod, url2]
+        protocol_list.append(inner_protocol)
+
+    asc = 'asc'
+
+    return render(request,'protocat_app/protocol_list.html', {'protocol_list':protocol_list, 'order':asc})
+
+'''
+REQUIRES: type and order in URL
+EFFECTS: Displays a list of protocol depending on which attribute is chosen in ascending
+         or descending order
 '''
 def protocol_list_sort(request, type, order):
 
@@ -302,7 +303,8 @@ def protocol_list_sort(request, type, order):
     return render(request,'protocat_app/protocol_list.html', {'protocol_list':protocol_list, 'order': new_order})
 
 '''
-Displays a list of protocols containing the searched terms
+REQUIRES: type, order, and terms in URL
+EFFECTS: Displays a list of protocols containing the searched terms
 '''
 def protocol_search_sort(request, type, order, terms):
 
@@ -341,7 +343,6 @@ def protocol_search_sort(request, type, order, terms):
 
     protocol_list=[]
 
-
     for each in results:
         title = each.title
         author = each.author
@@ -356,9 +357,35 @@ def protocol_search_sort(request, type, order, terms):
 
     return render(request,'protocat_app/search_protocols.html', {'protocol_list':protocol_list, 'results':results, 'terms':terms, 'order':new_order})
 
+'''
+EFFECTS: Makes queries to the database for searched terms
+'''
+def search(request):
+    terms = request.GET.get('search', '').split(' ')
+
+    all_terms = []
+    for each in terms:
+        all_terms.append(each)
+
+    joined = '+'.join(all_terms)
+
+    q_list = []
+    for term in terms:
+        if term:
+            q_list.append(Q(title__contains=term) | Q(author__contains=term) | Q(description__contains=term) | Q(reagents__contains=term) | Q(protocol_steps__contains=term))
+
+    if q_list:
+        results = Protocol.objects.filter(reduce(operator.and_, q_list))
+    else:
+        results = ''
+
+    asc = 'asc'
+
+    return render(request, 'protocat_app/search_protocols.html',{'results':results, 'terms':joined, 'order': asc})
 
 '''
-Displays all attributes of one protocol
+REQUIRES: Protocol id in url
+EFFECTS: Displays all attributes of one protocol
 '''
 def protocol_display(request, protocol_id):
     protocol_items = Protocol.objects.get(id=protocol_id)
@@ -368,7 +395,9 @@ def protocol_display(request, protocol_id):
     return render(request, 'protocat_app/protocol_display.html', {'protocol_items':protocol_items, 'steps':steps,'current_user':current_user})
 
 '''
-Deletes a protocol using protocol id
+REQUIRES: Protocol id in URL
+MODIFIES: Database
+EFFECTS: Deletes a protocol using protocol id
 '''
 def delete_protocol(request, protocol_id):
     protocol = Protocol.objects.get(id=protocol_id)
@@ -381,7 +410,8 @@ def delete_protocol(request, protocol_id):
     return HttpResponseRedirect('/protocol_list/')
 
 '''
-Prepares user edits to a protocol and sends to edit protocol
+REQUIRES: Protocol id in URL
+EFFECTS: Prepares user edits to a protocol and sends to edit protocol
 '''
 def pre_edit(request, protocol_id):
 
@@ -414,7 +444,9 @@ def pre_edit(request, protocol_id):
         return HttpResponse('You cannot edit this protocol')
 
 '''
-Edits a protocol object in the database
+REQUIRES: Protocol id
+MODIFIES: Database object
+EFFECTS: Edits a protocol object in the database
 '''
 def edit_protocol(request, protocol_id):
 
@@ -440,34 +472,11 @@ def edit_protocol(request, protocol_id):
     else:
         return HttpResponse('You cannot edit this protocol')
 
-'''
-Makes queries to the database for searched terms
-'''
-def search(request):
-    terms = request.GET.get('search', '').split(' ')
-
-    all_terms = []
-    for each in terms:
-        all_terms.append(each)
-
-    joined = '+'.join(all_terms)
-
-    q_list = []
-    for term in terms:
-        if term:
-            q_list.append(Q(title__contains=term) | Q(author__contains=term) | Q(description__contains=term) | Q(reagents__contains=term) | Q(protocol_steps__contains=term))
-
-    if q_list:
-        results = Protocol.objects.filter(reduce(operator.and_, q_list))
-    else:
-        results = ''
-
-    asc = 'asc'
-
-    return render(request, 'protocat_app/search_protocols.html',{'results':results, 'terms':joined, 'order': asc})
 
 '''
-Adds user rating to average rating for a protocol
+REQUIRES: Protocol id in URL
+MODIFIES: Database object
+EFFECTS: Adds user rating to average rating for a protocol
 '''
 def rating(request, protocol_id):
     rate = str(request.POST.get('rating'))
@@ -484,7 +493,7 @@ def rating(request, protocol_id):
     return HttpResponseRedirect(url)
 
 '''
-Displays the feedback page
+EFFECTS: Displays the feedback page
 '''
 def feedback(request):
 
