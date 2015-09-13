@@ -5,47 +5,36 @@
 
 {% block content %}
 
-
-    <div class="container">
+<!-- straight down layout -->
 
         <div class="row">
-            <div class="col-md-5">
-                <h1><strong>{{protocol_items.title}}</strong></h1>
-                Uploaded by {{protocol_items.author}} on
-                {{protocol_items.date_of_upload}}
-                | Last Modified: {{protocol_items.date_modified}}
-                <br>
-                Rating: <strong>{{protocol_items.rating}}</strong>
-                <br>
-                <form action="/protocol_list" style ='float: left; padding: 5px;'>
-                    <input type="submit" value="Back to List">
-                </form>
-                {% if protocol_items.author == current_user %}
-                <form method="POST" style ='float: left; padding: 5px;' action="/delete_protocol/{{protocol_items.id}}/">
-                    {% csrf_token %}
-                    <input type="submit" value="Delete">
-                </form>
-                <form method="POST" style ='float: left; padding: 5px;' action="/pre_edit/{{protocol_items.id}}/">
-                    {% csrf_token %}
-                    <input type="submit" value="Edit">
-                </form>
-                {% endif %}
-                <br>
-                <hr>
-                {% if protocol_items.description %}
-                {{protocol_items.description}}
-                <hr>
-                {% endif %}
-                <div class="row">
-                    <div class="col-md-5">
-                        <h3>Protocol Type:  {{protocol_items.protocol_type}}</h3>
-                        <h3>Reagents: </h3> <p>{{protocol_items.reagents|linebreaksbr}}</p>
-                    </div>
-                    <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="protocol_display_box">
+                    <form action="/protocol_list">
+                        <input type="submit" value="List">
+                    </form>
 
+                    <h1>{{protocol_items.title}}</h1>
+                    Author:&nbsp&nbsp&nbsp&nbsp{{protocol_items.author}}
+                    <br>
+                    Rating:&nbsp&nbsp&nbsp&nbsp{{protocol_items.rating}}
+                    <br>
+                    Publication:&nbsp&nbsp&nbsp&nbsp{{protocol_items.date_of_upload}}
+                    <br>
+                    Updated:&nbsp&nbsp&nbsp&nbsp{{protocol_items.date_modified}}
+                    <hr>
 
-                        <div class="col-md-12">
-                            {% if not user.is_authenticated %}
+                    {% if protocol_items.description %}
+                        <h3>Description:</h3>
+                    {{protocol_items.description}}
+                    <hr>
+                    {% endif %}
+                    <h3>Protocol Type:  {{protocol_items.protocol_type}}</h3>
+                    <h3>Reagents: </h3> <p>{{protocol_items.reagents|linebreaksbr}}</p>
+                    <br>
+                    <h3>Protocol Steps: </h3> <p>{{steps|linebreaksbr}}</p>
+                    {% if not user.is_authenticated %}
                             <h3>Sign up or login to rate and comment this protocol!</h3>
                             {% endif %}
                             {% if user.is_authenticated %}
@@ -60,12 +49,15 @@
                             </form>
                             {% endif %}
                             {% endif %}
-                            <br>
 
-                            <strong>Comments</strong>
-                            <hr>
+                    <hr>
 
-                            {% render_comment_list for protocol_items %}
+                    <h3>Comments</h3>
+                    <br>
+                    {% render_comment_list for protocol_items %}
+                    {% get_comment_form for protocol_items as form %}
+
+                    {% render_comment_list for protocol_items %}
                             {% if user.is_authenticated %}
                             {% get_comment_form for protocol_items as form %}
                             <hr>
@@ -87,131 +79,19 @@
                                 </form>
                             </table>
                             {% endif %}
-                        </div>
-                    </div>
+                    <br>
+                    {% if protocol_items.author == current_user %}
+                    <form method="POST" action="/delete_protocol/{{protocol_items.id}}/">
+                        {% csrf_token %}
+                    <input type="submit" value="Delete">
+                    </form>
+                    <form method="POST" action="/pre_edit/{{protocol_items.id}}/">
+                        {% csrf_token %}
+                        <input type="submit" value="Edit">
+                    </form>
+                    {% endif %}
                 </div>
-            </div>
-            <div class="col-md-7">
-                <h3>Protocol Steps: </h3> <p>{{steps|linebreaksbr}}</p>
             </div>
         </div>
 
 {% endblock %}
-
-
-
-
-
-
-
-
-
-
-<!-- straight down layout -->
-<!--
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
-                <form action="/protocol_list">
-                    <input type="submit" value="List">
-                </form>
-            </div>
-            <div class="col-md-2"></div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
-                <h1><strong>{{protocol_items.title}}</strong></h1>
-                Uploaded by {{protocol_items.author}}
-                {{protocol_items.date_of_upload}}
-                {{protocol_items.rating}}
-                Last Modified: {{protocol_items.date_modified}}
-                <hr>
-                {% if protocol_items.description %}
-                {{protocol_items.description}}
-                <hr>
-                {% endif %}
-            </div>
-            <div class="col-md-2"></div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
-                <h3>Protocol Type:  {{protocol_items.protocol_type}}</h3>
-                <h3>Reagents: </h3> <p>{{protocol_items.reagents|linebreaksbr}}</p>
-                <br>
-                <h3>Protocol Steps: </h3> <p>{{steps|linebreaksbr}}</p>
-            </div>
-            <div class="col-md-2"></div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
-                {% if current_user not in protocol_items.user_rated %}
-                {# This is a quick fix, change it later. Find a list field in Django #}
-            <br>
-                <h3>Rate this protocol</h3>
-            <form method="POST" action="/rating/{{protocol_items.id}}/">
-                {% csrf_token %}
-                <input type="number" value="1" name="rating" min="1" max="5">
-            </form>
-            <br>
-            {% endif %}
-            </div>
-            <div class="col-md-2"></div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
-                {% render_comment_list for protocol_items %}
-            {% get_comment_form for protocol_items as form %}
-                <hr>
-                <table>
-                    <form action="{% comment_form_target %}" method="post">
-                        {% csrf_token %}
-                        <textarea name="comment" rows="4" cols="40"></textarea>
-                        {{ form.object_pk }}
-                        {{ form.content_type }}
-                        {{ form.timestamp }}
-                        {{ form.security_hash }}
-                        <br>
-                        <input type="submit" value="Add comment" id="id_submit">
-                        <input type="hidden" name="name" value="{{current_user}}">
-                        <input type="hidden" name="next" value="/protocol_display/{{protocol_items.id}}" />
-                        <tr>
-                        </tr>
-                    </form>
-                </table>
-                <br>
-            </div>
-            <div class="col-md-2"></div>
-        </div>
-
-
-
-        <br>
-
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
-            {% if protocol_items.author == current_user %}
-            <form method="POST" action="/delete_protocol/{{protocol_items.id}}/">
-                {% csrf_token %}
-                <input type="submit" value="Delete">
-            </form>
-            <form method="POST" action="/pre_edit/{{protocol_items.id}}/">
-                {% csrf_token %}
-                <input type="submit" value="Edit">
-            </form>
-            {% endif %}
-            </div>
-            <div class="col-md-2"></div>
-        </div>
-    </div>
--->
-
-
