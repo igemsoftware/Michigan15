@@ -1,3 +1,32 @@
+.box_and_img_registration {
+    margin: auto;
+    width: 720px;
+    height: 700px;
+    z-index: 1;
+}
+
+.user_registration_box {
+    box-shadow: -10px 10px 7px #888888;
+    height: 400px;
+    width: 340px;
+    background-color: dimgray;
+    padding-top: 10px;
+    margin-top: 30px;
+    margin-left: none;
+    margin-right: none;
+    display: inline-block;
+    float: left;
+    z-index: 2;
+    position: absolute;
+    border-radius: 10px;
+}
+
+.user_registration_img {
+    display: inline-block;
+    margin: none;
+    float: right;
+}
+
 .banner {
     text-align: center;
 }
