@@ -5,26 +5,37 @@
 <!-- TODO: create forgot password form -->
 
 {% block content %}
-    <div class="banner">
-        <h2>Login</h2>
-    </div>
-    <div class="error">
-        <h4>{{ error }}</h4>
-    </div>
-    <div class="user_auth">
-        <form method="POST" action=""> {% csrf_token %} {#  allows POST requests #}
-            <div class="left">
-                <div class="user">{{ form.user_name.label_tag }}</div><br><br>
-                {{ form.password.label_tag }}
+    <div class="row">
+        <div class="col-md-offset-2">
+            <div class="authentication_box_and_img">
+                <div class="user_authentication_box">
+                    <div class="banner">
+                        <h2>Login</h2>
+                    </div>
+                    <div class="error">
+                        <h4>{{ error }}</h4>
+                    </div>
+                    <div class="user_auth">
+                        <form method="POST" action=""> {% csrf_token %} {#  allows POST requests #}
+                            <div class="left">
+                                <div class="user">{{ form.user_name.label_tag }}</div><br><br>
+                                {{ form.password.label_tag }}
+                            </div>
+                            <div class="right">
+                                {{ form.user_name }}<br><br>
+                                {{ form.password }}
+                            </div>
+                            <div class="bottom">
+                                <input type="submit" value="Sign In">
+                            </div>
+                       </form>
+                    </div>
+                </div>
+                <div class="authentication_img">
+                    <img src="{% static "images/mary2.jpeg" %}"/>
+                </div>
             </div>
-            <div class="right">
-                {{ form.user_name }}<br><br>
-                {{ form.password }}
-            </div>
-            <div class="bottom">
-                <input type="submit" value="Sign In">
-            </div>
-       </form>
+        </div>
     </div>
 
 {% endblock %}
