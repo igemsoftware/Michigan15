@@ -1,6 +1,6 @@
 .panel {
     margin-top:35px;
-    
+    box-shadow: -10px 10px 7px #888888;
 }
 
 .panel-primary {
