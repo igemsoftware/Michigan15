@@ -4,7 +4,7 @@
 }
 
 .panel-primary {
-    border: 2px solid #000080;
+    border: 2px solid dimgray;
 }
 
 .panel-primary > .panel-heading {
@@ -26,9 +26,11 @@
 .table tfoot > tr > td {
     border-top: 1px solid lightgray;
     border-bottom: 1px solid lightgray;
+    background: dimgray;
 }
 
 .table thead > tr > th {
     border-bottom: 2px solid #000080;
     border-top: 2px solid #000080;
+    background: dimgray;
 }
