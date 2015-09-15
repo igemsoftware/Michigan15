@@ -87,7 +87,7 @@ input {
     color:black;
 }
 
-label {color: #000080}
+label {color: white;}
 
 .search_box {
     margin-top: 8px;
@@ -127,7 +127,7 @@ textarea {
 
 #headerwrap p {
 	text-align: left;
-	color: white
+	color: white;
 }
 
 /* intro Wrap */
