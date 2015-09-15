@@ -28,6 +28,7 @@ QUICKSTART:
 
 AUTHORS:
   Hy Doan, hydoan@umich.edu |
+  Max Gittelman, maxgitt@umich.edu |
   Josh Abramson, evolver@umich.edu
   
 
