@@ -5,11 +5,11 @@
 {% block content %}
 <HEAD>
     <style>
-    h4 {color: #3bc492}
-    h5 {color: #3bc492}
-    label {color: #3bc492}
+    h4 {color: #000033}
+    h5 {color: #000033}
+    label {color: #000033}
     input{
-    color:#3bc492;
+    color:black;
 
 }
 input:hover {
@@ -38,7 +38,7 @@ input:after {
                             // creating the step label
                             var nodeList = document.getElementsByClassName("protocol");
                             var step_count = nodeList.length + 1;
-                            var label = document.createElement("h3");
+                            var label = document.createElement("h5");
                             label.innerHTML = "Step " + step_count;
                             inner_container.appendChild(label);
 
@@ -69,46 +69,51 @@ input:after {
                     </script>
 
     <div class="container">
+        <div class="protocol_upload_box">
         <div class="row">
-            <form method="POST" action="/protocol_upload/">
-            <div class="col-md-4">
+                <form method="POST" action="/protocol_upload/">
 
-                    {% csrf_token %}
-                    <div class="fieldWrapper">
+                <div class="col-md-4">
+                        {% csrf_token %}
+                        <div class="fieldWrapper">
+                            <br>
+                            <h4>Title:</h4>
+                            {{ form.title }}
+                        </div>
+                        <div class="fieldWrapper">
+                            <h4>Description:</h4>
+                            <textarea name="description" id="id_description" rows="5" cols="40"
+                                      placeholder="What this protocol is used for,safety guidelines, duration, etc."></textarea>
+                        </div>
+                        <div class="fieldWrapper">
+                            <div class="protocol_type">
+                            <h4>Protocol type:</h4>
+                            {{ form.protocol_type }}
+                            </div>
+                        </div>
+                        <div class="fieldWrapper">
+                            <h4>Reagents:</h4>
+                            {{ form.reagents }}
+                        </div>
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-6">
                         <br>
-                        <H4>Title:</H4>
-                        {{ form.title }}
-                    </div>
-                    <div class="fieldWrapper">
-                        <H4>Description:</H4>
-                        <textarea name="description" id="id_description" rows="5" cols="40"
-                                  placeholder="What this protocol is used for,safety guidelines, duration, etc."></textarea>
-                    </div>
-                    <div class="fieldWrapper">
-                        <H4>Protocol type:</H4>
-                        {{ form.protocol_type }}
-                    </div>
-                    <div class="fieldWrapper">
-                        <h4>Reagents:</h4>
-                        {{ form.reagents }}
-                    </div>
-            </div>
-            <div class="col-md-2"></div>
-            <div class="col-md-6">
-                    <br>
-                    <H4>Steps:</H4>
-                    <br>
-                    <h5>Step 1</h5>
-                    <textarea class="protocol" rows="3" cols="40" name="step1"></textarea>
-                    <div id="step_container"></div>
-                    <button type="button" onclick="addStep()">Add a Step</button>
-                    <button type="button" onclick="removeStep()">Remove a Step</button>
-                    <br>
-                    <br>
-                    <input type="submit" value="Post">
+                        <h4>Steps:</h4>
+                        <br>
+                        <h5>Step 1</h5>
+                        <textarea class="protocol" rows="3" cols="40" name="step1"></textarea>
+                        <div id="step_container"></div>
+                        <button type="button" onclick="addStep()">Add a Step</button>
+                        <button type="button" onclick="removeStep()">Remove a Step</button>
+                        <br>
+                        <br>
+                        <input type="submit" value="Post">
 
-            </div>
-            </form>
+                </div>
+
+                </form>
+        </div>
         </div>
     </div>
 

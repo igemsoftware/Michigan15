@@ -10,7 +10,7 @@
 .panel-primary > .panel-heading {
     background-color: #000080;
     border-color: #000080;
-    color: white;
+
     font-weight: bold;
 }
 
@@ -26,11 +26,13 @@
 .table tfoot > tr > td {
     border-top: 1px solid lightgray;
     border-bottom: 1px solid lightgray;
-    background: dimgray;
+    background: white;
+    color:#000080;
 }
 
 .table thead > tr > th {
     border-bottom: 2px solid #000080;
     border-top: 2px solid #000080;
-    background: dimgray;
+    background: white;
+
 }
