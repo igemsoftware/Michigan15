@@ -5,6 +5,7 @@ from django.utils import timezone
 from django.forms import ModelForm, PasswordInput
 from django_comments.forms import CommentForm
 from django_comments.models import Comment
+from .protocols import PROTOCOL_TYPES
 import operator
 
 '''
@@ -36,6 +37,9 @@ class ProtocolUploadForm(forms.ModelForm):
     title = forms.CharField(widget=forms.Textarea(attrs={'rows':1, 'cols':60}))
     description = forms.CharField(required=False, widget=forms.Textarea(attrs={'rows':5, 'cols':40}))
     protocol_steps = forms.CharField(required=False)
+    reagents = forms.CharField(required=False, widget=forms.Textarea(attrs={'rows':10, 'cols':30}))
+    protocol_type = forms.ChoiceField(required=False, choices=PROTOCOL_TYPES)
+
     class Meta:
         model = Protocol
         fields = ['title','description','protocol_type', 'reagents','protocol_steps']
