@@ -17,6 +17,9 @@ INSTALL:
     
   django-contrib-comments
     to install use "pip install django-contrib-comments"
+    
+  pytz
+    to install use "pip install pytz"
   
 QUICKSTART:
   1. Copy the SSH URL from https://github.com/igemsoftware/Michigan15
