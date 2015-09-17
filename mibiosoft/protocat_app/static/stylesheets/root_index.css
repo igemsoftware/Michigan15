@@ -33,6 +33,15 @@ p {
     text-align: center;
 }
 
+.feedback_section {
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+.image_section{
+    text-align: center;
+}
+
 /* Links */
 a {
     color: #000080;
