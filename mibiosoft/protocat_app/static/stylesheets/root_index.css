@@ -3,7 +3,7 @@ body {
     font-family: "Lato";
     font-weight: 300;
     font-size: 16px;
-    color: white;
+    color: black;
     padding-top: 50px;
 
     -webkit-font-smoothing: antialiased;
@@ -101,10 +101,14 @@ input {
     color:black;
 }
 
-label {color: white;}
+label {color: black;}
 
 .search_box {
     margin-top: 8px;
+}
+
+.edit {
+    color:black;
 }
 
 /* ==========================================================================
@@ -141,7 +145,7 @@ textarea {
 
 #headerwrap p {
 	text-align: left;
-	color: white;
+	color: black;
 }
 
 /* intro Wrap */

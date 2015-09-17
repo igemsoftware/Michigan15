@@ -318,9 +318,9 @@ def protocol_search_sort(request, type, order, terms):
     if(order=='asc'):
         new_order='desc'
         if(type=='title'):
-            results = Protocol.objects.filter(reduce(operator.and_, q_list)).annotate(title_lower=Func(F(type), function='LOWER')).order_by('-title_lower')
+            results = Protocol.objects.filter(reduce(operator.and_, q_list)).annotate(title_lower=Func(F(type), function='LOWER')).order_by('title_lower')
         if(type=='author'):
-            results = Protocol.objects.filter(reduce(operator.and_, q_list)).annotate(author_lower=Func(F(type), function='LOWER')).order_by('-author_lower')
+            results = Protocol.objects.filter(reduce(operator.and_, q_list)).annotate(author_lower=Func(F(type), function='LOWER')).order_by('author_lower')
         if(type=='date_of_upload'):
             results = Protocol.objects.filter(reduce(operator.and_, q_list)).annotate(date_lower=Func(F(type), function='LOWER')).order_by('-date_lower')
         if(type=='date_modified'):
@@ -331,7 +331,7 @@ def protocol_search_sort(request, type, order, terms):
     if(order=='desc'):
         new_order='asc'
         if(type=='title'):
-            results = Protocol.objects.filter(reduce(operator.and_, q_list)).order_by(Lower('title'))
+            results = Protocol.objects.filter(reduce(operator.and_, q_list)).order_by(Lower('-title'))
         if(type=='author'):
             results = Protocol.objects.filter(reduce(operator.and_, q_list)).order_by(Lower('author'))
         if(type=='date_of_upload'):
