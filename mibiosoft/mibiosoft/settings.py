@@ -39,7 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django_comments',
     'django_nose',
-
+    'django.contrib.admindocs',
 )
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
