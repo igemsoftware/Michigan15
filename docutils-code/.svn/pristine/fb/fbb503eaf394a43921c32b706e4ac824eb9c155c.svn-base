@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 @echo off
 C:\dev\Python25\python C:\dev\Python25\scripts\rst2pseudoxml.py %1
+=======
+@echo off
+C:\dev\Python25\python C:\dev\Python25\scripts\rst2pseudoxml.py %1
+>>>>>>> 30665a03f9af0025ac7f44d3b46a3b6df1db009f

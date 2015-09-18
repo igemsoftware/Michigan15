@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 "Item","Cost"
 "IT Costs",403002
 "Labor",2454972
@@ -5,3 +6,12 @@
 "SLAM Lines",1400000
 "Put-To-Light",900000
 "Total",6511518
+=======
+"Item","Cost"
+"IT Costs",403002
+"Labor",2454972
+"System Costs",1483027
+"SLAM Lines",1400000
+"Put-To-Light",900000
+"Total",6511518
+>>>>>>> 30665a03f9af0025ac7f44d3b46a3b6df1db009f

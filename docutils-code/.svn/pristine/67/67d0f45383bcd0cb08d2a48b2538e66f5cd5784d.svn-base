@@ -1,6 +1,15 @@
+<<<<<<< HEAD
 Header
 	First
 		An http://www.example.com URL
 	Second
 		Deeper again and this one should also contain a line break in the original source
 			And deeper...
+=======
+Header
+	First
+		An http://www.example.com URL
+	Second
+		Deeper again and this one should also contain a line break in the original source
+			And deeper...
+>>>>>>> 30665a03f9af0025ac7f44d3b46a3b6df1db009f
